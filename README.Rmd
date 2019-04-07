@@ -1,0 +1,18 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# nj-towns
+
+Calculating stats for New Jersey towns. So far, just calculating density and
+racial diversity.
+
+See [Methodology.md](./code/Markdown/Methodology.md).
