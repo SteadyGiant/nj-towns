@@ -140,6 +140,3 @@ diverse_dense = data_out %>%
 
 write_csv(x = data_out,
           path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density.csv'))
-
-write_csv(x = diverse_dense,
-          path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diverse_dense.csv'))
