@@ -134,9 +134,5 @@ data_out = data_uni %>%
          `pct Hispanic` = hispan_pct,
          `pct Non-Hispanic` = nonhispan_pct)
 
-diverse_dense = data_out %>%
-  filter(`Diversity Index` > 0.5,
-         `Population density` > median(`Population density`))
-
 write_csv(x = data_out,
           path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density.csv'))
