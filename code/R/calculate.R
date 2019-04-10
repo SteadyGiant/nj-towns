@@ -16,6 +16,7 @@ DATA_WRITE_DIR = './data/output/'
 
 library(dplyr)
 library(readr)
+library(readxl)
 library(scales)
 library(sf)
 
@@ -26,10 +27,19 @@ options(scipen = 999)
 ### Import ###
 ##############
 
+fips_nj_co =
+  read_excel('./data/input/all-geocodes-v2017.xlsx',
+             skip = 4) %>%
+  filter(`State Code (FIPS)` == '34'
+         & `Summary Level` == '050') %>%
+  mutate(`Area Name (including legal/statistical area description)` =
+           gsub(' County', '', `Area Name (including legal/statistical area description)`))
+
 cousubs =
   sf::st_read(dsn = paste0(DATA_READ_DIR,
                            'tl_2017_34_cousub/tl_2017_34_cousub.shp')) %>%
   mutate(GEOID = as.character(GEOID),
+         COUNTYFP = as.character(COUNTYFP),
          # https://www.metric-conversions.org/area/square-meters-to-square-miles.htm
          sq_miles = ALAND * 0.00000038610)
 
@@ -64,6 +74,11 @@ race =
 ############
 
 data_join = cousubs %>%
+  left_join(
+    select(fips_nj_co,
+           `County Code (FIPS)`,
+           county_name = `Area Name (including legal/statistical area description)`),
+    by = c('COUNTYFP' = 'County Code (FIPS)')) %>%
   left_join(
     select(race,
            GEOID:diversity_2,
@@ -115,7 +130,8 @@ data_out = data_uni %>%
             .funs = ~ scales::percent(., accuracy = 1, suffix = '')) %>%
   mutate_at(.vars = vars(diversity, asian_pct:nonhispan_pct),
             .funs = ~ scales::percent(., accuracy = 0.1)) %>%
-  select(Municipality = NAME,
+  select(Municipality = NAMELSAD,
+         County = county_name,
          `Diversity Index` = diversity,
          `Population density` = density,
          `Diversity Index rank` = diversity_rank,
