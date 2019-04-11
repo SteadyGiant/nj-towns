@@ -119,7 +119,8 @@ median(data_uni$density)
 get_diversity_pctile = ecdf(data_uni$diversity)
 get_density_pctile   = ecdf(data_uni$density)
 
-data_out = data_uni %>%
+# This dataset will be for public consumption.
+data_out_display = data_uni %>%
   as_tibble() %>%
   mutate(diversity_rank   = min_rank(-diversity),
          density_rank     = min_rank(-density),
@@ -151,5 +152,36 @@ data_out = data_uni %>%
          `pct Hispanic` = hispan_pct,
          `pct Non-Hispanic` = nonhispan_pct)
 
-write_csv(x = data_out,
+# This dataset will be joined to the "Best Towns" dataset for further calculations.
+# No formatting.
+data_out_calcs = data_uni %>%
+  mutate(diversity_rank   = min_rank(-diversity),
+         density_rank     = min_rank(-density),
+         diversity_pctile = get_diversity_pctile(diversity),
+         density_pctile   = get_density_pctile(density),
+         density          = scales::comma(density, accuracy = 1)) %>%
+  select(Municipality = NAMELSAD,
+         County = county_name,
+         `Diversity Index` = diversity,
+         `Population density` = density,
+         `Diversity Index rank` = diversity_rank,
+         `Pop. density rank` = density_rank,
+         `Diversity Index percentile` = diversity_pctile,
+         `Pop. density percentile` = density_pctile,
+         `Population, 2013-17` = pop1317,
+         `Square miles` = sq_miles,
+         `pct Asian` = asian_pct,
+         `pct Black` = black_pct,
+         `pct Two or more` = multi_pct,
+         `pct Native American` = natam_pct,
+         `pct Other race` = other_pct,
+         `pct Pacific Islander` = pacis_pct,
+         `pct White` = white_pct,
+         `pct Hispanic` = hispan_pct,
+         `pct Non-Hispanic` = nonhispan_pct)
+
+write_csv(x = data_out_display,
           path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density.csv'))
+
+write_csv(x = data_out_calcs,
+          path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density_unformatted.csv'))
