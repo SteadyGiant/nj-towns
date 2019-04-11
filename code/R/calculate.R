@@ -103,7 +103,8 @@ median(data_uni$density)
 # [1] 2163.473
 
 data_uni = data_uni %>%
-  filter(pop1317 >= median(pop1317))
+  # filter(pop1317 >= median(pop1317))
+  filter(pop1317 >= 1000)
 
 median(data_uni$pop1317)
 # [1] 18622
