@@ -155,6 +155,7 @@ data_out_display = data_uni %>%
 # This dataset will be joined to the "Best Towns" dataset for further calculations.
 # No formatting.
 data_out_calcs = data_uni %>%
+  as_tibble() %>%
   mutate(diversity_rank   = min_rank(-diversity),
          density_rank     = min_rank(-density),
          diversity_pctile = get_diversity_pctile(diversity),
