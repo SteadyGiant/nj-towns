@@ -85,4 +85,4 @@ abline(v = mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` < 20]),
 ##############
 
 write_csv(x = data_join,
-          path = './data/output/NJ_best_towns_diversity_density.csv')
+          path = './data/output/NJ_20132017_diversity_density_best_towns.csv')
