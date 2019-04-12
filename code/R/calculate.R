@@ -103,8 +103,7 @@ median(data_uni$density)
 # [1] 2163.473
 
 data_uni = data_uni %>%
-  # filter(pop1317 >= median(pop1317))
-  filter(pop1317 >= 1000)
+  filter(pop1317 >= median(pop1317))
 
 median(data_uni$pop1317)
 # [1] 18622
@@ -119,44 +118,51 @@ median(data_uni$density)
 get_diversity_pctile = ecdf(data_uni$diversity)
 get_density_pctile   = ecdf(data_uni$density)
 
-# This dataset will be for public consumption.
-data_out_display = data_uni %>%
+# This dataset will be for blog posts.
+data_out = data_uni %>%
   as_tibble() %>%
   mutate(diversity_rank   = min_rank(-diversity),
          density_rank     = min_rank(-density),
          diversity_pctile = get_diversity_pctile(diversity),
          density_pctile   = get_density_pctile(density)) %>%
   arrange(-diversity) %>%
-  mutate_at(.vars = vars(diversity_pctile, density_pctile),
-            .funs = ~ scales::percent(., accuracy = 1, suffix = '')) %>%
-  mutate_at(.vars = vars(diversity, asian_pct:nonhispan_pct),
-            .funs = ~ scales::percent(., accuracy = 0.1)) %>%
-  mutate_at(.vars = vars(pop1317, density),
-            .funs = ~ scales::comma(., accuracy = 1)) %>%
   select(Municipality = NAMELSAD,
          County = county_name,
+         `Population, 2013-17` = pop1317,
          `Diversity Index` = diversity,
          `Population density` = density,
          `Diversity Index rank` = diversity_rank,
          `Pop. density rank` = density_rank,
          `Diversity Index percentile` = diversity_pctile,
          `Pop. density percentile` = density_pctile,
-         `Population, 2013-17` = pop1317,
-         `Square miles` = sq_miles,
          `pct Asian` = asian_pct,
          `pct Black` = black_pct,
-         `pct Two or more` = multi_pct,
-         `pct Native American` = natam_pct,
-         `pct Other race` = other_pct,
-         `pct Pacific Islander` = pacis_pct,
          `pct White` = white_pct,
+         `pct Other race` = other_pct,
+         `pct Native American` = natam_pct,
+         `pct Pacific Islander` = pacis_pct,
+         `pct Two or more` = multi_pct,
          `pct Hispanic` = hispan_pct,
          `pct Non-Hispanic` = nonhispan_pct)
 
+# This dataset will be for public consumption.
+data_out_display = data_out %>%
+  mutate_at(.vars = vars(`Diversity Index percentile`,
+                         `Pop. density percentile`),
+            .funs = ~ scales::percent(., accuracy = 1, suffix = '')) %>%
+  mutate_at(.vars = vars(`Diversity Index`, `pct Asian`:`pct Non-Hispanic`),
+            .funs = ~ scales::percent(., accuracy = 0.1)) %>%
+  mutate_at(.vars = vars(`Population, 2013-17`, `Population density`),
+            .funs = ~ scales::comma(., accuracy = 1))
+
 # This dataset will be joined to the "Best Towns" dataset for further calculations.
 # No formatting.
-data_out_calcs = data_uni %>%
+data_out_best = data_join %>%
+  # Different universe.
+  filter(NAME != 'County subdivisions not defined'
+         & pop1317 >= 1000) %>%
   as_tibble() %>%
+  # Ranks and percentiles recalculated for different universe.
   mutate(diversity_rank   = min_rank(-diversity),
          density_rank     = min_rank(-density),
          diversity_pctile = get_diversity_pctile(diversity),
@@ -182,8 +188,13 @@ data_out_calcs = data_uni %>%
          `pct Hispanic` = hispan_pct,
          `pct Non-Hispanic` = nonhispan_pct)
 
-write_csv(x = data_out_display,
-          path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density.csv'))
+write_csv(x = data_out,
+          path = paste0(DATA_WRITE_DIR,
+                        'NJ_diversity_density_unformat.csv'))
 
-write_csv(x = data_out_calcs,
-          path = paste0(DATA_WRITE_DIR, 'NJ_20132017_diversity_density_unformatted.csv'))
+write_csv(x = data_out_display,
+          path = paste0(DATA_WRITE_DIR, 'NJ_diversity_density.csv'))
+
+write_csv(x = data_out_best,
+          path = paste0(DATA_WRITE_DIR,
+                        'NJ_1000up_diversity_density_unformat.csv'))

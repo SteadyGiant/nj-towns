@@ -39,7 +39,7 @@ best_towns = READ_URL %>%
 
 dive_dens =
   read_csv(paste0(DATA_READ_DIR,
-                  'NJ_20132017_diversity_density_unformatted.csv')) %>%
+                  'NJ_1000up_diversity_density_unformat.csv')) %>%
   mutate(join_town = gsub(' borough$| city$| township$| town$| village$| Village township$', '',
                           Municipality),
          join_town = gsub('Ventnor City', 'Ventnor', join_town),
@@ -85,4 +85,4 @@ abline(v = mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` < 20]),
 ##############
 
 write_csv(x = data_join,
-          path = './data/output/NJ_20132017_diversity_density_best_towns.csv')
+          path = './data/output/NJ_best_towns_diversity_density.csv')
