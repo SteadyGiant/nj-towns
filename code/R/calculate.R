@@ -125,13 +125,14 @@ data_out_display = data_uni %>%
   mutate(diversity_rank   = min_rank(-diversity),
          density_rank     = min_rank(-density),
          diversity_pctile = get_diversity_pctile(diversity),
-         density_pctile   = get_density_pctile(density),
-         density          = scales::comma(density, accuracy = 1)) %>%
+         density_pctile   = get_density_pctile(density)) %>%
   arrange(-diversity) %>%
   mutate_at(.vars = vars(diversity_pctile, density_pctile),
             .funs = ~ scales::percent(., accuracy = 1, suffix = '')) %>%
   mutate_at(.vars = vars(diversity, asian_pct:nonhispan_pct),
             .funs = ~ scales::percent(., accuracy = 0.1)) %>%
+  mutate_at(.vars = vars(pop1317, density),
+            .funs = ~ scales::comma(., accuracy = 1)) %>%
   select(Municipality = NAMELSAD,
          County = county_name,
          `Diversity Index` = diversity,
