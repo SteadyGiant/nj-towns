@@ -12,9 +12,12 @@ library(knitr)
 library(dplyr)
 library(readr)
 library(scales)
-
-dive_dens = read_csv('../../data/output/NJ_diversity_density_unformat.csv')
 ```
+
+```{r import, include=FALSE}
+dive_dens = read_csv('./data/output/NJ_diversity_density_unformat.csv')
+```
+
 
 # Background
 
