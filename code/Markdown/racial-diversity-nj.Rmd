@@ -106,8 +106,10 @@ they identify.[^5]
 # The Results
 
 The table below contains Diversity Index estimates and other indicators for
-every municipality in New Jersey with population counts greater than the 
-median.[^6]
+every municipality in New Jersey with population counts greater than the
+median.[^6] To summarize, for most towns, the probability that two residents
+are a different race is less than 50%. In the median town, that probability is
+about `r median(dive_dens$'Diversity Index') %>% percent(accuracy = 0.1)`.
 
 ```{r}
 dive_dens %>%
@@ -118,32 +120,11 @@ dive_dens %>%
   DT::formatPercentage(columns = c(4, 6:ncol(dive_dens)), digits = 1)
 ```
 
-To summarize, for most NJ towns, the probability that two residents are a
-different race is less than 50%. In the median town, that probability is about
-`r median(dive_dens$'Diversity Index') %>% percent(accuracy = 0.1)`. The chart
-below shows the distribution of diversity across NJ, with the blue dotted line
-marking the median Diversity Index.
-
-```{r}
-dive_dens %>%
-  ggplot() +
-  geom_density(mapping = aes(x = `Diversity Index`)) +
-  geom_vline(mapping = aes(xintercept = median(`Diversity Index`)),
-             color = 'blue', linetype = 'dashed', size = 1) +
-  geom_vline(mapping = aes(xintercept = 0.5),
-             color = 'red', linetype = 'dashed', size = 1) +
-  theme_minimal() +
-  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
-  xlab('Diversity Index') +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank())
-```
-
 The vast majority of non-diverse towns are majority white. The chart below (with
-the red line marking 50%) shows four towns with a Diversity Index below 50% and
-a racial group other than White in the majority: East Orange, Irvington,
-Willingboro, and Orange. In fact, there are very few places in NJ where less
-than half of residents are white.
+the red line marking 50% and the blue line marking the median) shows four towns
+with a Diversity Index below 50% and a racial group other than White in the
+majority: East Orange, Irvington, Willingboro, and Orange. In fact, there are
+very few places in NJ where less than half of residents are white.
 
 ```{r, fig.width=10, fig.height=6}
 (
@@ -175,6 +156,8 @@ than half of residents are white.
     ) +
     geom_vline(mapping = aes(xintercept = 0.5),
                color = 'red', linetype = 'dashed', size = 0.5) +
+      geom_vline(mapping = aes(xintercept = median(`Diversity Index`)),
+             color = 'blue', linetype = 'dashed', size = 0.1) +
     scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     xlab('Diversity Index') +
