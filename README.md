@@ -9,5 +9,8 @@ and racial diversity.
 A dataset containing the Diversity Index, population density, and other
 variables for every NJ municipality is in
 [`data/output/NJ_diversity_density.csv`](./data/output/NJ_diversity_density.csv).
+If you want a dataset with which to run your own analysis or do calculations,
+[`data/output/NJ_diversity_density_unformat.csv`](data/output/NJ_diversity_density_unformat.csv)
+is the same dataset, but all variables are numeric.
 
-See [Methodology.md](./code/Markdown/Methodology.md).
+See [Methodology.md](./code/Markdown/Methodology.md) for technical details.
