@@ -1,17 +1,15 @@
 ---
 title: "Racial Diversity in New Jersey"
 slug: "racial-diversity-nj"
-date: 2019-04-10
+date: 2019-04-15
 categories:
-- category
-- subcategory
+- New Jersey
 tags:
 - race
-- tag2
 keywords:
 - tech
 summary: ""
-thumbnailImage: https://res.cloudinary.com/evcloud/image/upload/v1545008956/rbs.jpg
+thumbnailImage: https://res.cloudinary.com/evcloud/image/upload/v1555372288/race2000.jpg
 thumbnailImagePosition: left
 autoThumbnailImage: yes
 coverImage: jc_v_nyc.JPG
@@ -43,8 +41,10 @@ library(plotly)
 library(readr)
 library(scales)
 library(tidyr)
+```
 
-dive_dens = read_csv('../../data/output/NJ_diversity_density_unformat.csv')
+```{r import, include=FALSE}
+dive_dens = read_csv('./data/output/NJ_diversity_density_unformat.csv')
 ```
 
 Despite its bland suburban reputation, 
@@ -156,8 +156,8 @@ very few places in NJ where less than half of residents are white.
     ) +
     geom_vline(mapping = aes(xintercept = 0.5),
                color = 'red', linetype = 'dashed', size = 0.5) +
-      geom_vline(mapping = aes(xintercept = median(`Diversity Index`)),
-             color = 'blue', linetype = 'dashed', size = 0.1) +
+    geom_vline(mapping = aes(xintercept = median(`Diversity Index`)),
+               color = 'blue', linetype = 'dashed', size = 0.1) +
     scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     xlab('Diversity Index') +
@@ -244,3 +244,9 @@ because it's important info, though I don't use those variables to calculate the
 Diversity Index. Maybe I'll try that later and see if it changes the results
 much.
 
+# Attributions
+
+The image appering in the thumbnail for this post on the home page is by
+[Eric Fischer](https://www.flickr.com/photos/walkingsf/5010396867/in/photolist-qzM8zR-mt34zn-8CKAqT-5hJgbT-9tiLT4-5VUVeU-8aiFQ2-bV3kEF-QdchHW-Gm1KvC-utLBHK-rVAz6-imyrbY-ppAPQe-cvQGpf-4Z83nn-oRHth4-ecmQAZ-5ZsqeC-7rYqCC-5amLek-4CiNj-5RTTQj-5ZocyK-5tThZy-egU1y1-dpLNMR-8TcAJs-ymkJBP-ovCXdx-bV3kwH-fgjNcs-bRDZqp-c2zgU5-bV3ktZ-4ZYayq-t2Fq3-4ZTWAD-4ZU7Bi-aeuMoJ-qikdfb-FVCUp9-Ljxjrn-mt4Dqs-jNfsW-oPnxH7-uXTeQL), 
+licensed under 
+[CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
