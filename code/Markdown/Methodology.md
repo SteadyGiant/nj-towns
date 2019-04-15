@@ -2,112 +2,123 @@ Methodology
 ================
 Everet Rummel
 
-Background
-==========
+# Background
 
-*New Jersey Family* magazine created a list of ["New Jersey's Best Towns for Families"](https://www.njfamily.com/New-Jerseys-Best-Towns-for-Families/). An [obvious question](https://twitter.com/hobokenurbanist/status/1114592402336100355) arose: How dense and racially diverse are the top towns in this list?
+*New Jersey Family* magazine created a list of [“New Jersey’s Best Towns
+for
+Families”](https://www.njfamily.com/New-Jerseys-Best-Towns-for-Families/)
+(full list
+[here](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/).
+An [obvious
+question](https://twitter.com/hobokenurbanist/status/1114592402336100355)
+arose: How dense and racially diverse are the top towns in this list?
 
-Objectives
-==========
+# Objectives
 
 Using most recent, highest quality data available:
 
--   Calculate a measure of racial diversity for all municipalities in New Jersey
--   Calculate population density for all municipalities in New Jersey
--   Calculate diversity/density rank and percentile for all municipalities
+  - Calculate a measure of racial diversity for all municipalities in
+    New Jersey
+  - Calculate population density for all municipalities in New Jersey
+  - Calculate diversity/density rank and percentile for all
+    municipalities
 
-Code
-====
+# Code
 
-I did everything in `code/R/calculate.R`. See that script for all the details. See below for a summary in English.
+I did everything in [`code/R/calculate.R`](./code/R/calculate.R). See
+that script for all the details. See below for a summary in English.
 
-Source Data
-===========
+# Source Data
 
-American Community Survey, 5-year Public Use Micro Sample, 2013-2017. The Census Bureau provides estimates for county subdivisions, which basically equal municipalities, so I use those summary tables.
+American Community Survey, 5-year Public Use Micro Sample, 2013-2017.
+The Census Bureau provides estimates for county subdivisions, which
+basically equal municipalities, so I use those summary tables.
 
-Variables
----------
+## Variables
 
 ### Race, Population
 
-[Table B03002: HISPANIC OR LATINO ORIGIN BY RACE](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000).
+[Table B03002: HISPANIC OR LATINO ORIGIN BY
+RACE](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000).
 
 ### Land area
 
-[American FactFinder](https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34) only provides *rounded* land area. For more accurate land area data, I downloaded the [2017 TIGER/Line shapefile](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.2017.html) for New Jersey (see: [direct download link](https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/tl_2017_34_cousub.zip)).
+[American
+FactFinder](https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34)
+only provides *rounded* land area. For more accurate land area data, I
+downloaded the [2017 TIGER/Line
+shapefile](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.2017.html)
+for New Jersey (see: [direct download
+link](https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/tl_2017_34_cousub.zip)).
 
-Universe
-========
+# Universe
 
-Each record is a county subdivision, which I'm calling a "municipality" here.
+Each record is a county subdivision, which I’m calling a “municipality”
+here.
 
-I exclude municipalities with populations lower than the median, 8,244.
+I exclude municipalities with populations lower than the median, 36.4%.
 
-Calculations
-============
+# Calculations
 
-To measure diversity, I calculate the [Gini-Simpson Index](https://en.wikipedia.org/wiki/Diversity_index#Gini%E2%80%93Simpson_index). If any economists are reading this, the Gini-Simpson Index is one minus the [Herfindahl–Hirschman Index](https://en.wikipedia.org/wiki/Herfindahl_index). Hereafter, I'll refer to it as the "Diversity Index" in title-case.
+To measure diversity, I calculate the [Gini-Simpson
+Index](https://en.wikipedia.org/wiki/Diversity_index#Gini%E2%80%93Simpson_index).
+If any economists are reading this, the Gini-Simpson Index is one minus
+the [Herfindahl–Hirschman
+Index](https://en.wikipedia.org/wiki/Herfindahl_index). Hereafter, I’ll
+refer to it as the “Diversity Index” in title-case.
 
-The value of the Diversity Index for a given municipality can be interpreted as the probability that two randomly selected residents are of a different race. For example: Two random residents in Jersey City have a ~75% chance of identifying as different races.
+The value of the Diversity Index for a given municipality can be
+interpreted as the probability that two randomly selected residents are
+of a different race. For example: Two random residents in Jersey City
+have a ~75% chance of identifying as different races.
 
 The Diversity Index is calculate as follows:
 
-$D = 1 - \\sum\_{i = 1}^{N} p\_i$
+\(D = 1 - \sum_{i = 1}^{N} p_i\)
 
-where *p*<sub>*i*</sub> is the percent of the total municipality population identifying as racial group *i*, and *N* is the total number of racial groups.
+where \(p_i\) is the percent of the total municipality population
+identifying as racial group \(i\), and \(N\) is the total number of
+racial groups.
 
-There are 7 racial groups in the Census: White, Black or African American, American Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific Islander, Two or more races, or Some other race. If you glance at the [HISPANIC OR LATINO ORIGIN BY RACE](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000) table, you'll notice many people identifying with Hispanic ethnicity identify as "Some other race".
+There are 7 racial groups in the ACS: White, Black or African American,
+American Indian and Alaska Native, Asian, Native Hawaiian and Other
+Pacific Islander, Two or more races, and Some other race. Because
+“Hispanic” is not a racial group (according to the Census Bureau’s
+admittedly imperfect definitions), **I do not use the Hispanic grouping
+to calculate the Diversity Index.** In doing so, I’m not leaving out
+Hispanic people. If you glance at the [“HISPANIC OR LATINO ORIGIN BY
+RACE”](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002)
+summary table, you’ll notice most people identifying as “some other
+race” are Hispanic/Latinx in origin. All other Hispanic/Latinx people
+identify as White, Black, Asian, etc, and so they’re included in the
+count of the race with which they identify.\[^5\]
 
-Special Note About Hispanic Individuals
----------------------------------------
+# Validation
 
-Because "Hispanic" is an ethnicity, not a racial group (according to the Census Bureau's admittedly imperfect definitions), **I do not use the Hispanic variable to calculate the Diversity Index.** In doing so, I'm not leaving out Hispanic people. Most of the people identifying as "some other race" are Hispanic. All other Hispanic people identify as white, black, asian, etc, and so they're included in the count of the race with which they identify.
+My results can be compared to the Diversity Index calculated for every
+municipality in New Jersey by NJ.com’s [Disha
+Raychaudhuri](https://twitter.com/Disha_RC) in [this
+article](https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html).
+My rankings match theirs almost exactly. My calculations are off by
+about a hundredth of a percentage point for each municipality. They
+claim to have followed [this
+methodology](https://www.usatoday.com/story/news/nation/2014/10/21/diversity-index-data-how-we-did-report/17432103/)
+for calculating the Diversity Index from ACS data, but I matched their
+results by *not* following that methodology.
 
-Validation
-==========
+Note: While Raychaudhuri excludes municipalities with populations lower
+than 10,000, I exclude those with populations lower than the median.
 
-My results can be compared to the Diversity Index calculated for every municipality in New Jersey by NJ.com's [Disha Raychaudhuri](https://twitter.com/Disha_RC) in [this article](https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html). My rankings match theirs almost exactly. My calculations are off by about a hundredth of a percentage point for each municipality. They claim to have followed [this methodology](https://www.usatoday.com/story/news/nation/2014/10/21/diversity-index-data-how-we-did-report/17432103/) for calculating the Diversity Index from ACS data, but I matched their results by *not* following that methodology.
-
-Note: While Raychaudhuri excludes municipalities with populations lower than 10,000, I exclude those with populations lower than the median, 8,244.
-
-My Environment
-==============
+# My Environment
 
 Here are the R packages directly loaded in this analysis:
 
 ``` r
 library(dplyr)
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 library(readr)
 library(scales)
-```
-
-    ## 
-    ## Attaching package: 'scales'
-
-    ## The following object is masked from 'package:readr':
-    ## 
-    ##     col_factor
-
-``` r
 library(sf)
 ```
-
-    ## Linking to GEOS 3.7.0, GDAL 2.4.0, PROJ 5.2.0
 
 Here is my session info:
 
@@ -140,88 +151,79 @@ sessionInfo()
     ## loaded via a namespace (and not attached):
     ##  [1] Rcpp_1.0.1       magrittr_1.5     units_0.6-2      hms_0.4.2       
     ##  [5] tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1 R6_2.4.0        
-    ##  [9] rlang_0.3.3      stringr_1.4.0    tools_3.5.3      grid_3.5.3      
+    ##  [9] rlang_0.3.4      stringr_1.4.0    tools_3.5.3      grid_3.5.3      
     ## [13] xfun_0.6         e1071_1.7-1      DBI_1.0.0        class_7.3-15    
-    ## [17] htmltools_0.3.6  yaml_2.2.0       digest_0.6.18    assertthat_0.2.1
+    ## [17] htmltools_0.3.6  yaml_2.2.0       assertthat_0.2.1 digest_0.6.18   
     ## [21] tibble_2.1.1     crayon_1.3.4     purrr_0.3.2      glue_1.3.1      
     ## [25] evaluate_0.13    rmarkdown_1.12   stringi_1.4.3    compiler_3.5.3  
     ## [29] pillar_1.3.1     classInt_0.3-1   pkgconfig_2.0.2
 
-Results
-=======
+# Results
 
-The full cleaned dataset output by `calculate.R` is in `data/output/NJ_20132017_diversity_density.csv`. The following results come from this dataset, unless stated otherwise.
+The full cleaned dataset output by `calculate.R` is in
+`data/output/NJ_20132017_dive_dens.csv`. The following results come from
+this dataset, unless stated otherwise.
 
-The 10 most diverse municipalities in New Jersey:
+The 10 most diverse municipalities in New
+Jersey:
 
-| Municipality     | Diversity Index |  Population density|  Diversity Index rank|  Pop. density rank|  Diversity Index percentile|  Pop. density percentile|  Population, 2013-17|  Square miles| pct Asian | pct Black | pct Two or more | pct Native American | pct Other race | pct Pacific Islander | pct White | pct Hispanic | pct Non-Hispanic |
-|:-----------------|:----------------|-------------------:|---------------------:|------------------:|---------------------------:|------------------------:|--------------------:|-------------:|:----------|:----------|:----------------|:--------------------|:---------------|:---------------------|:----------|:-------------|:-----------------|
-| Jersey City      | 73.8%           |               17975|                     1|                  9|                         100|                       97|               265932|     14.794660| 25.4%     | 24.0%     | 3.2%            | 0.4%                | 11.6%          | 0.1%                 | 35.4%     | 28.8%        | 71.2%            |
-| Atlantic City    | 72.3%           |                3632|                     2|                121|                         100|                       58|                39075|     10.759121| 18.2%     | 36.2%     | 4.2%            | 0.4%                | 9.0%           | 0.0%                 | 32.0%     | 29.3%        | 70.7%            |
-| Paterson         | 72.1%           |               17578|                     3|                 10|                          99|                       97|               147890|      8.413166| 3.9%      | 27.8%     | 5.5%            | 0.1%                | 32.8%          | 0.0%                 | 30.0%     | 60.7%        | 39.3%            |
-| Pennsauken       | 69.8%           |                3423|                     4|                128|                          99|                       55|                35863|     10.478463| 7.4%      | 26.6%     | 3.6%            | 0.5%                | 18.0%          | 0.1%                 | 43.8%     | 31.9%        | 68.1%            |
-| Hackensack       | 69.3%           |               10659|                     5|                 31|                          99|                       89|                44673|      4.191269| 10.5%     | 25.3%     | 3.3%            | 0.4%                | 14.7%          | 0.0%                 | 45.8%     | 38.2%        | 61.8%            |
-| Lindenwold       | 68.7%           |                4480|                     6|                 95|                          98|                       67|                17481|      3.902021| 1.5%      | 34.0%     | 5.4%            | 0.0%                | 19.5%          | 0.0%                 | 39.5%     | 27.6%        | 72.4%            |
-| North Plainfield | 68.4%           |                7869|                     7|                 43|                          98|                       85|                22092|      2.807447| 6.2%      | 20.5%     | 3.2%            | 0.1%                | 24.0%          | 0.0%                 | 46.0%     | 47.1%        | 52.9%            |
-| Piscataway       | 68.3%           |                3071|                     8|                139|                          98|                       51|                57695|     18.785289| 38.0%     | 19.8%     | 3.1%            | 0.2%                | 2.4%           | 0.1%                 | 36.3%     | 11.3%        | 88.7%            |
-| Camden           | 67.9%           |                8471|                     9|                 39|                          97|                       87|                75550|      8.918425| 3.2%      | 45.4%     | 3.6%            | 0.6%                | 25.9%          | 0.1%                 | 21.2%     | 48.5%        | 51.5%            |
-| Englewood        | 67.4%           |                5788|                    10|                 73|                          97|                       75|                28509|      4.925441| 12.3%     | 30.8%     | 3.9%            | 0.3%                | 7.0%           | 0.0%                 | 45.8%     | 24.5%        | 75.5%            |
+| Municipality             | County    | Population, 2013-17 | Diversity Index | Population density | Diversity Index rank | Pop. density rank | Diversity Index percentile | Pop. density percentile | pct Asian | pct Black | pct White | pct Other race | pct Native American | pct Pacific Islander | pct Two or more | pct Hispanic | pct Non-Hispanic |
+| :----------------------- | :-------- | ------------------: | --------------: | -----------------: | -------------------: | ----------------: | -------------------------: | ----------------------: | --------: | --------: | --------: | -------------: | ------------------: | -------------------: | --------------: | -----------: | ---------------: |
+| Jersey City city         | Hudson    |              265932 |       0.7382005 |          17974.864 |                    1 |                 9 |                  1.0000000 |               0.9717314 | 0.2539221 | 0.2398658 | 0.3540717 |      0.1156837 |           0.0039070 |            0.0005753 |       0.0319743 |    0.2881827 |        0.7118173 |
+| Atlantic City city       | Atlantic  |               39075 |       0.7233136 |           3631.802 |                    2 |               121 |                  0.9964664 |               0.5759717 | 0.1822649 | 0.3623800 | 0.3197441 |      0.0902623 |           0.0035061 |            0.0000000 |       0.0418426 |    0.2926935 |        0.7073065 |
+| Paterson city            | Passaic   |              147890 |       0.7212596 |          17578.400 |                    3 |                10 |                  0.9929329 |               0.9681979 | 0.0392048 | 0.2776861 | 0.2997160 |      0.3275137 |           0.0011292 |            0.0000000 |       0.0547502 |    0.6073095 |        0.3926905 |
+| Pennsauken township      | Camden    |               35863 |       0.6980178 |           3422.544 |                    4 |               128 |                  0.9893993 |               0.5512367 | 0.0738365 | 0.2659566 | 0.4382511 |      0.1800742 |           0.0048239 |            0.0012548 |       0.0358029 |    0.3187408 |        0.6812592 |
+| Hackensack city          | Bergen    |               44673 |       0.6925415 |          10658.585 |                    5 |                31 |                  0.9858657 |               0.8939929 | 0.1046493 | 0.2525015 | 0.4583082 |      0.1468896 |           0.0043651 |            0.0000000 |       0.0332863 |    0.3815280 |        0.6184720 |
+| Lindenwold borough       | Camden    |               17481 |       0.6865866 |           4479.986 |                    6 |                95 |                  0.9823322 |               0.6678445 | 0.0147017 | 0.3403695 | 0.3952863 |      0.1952978 |           0.0000000 |            0.0000000 |       0.0543447 |    0.2758995 |        0.7241005 |
+| North Plainfield borough | Somerset  |               22092 |       0.6835520 |           7869.070 |                    7 |                43 |                  0.9787986 |               0.8515901 | 0.0617871 | 0.2053232 | 0.4604834 |      0.2395890 |           0.0008148 |            0.0000000 |       0.0320025 |    0.4708944 |        0.5291056 |
+| Piscataway township      | Middlesex |               57695 |       0.6827511 |           3071.286 |                    8 |               139 |                  0.9752650 |               0.5123675 | 0.3803449 | 0.1984227 | 0.3628217 |      0.0244735 |           0.0018546 |            0.0009013 |       0.0311812 |    0.1134240 |        0.8865760 |
+| Camden city              | Camden    |               75550 |       0.6793024 |           8471.227 |                    9 |                39 |                  0.9717314 |               0.8657244 | 0.0317670 | 0.4539643 | 0.2121774 |      0.2593647 |           0.0063137 |            0.0007015 |       0.0357114 |    0.4848312 |        0.5151688 |
+| Englewood city           | Bergen    |               28509 |       0.6741533 |           5788.112 |                   10 |                73 |                  0.9681979 |               0.7455830 | 0.1232944 | 0.3076572 | 0.4578554 |      0.0696271 |           0.0027711 |            0.0000000 |       0.0387948 |    0.2451507 |        0.7548493 |
 
-The 10 least diverse municipalities in New Jersey:
+The 10 least diverse municipalities in New
+Jersey:
 
-| Municipality   | Diversity Index |  Population density|  Diversity Index rank|  Pop. density rank|  Diversity Index percentile|  Pop. density percentile|  Population, 2013-17|  Square miles| pct Asian | pct Black | pct Two or more | pct Native American | pct Other race | pct Pacific Islander | pct White | pct Hispanic | pct Non-Hispanic |
-|:---------------|:----------------|-------------------:|---------------------:|------------------:|---------------------------:|------------------------:|--------------------:|-------------:|:----------|:----------|:----------------|:--------------------|:---------------|:---------------------|:----------|:-------------|:-----------------|
-| Audubon        | 10.5%           |                5894|                   274|                 70|                           4|                       76|                 8736|      1.482154| 0.2%      | 3.9%      | 1.1%            | 0.0%                | 0.4%           | 0.0%                 | 94.5%     | 2.2%         | 97.8%            |
-| Pequannock     | 10.3%           |                2284|                   275|                165|                           3|                       42|                15499|      6.786193| 1.4%      | 0.1%      | 1.6%            | 0.4%                | 1.8%           | 0.0%                 | 94.7%     | 8.3%         | 91.7%            |
-| Wall           | 10.2%           |                 849|                   276|                231|                           3|                       19|                26020|     30.657986| 1.0%      | 3.4%      | 0.6%            | 0.0%                | 0.3%           | 0.0%                 | 94.7%     | 3.2%         | 96.8%            |
-| Beachwood      | 9.9%            |                4051|                   277|                106|                           2|                       63|                11193|      2.763052| 0.3%      | 1.3%      | 1.9%            | 0.1%                | 1.5%           | 0.0%                 | 94.9%     | 7.8%         | 92.2%            |
-| Wantage        | 9.9%            |                 166|                   278|                283|                           2|                        0|                11062|     66.755147| 1.2%      | 0.8%      | 3.1%            | 0.0%                | 0.0%           | 0.0%                 | 94.9%     | 5.5%         | 94.5%            |
-| Berkeley       | 8.9%            |                 976|                   279|                224|                           2|                       21|                41676|     42.717142| 1.6%      | 1.5%      | 0.8%            | 0.1%                | 0.6%           | 0.0%                 | 95.4%     | 5.9%         | 94.1%            |
-| Lacey          | 6.0%            |                 341|                   280|                268|                           1|                        6|                28444|     83.372914| 1.2%      | 0.8%      | 0.4%            | 0.0%                | 0.7%           | 0.0%                 | 96.9%     | 4.7%         | 95.3%            |
-| Upper          | 4.7%            |                 193|                   281|                282|                           1|                        1|                11990|     62.020870| 0.3%      | 0.7%      | 1.1%            | 0.0%                | 0.3%           | 0.0%                 | 97.6%     | 2.2%         | 97.8%            |
-| Ocean          | 4.7%            |                 419|                   282|                263|                           1|                        7|                 8838|     21.099528| 0.5%      | 0.5%      | 0.9%            | 0.6%                | 0.0%           | 0.0%                 | 97.6%     | 2.4%         | 97.6%            |
-| Point Pleasant | 3.2%            |                5305|                   283|                 79|                           0|                       72|                18519|      3.491037| 0.2%      | 0.4%      | 0.6%            | 0.0%                | 0.4%           | 0.0%                 | 98.4%     | 4.6%         | 95.4%            |
+| Municipality           | County   | Population, 2013-17 | Diversity Index | Population density | Diversity Index rank | Pop. density rank | Diversity Index percentile | Pop. density percentile | pct Asian | pct Black | pct White | pct Other race | pct Native American | pct Pacific Islander | pct Two or more | pct Hispanic | pct Non-Hispanic |
+| :--------------------- | :------- | ------------------: | --------------: | -----------------: | -------------------: | ----------------: | -------------------------: | ----------------------: | --------: | --------: | --------: | -------------: | ------------------: | -------------------: | --------------: | -----------: | ---------------: |
+| Audubon borough        | Camden   |                8736 |       0.1050283 |          5894.1254 |                  274 |                70 |                  0.0353357 |               0.7561837 | 0.0016026 | 0.0386905 | 0.9451694 |      0.0040064 |           0.0000000 |                    0 |       0.0105311 |    0.0215201 |        0.9784799 |
+| Pequannock township    | Morris   |               15499 |       0.1029539 |          2283.9020 |                  275 |               165 |                  0.0318021 |               0.4204947 | 0.0142590 | 0.0014840 | 0.9467062 |      0.0180012 |           0.0037422 |                    0 |       0.0158075 |    0.0833602 |        0.9166398 |
+| Wall township          | Monmouth |               26020 |       0.1017452 |           848.7185 |                  276 |               231 |                  0.0282686 |               0.1872792 | 0.0099539 | 0.0339354 | 0.9470792 |      0.0030361 |           0.0000000 |                    0 |       0.0059954 |    0.0321291 |        0.9678709 |
+| Beachwood borough      | Ocean    |               11193 |       0.0988250 |          4050.9557 |                  277 |               106 |                  0.0247350 |               0.6289753 | 0.0032163 | 0.0127758 | 0.9488966 |      0.0148307 |           0.0008934 |                    0 |       0.0193871 |    0.0781739 |        0.9218261 |
+| Wantage township       | Sussex   |               11062 |       0.0987186 |           165.7101 |                  278 |               283 |                  0.0212014 |               0.0035336 | 0.0117519 | 0.0082264 | 0.9487434 |      0.0002712 |           0.0000000 |                    0 |       0.0310071 |    0.0549629 |        0.9450371 |
+| Berkeley township      | Ocean    |               41676 |       0.0894888 |           975.6271 |                  279 |               224 |                  0.0176678 |               0.2120141 | 0.0156445 | 0.0149007 | 0.9539063 |      0.0062386 |           0.0011277 |                    0 |       0.0081822 |    0.0591228 |        0.9408772 |
+| Lacey township         | Ocean    |               28444 |       0.0603786 |           341.1660 |                  280 |               268 |                  0.0141343 |               0.0565371 | 0.0118478 | 0.0081915 | 0.9692026 |      0.0068204 |           0.0002461 |                    0 |       0.0036915 |    0.0473914 |        0.9526086 |
+| Upper township         | Cape May |               11990 |       0.0471160 |           193.3220 |                  281 |               282 |                  0.0106007 |               0.0070671 | 0.0027523 | 0.0073394 | 0.9760634 |      0.0032527 |           0.0000000 |                    0 |       0.0105922 |    0.0222686 |        0.9777314 |
+| Ocean township         | Ocean    |                8838 |       0.0465866 |           418.8719 |                  282 |               263 |                  0.0070671 |               0.0742049 | 0.0045259 | 0.0049785 | 0.9763521 |      0.0000000 |           0.0055442 |                    0 |       0.0085992 |    0.0243268 |        0.9756732 |
+| Point Pleasant borough | Ocean    |               18519 |       0.0320661 |          5304.7268 |                  283 |                79 |                  0.0035336 |               0.7243816 | 0.0016740 | 0.0038879 | 0.9838004 |      0.0043739 |           0.0004860 |                    0 |       0.0057778 |    0.0461148 |        0.9538852 |
 
-The 10 densest municipalities:
+The 10 densest
+municipalities:
 
-``` r
-diversity_density %>%
-  arrange(-`Population density`) %>%
-  head(n = 10) %>%
-  knitr::kable()
-```
+| Municipality           | County  | Population, 2013-17 | Diversity Index | Population density | Diversity Index rank | Pop. density rank | Diversity Index percentile | Pop. density percentile | pct Asian | pct Black | pct White | pct Other race | pct Native American | pct Pacific Islander | pct Two or more | pct Hispanic | pct Non-Hispanic |
+| :--------------------- | :------ | ------------------: | --------------: | -----------------: | -------------------: | ----------------: | -------------------------: | ----------------------: | --------: | --------: | --------: | -------------: | ------------------: | -------------------: | --------------: | -----------: | ---------------: |
+| Guttenberg town        | Hudson  |               11733 |       0.5815861 |           60788.43 |                   39 |                 1 |                  0.8657244 |               1.0000000 | 0.0744055 | 0.0334953 | 0.5837382 |      0.2635302 |           0.0057956 |            0.0000000 |       0.0390352 |    0.6584846 |        0.3415154 |
+| Union City city        | Hudson  |               69815 |       0.4514594 |           54246.15 |                  100 |                 2 |                  0.6501767 |               0.9964664 | 0.0409081 | 0.0483420 | 0.7207477 |      0.1554967 |           0.0044833 |            0.0008164 |       0.0292058 |    0.7958748 |        0.2041252 |
+| West New York town     | Hudson  |               53345 |       0.5670316 |           53652.70 |                   48 |                 3 |                  0.8339223 |               0.9929329 | 0.0620489 | 0.0338738 | 0.5953135 |      0.2688537 |           0.0021745 |            0.0019308 |       0.0358047 |    0.7694817 |        0.2305183 |
+| Hoboken city           | Hudson  |               54117 |       0.3018175 |           43286.62 |                  174 |                 4 |                  0.3886926 |               0.9893993 | 0.0929283 | 0.0271818 | 0.8290740 |      0.0164089 |           0.0001109 |            0.0000185 |       0.0342776 |    0.1621856 |        0.8378144 |
+| Cliffside Park borough | Bergen  |               24861 |       0.5122879 |           26011.57 |                   71 |                 5 |                  0.7526502 |               0.9858657 | 0.1673706 | 0.0325409 | 0.6689594 |      0.1016854 |           0.0007642 |            0.0005229 |       0.0281566 |    0.3005913 |        0.6994087 |
+| Passaic city           | Passaic |               71057 |       0.6026179 |           22680.72 |                   31 |                 6 |                  0.8939929 |               0.9823322 | 0.0337616 | 0.0990754 | 0.5694724 |      0.2458027 |           0.0113852 |            0.0007740 |       0.0397287 |    0.7319335 |        0.2680665 |
+| Irvington township     | Essex   |               54715 |       0.2395346 |           18775.34 |                  204 |                 7 |                  0.2826855 |               0.9787986 | 0.0149136 | 0.8684821 | 0.0641872 |      0.0420360 |           0.0003655 |            0.0002924 |       0.0097231 |    0.0961893 |        0.9038107 |
+| Weehawken township     | Hudson  |               14268 |       0.4201864 |           18282.59 |                  116 |                 8 |                  0.5936396 |               0.9752650 | 0.0998738 | 0.0397393 | 0.7501402 |      0.0599944 |           0.0065882 |            0.0000000 |       0.0436641 |    0.3760163 |        0.6239837 |
+| Jersey City city       | Hudson  |              265932 |       0.7382005 |           17974.86 |                    1 |                 9 |                  1.0000000 |               0.9717314 | 0.2539221 | 0.2398658 | 0.3540717 |      0.1156837 |           0.0039070 |            0.0005753 |       0.0319743 |    0.2881827 |        0.7118173 |
+| Paterson city          | Passaic |              147890 |       0.7212596 |           17578.40 |                    3 |                10 |                  0.9929329 |               0.9681979 | 0.0392048 | 0.2776861 | 0.2997160 |      0.3275137 |           0.0011292 |            0.0000000 |       0.0547502 |    0.6073095 |        0.3926905 |
 
-| Municipality   | Diversity Index |  Population density|  Diversity Index rank|  Pop. density rank|  Diversity Index percentile|  Pop. density percentile|  Population, 2013-17|  Square miles| pct Asian | pct Black | pct Two or more | pct Native American | pct Other race | pct Pacific Islander | pct White | pct Hispanic | pct Non-Hispanic |
-|:---------------|:----------------|-------------------:|---------------------:|------------------:|---------------------------:|------------------------:|--------------------:|-------------:|:----------|:----------|:----------------|:--------------------|:---------------|:---------------------|:----------|:-------------|:-----------------|
-| Guttenberg     | 58.2%           |               60788|                    39|                  1|                          87|                      100|                11733|     0.1930137| 7.4%      | 3.3%      | 3.9%            | 0.6%                | 26.4%          | 0.0%                 | 58.4%     | 65.8%        | 34.2%            |
-| Union City     | 45.1%           |               54246|                   100|                  2|                          65|                      100|                69815|     1.2870037| 4.1%      | 4.8%      | 2.9%            | 0.4%                | 15.5%          | 0.1%                 | 72.1%     | 79.6%        | 20.4%            |
-| West New York  | 56.7%           |               53653|                    48|                  3|                          83|                       99|                53345|     0.9942650| 6.2%      | 3.4%      | 3.6%            | 0.2%                | 26.9%          | 0.2%                 | 59.5%     | 76.9%        | 23.1%            |
-| Hoboken        | 30.2%           |               43287|                   174|                  4|                          39|                       99|                54117|     1.2502015| 9.3%      | 2.7%      | 3.4%            | 0.0%                | 1.6%           | 0.0%                 | 82.9%     | 16.2%        | 83.8%            |
-| Cliffside Park | 51.2%           |               26012|                    71|                  5|                          75|                       99|                24861|     0.9557670| 16.7%     | 3.3%      | 2.8%            | 0.1%                | 10.2%          | 0.1%                 | 66.9%     | 30.1%        | 69.9%            |
-| Passaic        | 60.3%           |               22681|                    31|                  6|                          89|                       98|                71057|     3.1329254| 3.4%      | 9.9%      | 4.0%            | 1.1%                | 24.6%          | 0.1%                 | 56.9%     | 73.2%        | 26.8%            |
-| Irvington      | 24.0%           |               18775|                   204|                  7|                          28|                       98|                54715|     2.9141952| 1.5%      | 86.8%     | 1.0%            | 0.0%                | 4.2%           | 0.0%                 | 6.4%      | 9.6%         | 90.4%            |
-| Weehawken      | 42.0%           |               18283|                   116|                  8|                          59|                       98|                14268|     0.7804147| 10.0%     | 4.0%      | 4.4%            | 0.7%                | 6.0%           | 0.0%                 | 75.0%     | 37.6%        | 62.4%            |
-| Jersey City    | 73.8%           |               17975|                     1|                  9|                         100|                       97|               265932|    14.7946597| 25.4%     | 24.0%     | 3.2%            | 0.4%                | 11.6%          | 0.1%                 | 35.4%     | 28.8%        | 71.2%            |
-| Paterson       | 72.1%           |               17578|                     3|                 10|                          99|                       97|               147890|     8.4131661| 3.9%      | 27.8%     | 5.5%            | 0.1%                | 32.8%          | 0.0%                 | 30.0%     | 60.7%        | 39.3%            |
+The 10
+sparsest:
 
-The 10 sparsest:
-
-``` r
-diversity_density %>%
-  arrange(-`Population density`) %>%
-  tail(n = 10) %>%
-  knitr::kable()
-```
-
-| Municipality | Diversity Index |  Population density|  Diversity Index rank|  Pop. density rank|  Diversity Index percentile|  Pop. density percentile|  Population, 2013-17|  Square miles| pct Asian | pct Black | pct Two or more | pct Native American | pct Other race | pct Pacific Islander | pct White | pct Hispanic | pct Non-Hispanic |
-|:-------------|:----------------|-------------------:|---------------------:|------------------:|---------------------------:|------------------------:|--------------------:|-------------:|:----------|:----------|:----------------|:--------------------|:---------------|:---------------------|:----------|:-------------|:-----------------|
-| Waterford    | 23.6%           |                 299|                   210|                274|                          26|                        4|                10749|      36.00219| 0.3%      | 4.0%      | 4.8%            | 0.0%                | 3.7%           | 0.0%                 | 87.1%     | 5.9%         | 94.1%            |
-| Franklin     | 28.9%           |                 297|                   179|                275|                          37|                        3|                16579|      55.83001| 2.5%      | 6.8%      | 2.8%            | 0.0%                | 4.1%           | 0.0%                 | 83.9%     | 6.9%         | 93.1%            |
-| Millstone    | 19.6%           |                 288|                   231|                276|                          19|                        3|                10522|      36.59022| 3.8%      | 1.9%      | 2.5%            | 0.2%                | 1.9%           | 0.2%                 | 89.5%     | 6.6%         | 93.4%            |
-| Middle       | 29.3%           |                 265|                   177|                277|                          38|                        2|                18623|      70.30035| 1.3%      | 11.8%     | 2.4%            | 0.1%                | 1.1%           | 0.0%                 | 83.2%     | 6.0%         | 94.0%            |
-| Hamilton     | 55.8%           |                 240|                    53|                278|                          82|                        2|                26663|     110.93464| 6.8%      | 19.5%     | 4.2%            | 1.1%                | 5.5%           | 0.1%                 | 62.8%     | 15.5%        | 84.5%            |
-| Southampton  | 12.6%           |                 234|                   263|                279|                           7|                        2|                10274|      43.88828| 0.5%      | 2.7%      | 1.8%            | 0.0%                | 1.5%           | 0.0%                 | 93.4%     | 4.4%         | 95.6%            |
-| Plumsted     | 10.7%           |                 217|                   273|                280|                           4|                        1|                 8509|      39.13673| 0.8%      | 3.7%      | 0.4%            | 0.0%                | 0.6%           | 0.0%                 | 94.4%     | 8.8%         | 91.2%            |
-| Pittsgrove   | 18.2%           |                 201|                   235|                281|                          17|                        1|                 9009|      44.89862| 0.8%      | 6.0%      | 1.5%            | 0.1%                | 1.3%           | 0.0%                 | 90.2%     | 4.3%         | 95.7%            |
-| Upper        | 4.7%            |                 193|                   281|                282|                           1|                        1|                11990|      62.02087| 0.3%      | 0.7%      | 1.1%            | 0.0%                | 0.3%           | 0.0%                 | 97.6%     | 2.2%         | 97.8%            |
-| Wantage      | 9.9%            |                 166|                   278|                283|                           2|                        0|                11062|      66.75515| 1.2%      | 0.8%      | 3.1%            | 0.0%                | 0.0%           | 0.0%                 | 94.9%     | 5.5%         | 94.5%            |
+| Municipality         | County     | Population, 2013-17 | Diversity Index | Population density | Diversity Index rank | Pop. density rank | Diversity Index percentile | Pop. density percentile | pct Asian | pct Black | pct White | pct Other race | pct Native American | pct Pacific Islander | pct Two or more | pct Hispanic | pct Non-Hispanic |
+| :------------------- | :--------- | ------------------: | --------------: | -----------------: | -------------------: | ----------------: | -------------------------: | ----------------------: | --------: | --------: | --------: | -------------: | ------------------: | -------------------: | --------------: | -----------: | ---------------: |
+| Waterford township   | Camden     |               10749 |       0.2356335 |           298.5652 |                  210 |               274 |                  0.2614841 |               0.0353357 | 0.0034422 | 0.0403758 | 0.8712438 |      0.0373988 |           0.0000000 |            0.0000000 |       0.0475393 |    0.0589822 |        0.9410178 |
+| Franklin township    | Gloucester |               16579 |       0.2892155 |           296.9550 |                  179 |               275 |                  0.3710247 |               0.0318021 | 0.0245491 | 0.0675553 | 0.8385307 |      0.0409554 |           0.0000000 |            0.0000000 |       0.0284094 |    0.0687617 |        0.9312383 |
+| Millstone township   | Monmouth   |               10522 |       0.1956913 |           287.5632 |                  231 |               276 |                  0.1872792 |               0.0282686 | 0.0381106 | 0.0191028 | 0.8952671 |      0.0186276 |           0.0016157 |            0.0020909 |       0.0251853 |    0.0664322 |        0.9335678 |
+| Middle township      | Cape May   |               18623 |       0.2933582 |           264.9062 |                  177 |               277 |                  0.3780919 |               0.0247350 | 0.0134243 | 0.1182946 | 0.8317135 |      0.0114375 |           0.0008592 |            0.0000000 |       0.0242711 |    0.0598722 |        0.9401278 |
+| Hamilton township    | Atlantic   |               26663 |       0.5576664 |           240.3487 |                   53 |               278 |                  0.8162544 |               0.0212014 | 0.0680344 | 0.1945768 | 0.6284364 |      0.0548700 |           0.0111390 |            0.0007876 |       0.0421558 |    0.1545588 |        0.8454412 |
+| Southampton township | Burlington |               10274 |       0.1261181 |           234.0944 |                  263 |               279 |                  0.0742049 |               0.0176678 | 0.0050613 | 0.0268639 | 0.9341055 |      0.0154760 |           0.0000000 |            0.0000000 |       0.0184933 |    0.0435079 |        0.9564921 |
+| Plumsted township    | Ocean      |                8509 |       0.1065713 |           217.4172 |                  273 |               280 |                  0.0388693 |               0.0141343 | 0.0082266 | 0.0373722 | 0.9444118 |      0.0056411 |           0.0000000 |            0.0000000 |       0.0043483 |    0.0881420 |        0.9118580 |
+| Pittsgrove township  | Salem      |                9009 |       0.1821425 |           200.6520 |                  235 |               281 |                  0.1731449 |               0.0106007 | 0.0084360 | 0.0599401 | 0.9020979 |      0.0133200 |           0.0008880 |            0.0000000 |       0.0153180 |    0.0428460 |        0.9571540 |
+| Upper township       | Cape May   |               11990 |       0.0471160 |           193.3220 |                  281 |               282 |                  0.0106007 |               0.0070671 | 0.0027523 | 0.0073394 | 0.9760634 |      0.0032527 |           0.0000000 |            0.0000000 |       0.0105922 |    0.0222686 |        0.9777314 |
+| Wantage township     | Sussex     |               11062 |       0.0987186 |           165.7101 |                  278 |               283 |                  0.0212014 |               0.0035336 | 0.0117519 | 0.0082264 | 0.9487434 |      0.0002712 |           0.0000000 |            0.0000000 |       0.0310071 |    0.0549629 |        0.9450371 |

@@ -9,16 +9,12 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = '../../')
 
 library(knitr)
-```
-
-```{r import, include=FALSE}
+library(dplyr)
 library(readr)
+library(scales)
 
-diversity_density = read_csv('./data/output/NJ_20132017_diversity_density.csv')
-
-detach('package:readr', unload=TRUE)
+dive_dens = read_csv('../../data/output/NJ_diversity_density_unformat.csv')
 ```
-
 
 # Background
 
@@ -37,7 +33,9 @@ Using most recent, highest quality data available:
 
 # Code
 
-I did everything in `code/R/calculate.R`. See that script for all the details.
+I did everything in 
+[`code/R/calculate.R`](./code/R/calculate.R). 
+See that script for all the details.
 See below for a summary in English.
 
 # Source Data
@@ -63,7 +61,8 @@ for New Jersey (see: [direct download link](https://www2.census.gov/geo/tiger/TI
 
 Each record is a county subdivision, which I'm calling a "municipality" here.
 
-I exclude municipalities with populations lower than the median, 8,244.
+I exclude municipalities with populations lower than the median, 
+`r median(dive_dens$'Diversity Index') %>% percent(accuracy = 0.1)`.
 
 # Calculations
 
@@ -83,21 +82,17 @@ $D = 1 - \sum_{i = 1}^{N} p_i$
 where $p_i$ is the percent of the total municipality population identifying as
 racial group $i$, and $N$ is the total number of racial groups. 
 
-There are 7 racial groups in the Census: White, Black or African American,
-American Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific
-Islander, Two or more races, or Some other race. If you glance at the 
-[HISPANIC OR LATINO ORIGIN BY RACE](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000) table, you'll notice many people identifying with Hispanic ethnicity
-identify as "Some other race". 
-
-## Special Note About Hispanic Individuals
-
-Because "Hispanic" is an ethnicity, not a racial group (according to the Census
-Bureau's admittedly imperfect definitions), 
-**I do not use the Hispanic variable to calculate the Diversity Index.** In 
-doing so, I'm not leaving out Hispanic people. Most of the people identifying as
-"some other race" are Hispanic. All other Hispanic people identify as white, 
-black, asian, etc, and so they're included in the count of the race with which
-they identify.
+There are 7 racial groups in the ACS: White, Black or African American, American
+Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific Islander, Two
+or more races, and Some other race. Because "Hispanic" is not a racial group
+(according to the Census Bureau's admittedly imperfect definitions),
+**I do not use the Hispanic grouping to calculate the Diversity Index.** In 
+doing so, I'm not leaving out Hispanic people. If you glance at the 
+["HISPANIC OR LATINO ORIGIN BY RACE"](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002)
+summary table, you'll notice most people identifying as "some other race" are
+Hispanic/Latinx in origin. All other Hispanic/Latinx people identify as White,
+Black, Asian, etc, and so they're included in the count of the race with which
+they identify.[^5]
 
 # Validation
 
@@ -111,13 +106,13 @@ for calculating the Diversity Index from ACS data, but I matched their results
 by *not* following that methodology.
 
 Note: While Raychaudhuri excludes municipalities with populations lower than 
-10,000, I exclude those with populations lower than the median, 8,244.
+10,000, I exclude those with populations lower than the median.
 
 # My Environment
 
 Here are the R packages directly loaded in this analysis:
 
-```{r}
+```{r, message=FALSE}
 library(dplyr)
 library(readr)
 library(scales)
@@ -132,13 +127,13 @@ sessionInfo()
 
 # Results
 
-The full cleaned dataset output by `calculate.R` is in `data/output/NJ_20132017_diversity_density.csv`. The following results come
+The full cleaned dataset output by `calculate.R` is in `data/output/NJ_20132017_dive_dens.csv`. The following results come
 from this dataset, unless stated otherwise.
 
 The 10 most diverse municipalities in New Jersey:
 
 ```{r, echo=FALSE, message=FALSE}
-diversity_density %>%
+dive_dens %>%
   head(n = 10) %>%
   knitr::kable()
 ```
@@ -146,15 +141,15 @@ diversity_density %>%
 The 10 least diverse municipalities in New Jersey:
 
 ```{r, echo=FALSE, message=FALSE}
-diversity_density %>%
+dive_dens %>%
   tail(n = 10) %>%
   knitr::kable()
 ```
 
 The 10 densest municipalities:
 
-```{r, echo=FALSE, message=FALSE}}
-diversity_density %>%
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
   arrange(-`Population density`) %>%
   head(n = 10) %>%
   knitr::kable()
@@ -162,8 +157,8 @@ diversity_density %>%
 
 The 10 sparsest:
 
-```{r, echo=FALSE, message=FALSE}}
-diversity_density %>%
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
   arrange(-`Population density`) %>%
   tail(n = 10) %>%
   knitr::kable()
