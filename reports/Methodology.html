@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+body {
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+}
+a {
+background-color: transparent;
+}
+a:active,
+a:hover {
+outline: 0;
+}
+strong {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border: 0;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+}
+pre {
+overflow: auto;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+input {
+color: inherit;
+font: inherit;
+margin: 0;
+}
+html input[disabled] {
+cursor: default;
+}
+input {
+line-height: normal;
+}
+input[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+td,
+th {
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a {
+color: #4078c0;
+text-decoration: none;
+}
+a:hover,
+a:active {
+text-decoration: underline;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #ddd;
+}
+hr:before {
+display: table;
+content: "";
+}
+hr:after {
+display: table;
+clear: both;
+content: "";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 15px;
+margin-bottom: 15px;
+line-height: 1.1;
+}
+h1 {
+font-size: 30px;
+}
+h2 {
+font-size: 21px;
+}
+h3 {
+font-size: 16px;
+}
+h4 {
+font-size: 14px;
+}
+h5 {
+font-size: 12px;
+}
+h6 {
+font-size: 11px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.select::-ms-expand {
+opacity: 0;
+}
+.octicon {
+font: normal normal normal 16px/1 octicons-link;
+display: inline-block;
+text-decoration: none;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.octicon-link:before {
+content: '\f05c';
+}
+.markdown-body:before {
+display: table;
+content: "";
+}
+.markdown-body:after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+display: inline-block;
+padding-right: 2px;
+margin-left: -18px;
+}
+.anchor:focus {
+outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1em;
+margin-bottom: 16px;
+font-weight: bold;
+line-height: 1.4;
+}
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+color: #000;
+vertical-align: middle;
+visibility: hidden;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2.25em;
+line-height: 1.2;
+border-bottom: 1px solid #eee;
+}
+h1 .anchor {
+line-height: 1;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.75em;
+line-height: 1.225;
+border-bottom: 1px solid #eee;
+}
+h2 .anchor {
+line-height: 1;
+}
+h3 {
+font-size: 1.5em;
+line-height: 1.43;
+}
+h3 .anchor {
+line-height: 1.2;
+}
+h4 {
+font-size: 1.25em;
+}
+h4 .anchor {
+line-height: 1.2;
+}
+h5 {
+font-size: 1em;
+}
+h5 .anchor {
+line-height: 1.1;
+}
+h6 {
+font-size: 1em;
+color: #777;
+}
+h6 .anchor {
+line-height: 1.1;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 4px;
+padding: 0;
+margin: 16px 0;
+background-color: #e7e7e7;
+border: 0 none;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li>p {
+margin-top: 16px;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+blockquote {
+padding: 0 15px;
+color: #777;
+border-left: 4px solid #ddd;
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+word-break: normal;
+word-break: keep-all;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #ddd;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+code {
+padding: 0;
+padding-top: 0.2em;
+padding-bottom: 0.2em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(0,0,0,0.04);
+border-radius: 3px;
+}
+code:before,
+code:after {
+letter-spacing: -0.2em;
+content: "\00a0";
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 16px;
+}
+.highlight pre,
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f7f7f7;
+border-radius: 3px;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+pre {
+word-wrap: normal;
+}
+pre code {
+display: inline;
+max-width: initial;
+padding: 0;
+margin: 0;
+overflow: initial;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+pre code:before,
+pre code:after {
+content: normal;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font-size: 11px;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.pl-c {
+color: #969896;
+}
+.pl-c1,
+.pl-s .pl-v {
+color: #0086b3;
+}
+.pl-e,
+.pl-en {
+color: #795da3;
+}
+.pl-s .pl-s1,
+.pl-smi {
+color: #333;
+}
+.pl-ent {
+color: #63a35c;
+}
+.pl-k {
+color: #a71d5d;
+}
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+color: #183691;
+}
+.pl-v {
+color: #ed6a43;
+}
+.pl-id {
+color: #b52a1d;
+}
+.pl-ii {
+background-color: #b52a1d;
+color: #f8f8f8;
+}
+.pl-sr .pl-cce {
+color: #63a35c;
+font-weight: bold;
+}
+.pl-ml {
+color: #693a17;
+}
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+color: #1d3e81;
+font-weight: bold;
+}
+.pl-mq {
+color: #008080;
+}
+.pl-mi {
+color: #333;
+font-style: italic;
+}
+.pl-mb {
+color: #333;
+font-weight: bold;
+}
+.pl-md {
+background-color: #ffecec;
+color: #bd2c00;
+}
+.pl-mi1 {
+background-color: #eaffea;
+color: #55a532;
+}
+.pl-mdr {
+color: #795da3;
+font-weight: bold;
+}
+.pl-mo {
+color: #1d3e81;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.task-list-item input {
+margin: 0 0.35em 0.25em -1.6em;
+vertical-align: middle;
+}
+:checked+.radio-label {
+z-index: 1;
+position: relative;
+border-color: #4078c0;
+}
+.sourceLine {
+display: inline-block;
+}
+code .kw { color: #000000; }
+code .dt { color: #ed6a43; }
+code .dv { color: #009999; }
+code .bn { color: #009999; }
+code .fl { color: #009999; }
+code .ch { color: #009999; }
+code .st { color: #183691; }
+code .co { color: #969896; }
+code .ot { color: #0086b3; }
+code .al { color: #a61717; }
+code .fu { color: #63a35c; }
+code .er { color: #a61717; background-color: #e3d2d2; }
+code .wa { color: #000000; }
+code .cn { color: #008080; }
+code .sc { color: #008080; }
+code .vs { color: #183691; }
+code .ss { color: #183691; }
+code .im { color: #000000; }
+code .va {color: #008080; }
+code .cf { color: #000000; }
+code .op { color: #000000; }
+code .bu { color: #000000; }
+code .ex { color: #000000; }
+code .pp { color: #999999; }
+code .at { color: #008080; }
+code .do { color: #969896; }
+code .an { color: #008080; }
+code .cv { color: #008080; }
+code .in { color: #008080; }
+</style>
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 id="methodology">Methodology</h1>
+<p>Everet Rummel</p>
+<h1 id="background">Background</h1>
+<p><em>New Jersey Family</em> magazine created a list of <a href="https://www.njfamily.com/New-Jerseys-Best-Towns-for-Families/">“New Jersey’s Best Towns for Families”</a> (full list <a href="https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/">here</a>. An <a href="https://twitter.com/hobokenurbanist/status/1114592402336100355">obvious question</a> arose: How dense and racially diverse are the top towns in this list?</p>
+<h1 id="objectives">Objectives</h1>
+<p>Using most recent, highest quality data available:</p>
+<ul>
+<li>Calculate a measure of racial diversity for all municipalities in New Jersey</li>
+<li>Calculate population density for all municipalities in New Jersey</li>
+<li>Calculate diversity/density rank and percentile for all municipalities</li>
+</ul>
+<h1 id="code">Code</h1>
+<p>I did everything in <a href="./code/R/calculate.R"><code>code/R/calculate.R</code></a>. See that script for all the details. See below for a summary in English.</p>
+<h1 id="source-data">Source Data</h1>
+<p>American Community Survey, 5-year Public Use Micro Sample, 2013-2017. The Census Bureau provides estimates for county subdivisions, which basically equal municipalities, so I use those summary tables.</p>
+<h2 id="variables">Variables</h2>
+<h3 id="race-population">Race, Population</h3>
+<p><a href="https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000">Table B03002: HISPANIC OR LATINO ORIGIN BY RACE</a>.</p>
+<h3 id="land-area">Land area</h3>
+<p><a href="https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34">American FactFinder</a> only provides <em>rounded</em> land area. For more accurate land area data, I downloaded the <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.2017.html">2017 TIGER/Line shapefile</a> for New Jersey (see: <a href="https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/tl_2017_34_cousub.zip">direct download link</a>).</p>
+<h1 id="universe">Universe</h1>
+<p>Each record is a county subdivision, which I’m calling a “municipality” here.</p>
+<p>I exclude municipalities with populations lower than the median, 36.4%.</p>
+<h1 id="calculations">Calculations</h1>
+<p>To measure diversity, I calculate the <a href="https://en.wikipedia.org/wiki/Diversity_index#Gini%E2%80%93Simpson_index">Gini-Simpson Index</a>. If any economists are reading this, the Gini-Simpson Index is one minus the <a href="https://en.wikipedia.org/wiki/Herfindahl_index">Herfindahl–Hirschman Index</a>. Hereafter, I’ll refer to it as the “Diversity Index” in title-case.</p>
+<p>The value of the Diversity Index for a given municipality can be interpreted as the probability that two randomly selected residents are of a different race. For example: Two random residents in Jersey City have a ~75% chance of identifying as different races.</p>
+<p>The Diversity Index is calculate as follows:</p>
+<p>(D = 1 - \sum_{i = 1}^{N} p_i)</p>
+<p>where (p_i) is the percent of the total municipality population identifying as racial group (i), and (N) is the total number of racial groups.</p>
+<p>There are 7 racial groups in the ACS: White, Black or African American, American Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific Islander, Two or more races, and Some other race. Because “Hispanic” is not a racial group (according to the Census Bureau’s admittedly imperfect definitions), <strong>I do not use the Hispanic grouping to calculate the Diversity Index.</strong> In doing so, I’m not leaving out Hispanic people. If you glance at the <a href="https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002">“HISPANIC OR LATINO ORIGIN BY RACE”</a> summary table, you’ll notice most people identifying as “some other race” are Hispanic/Latinx in origin. All other Hispanic/Latinx people identify as White, Black, Asian, etc, and so they’re included in the count of the race with which they identify.[^5]</p>
+<h1 id="validation">Validation</h1>
+<p>My results can be compared to the Diversity Index calculated for every municipality in New Jersey by NJ.com’s <a href="https://twitter.com/Disha_RC">Disha Raychaudhuri</a> in <a href="https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html">this article</a>. My rankings match theirs almost exactly. My calculations are off by about a hundredth of a percentage point for each municipality. They claim to have followed <a href="https://www.usatoday.com/story/news/nation/2014/10/21/diversity-index-data-how-we-did-report/17432103/">this methodology</a> for calculating the Diversity Index from ACS data, but I matched their results by <em>not</em> following that methodology.</p>
+<p>Note: While Raychaudhuri excludes municipalities with populations lower than 10,000, I exclude those with populations lower than the median.</p>
+<h1 id="my-environment">My Environment</h1>
+<p>Here are the R packages directly loaded in this analysis:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(scales)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(sf)</a></code></pre></div>
+<p>Here is my session info:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">sessionInfo</span>()</a></code></pre></div>
+<pre><code>## R version 3.5.3 (2019-03-11)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.2 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] sf_0.7-3       scales_1.0.0   readr_1.3.1    dplyr_0.8.0.1 
+## [5] knitr_1.22     rmarkdown_1.12
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_1.0.1       magrittr_1.5     units_0.6-2      hms_0.4.2       
+##  [5] tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1 R6_2.4.0        
+##  [9] rlang_0.3.4      stringr_1.4.0    tools_3.5.3      grid_3.5.3      
+## [13] packrat_0.5.0    xfun_0.6         e1071_1.7-1      DBI_1.0.0       
+## [17] class_7.3-15     htmltools_0.3.6  yaml_2.2.0       assertthat_0.2.1
+## [21] digest_0.6.18    tibble_2.1.1     crayon_1.3.4     purrr_0.3.2     
+## [25] glue_1.3.1       evaluate_0.13    stringi_1.4.3    compiler_3.5.3  
+## [29] pillar_1.3.1     classInt_0.3-1   pkgconfig_2.0.2
+</code></pre>
+<h1 id="results">Results</h1>
+<p>The full cleaned dataset output by <code>calculate.R</code> is in <code>data/output/NJ_20132017_dive_dens.csv</code>. The following results come from this dataset, unless stated otherwise.</p>
+<p>The 10 most diverse municipalities in New Jersey:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Municipality</th>
+<th align="left">County</th>
+<th align="right">Population, 2013-17</th>
+<th align="right">Diversity Index</th>
+<th align="right">Population density</th>
+<th align="right">Diversity Index rank</th>
+<th align="right">Pop. density rank</th>
+<th align="right">Diversity Index percentile</th>
+<th align="right">Pop. density percentile</th>
+<th align="right">pct Asian</th>
+<th align="right">pct Black</th>
+<th align="right">pct White</th>
+<th align="right">pct Other race</th>
+<th align="right">pct Native American</th>
+<th align="right">pct Pacific Islander</th>
+<th align="right">pct Two or more</th>
+<th align="right">pct Hispanic</th>
+<th align="right">pct Non-Hispanic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Jersey City city</td>
+<td align="left">Hudson</td>
+<td align="right">265932</td>
+<td align="right">0.7382005</td>
+<td align="right">17974.864</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">1.0000000</td>
+<td align="right">0.9717314</td>
+<td align="right">0.2539221</td>
+<td align="right">0.2398658</td>
+<td align="right">0.3540717</td>
+<td align="right">0.1156837</td>
+<td align="right">0.0039070</td>
+<td align="right">0.0005753</td>
+<td align="right">0.0319743</td>
+<td align="right">0.2881827</td>
+<td align="right">0.7118173</td>
+</tr>
+<tr class="even">
+<td align="left">Atlantic City city</td>
+<td align="left">Atlantic</td>
+<td align="right">39075</td>
+<td align="right">0.7233136</td>
+<td align="right">3631.802</td>
+<td align="right">2</td>
+<td align="right">121</td>
+<td align="right">0.9964664</td>
+<td align="right">0.5759717</td>
+<td align="right">0.1822649</td>
+<td align="right">0.3623800</td>
+<td align="right">0.3197441</td>
+<td align="right">0.0902623</td>
+<td align="right">0.0035061</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0418426</td>
+<td align="right">0.2926935</td>
+<td align="right">0.7073065</td>
+</tr>
+<tr class="odd">
+<td align="left">Paterson city</td>
+<td align="left">Passaic</td>
+<td align="right">147890</td>
+<td align="right">0.7212596</td>
+<td align="right">17578.400</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">0.9929329</td>
+<td align="right">0.9681979</td>
+<td align="right">0.0392048</td>
+<td align="right">0.2776861</td>
+<td align="right">0.2997160</td>
+<td align="right">0.3275137</td>
+<td align="right">0.0011292</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0547502</td>
+<td align="right">0.6073095</td>
+<td align="right">0.3926905</td>
+</tr>
+<tr class="even">
+<td align="left">Pennsauken township</td>
+<td align="left">Camden</td>
+<td align="right">35863</td>
+<td align="right">0.6980178</td>
+<td align="right">3422.544</td>
+<td align="right">4</td>
+<td align="right">128</td>
+<td align="right">0.9893993</td>
+<td align="right">0.5512367</td>
+<td align="right">0.0738365</td>
+<td align="right">0.2659566</td>
+<td align="right">0.4382511</td>
+<td align="right">0.1800742</td>
+<td align="right">0.0048239</td>
+<td align="right">0.0012548</td>
+<td align="right">0.0358029</td>
+<td align="right">0.3187408</td>
+<td align="right">0.6812592</td>
+</tr>
+<tr class="odd">
+<td align="left">Hackensack city</td>
+<td align="left">Bergen</td>
+<td align="right">44673</td>
+<td align="right">0.6925415</td>
+<td align="right">10658.585</td>
+<td align="right">5</td>
+<td align="right">31</td>
+<td align="right">0.9858657</td>
+<td align="right">0.8939929</td>
+<td align="right">0.1046493</td>
+<td align="right">0.2525015</td>
+<td align="right">0.4583082</td>
+<td align="right">0.1468896</td>
+<td align="right">0.0043651</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0332863</td>
+<td align="right">0.3815280</td>
+<td align="right">0.6184720</td>
+</tr>
+<tr class="even">
+<td align="left">Lindenwold borough</td>
+<td align="left">Camden</td>
+<td align="right">17481</td>
+<td align="right">0.6865866</td>
+<td align="right">4479.986</td>
+<td align="right">6</td>
+<td align="right">95</td>
+<td align="right">0.9823322</td>
+<td align="right">0.6678445</td>
+<td align="right">0.0147017</td>
+<td align="right">0.3403695</td>
+<td align="right">0.3952863</td>
+<td align="right">0.1952978</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0543447</td>
+<td align="right">0.2758995</td>
+<td align="right">0.7241005</td>
+</tr>
+<tr class="odd">
+<td align="left">North Plainfield borough</td>
+<td align="left">Somerset</td>
+<td align="right">22092</td>
+<td align="right">0.6835520</td>
+<td align="right">7869.070</td>
+<td align="right">7</td>
+<td align="right">43</td>
+<td align="right">0.9787986</td>
+<td align="right">0.8515901</td>
+<td align="right">0.0617871</td>
+<td align="right">0.2053232</td>
+<td align="right">0.4604834</td>
+<td align="right">0.2395890</td>
+<td align="right">0.0008148</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0320025</td>
+<td align="right">0.4708944</td>
+<td align="right">0.5291056</td>
+</tr>
+<tr class="even">
+<td align="left">Piscataway township</td>
+<td align="left">Middlesex</td>
+<td align="right">57695</td>
+<td align="right">0.6827511</td>
+<td align="right">3071.286</td>
+<td align="right">8</td>
+<td align="right">139</td>
+<td align="right">0.9752650</td>
+<td align="right">0.5123675</td>
+<td align="right">0.3803449</td>
+<td align="right">0.1984227</td>
+<td align="right">0.3628217</td>
+<td align="right">0.0244735</td>
+<td align="right">0.0018546</td>
+<td align="right">0.0009013</td>
+<td align="right">0.0311812</td>
+<td align="right">0.1134240</td>
+<td align="right">0.8865760</td>
+</tr>
+<tr class="odd">
+<td align="left">Camden city</td>
+<td align="left">Camden</td>
+<td align="right">75550</td>
+<td align="right">0.6793024</td>
+<td align="right">8471.227</td>
+<td align="right">9</td>
+<td align="right">39</td>
+<td align="right">0.9717314</td>
+<td align="right">0.8657244</td>
+<td align="right">0.0317670</td>
+<td align="right">0.4539643</td>
+<td align="right">0.2121774</td>
+<td align="right">0.2593647</td>
+<td align="right">0.0063137</td>
+<td align="right">0.0007015</td>
+<td align="right">0.0357114</td>
+<td align="right">0.4848312</td>
+<td align="right">0.5151688</td>
+</tr>
+<tr class="even">
+<td align="left">Englewood city</td>
+<td align="left">Bergen</td>
+<td align="right">28509</td>
+<td align="right">0.6741533</td>
+<td align="right">5788.112</td>
+<td align="right">10</td>
+<td align="right">73</td>
+<td align="right">0.9681979</td>
+<td align="right">0.7455830</td>
+<td align="right">0.1232944</td>
+<td align="right">0.3076572</td>
+<td align="right">0.4578554</td>
+<td align="right">0.0696271</td>
+<td align="right">0.0027711</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0387948</td>
+<td align="right">0.2451507</td>
+<td align="right">0.7548493</td>
+</tr>
+</tbody>
+</table>
+<p>The 10 least diverse municipalities in New Jersey:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Municipality</th>
+<th align="left">County</th>
+<th align="right">Population, 2013-17</th>
+<th align="right">Diversity Index</th>
+<th align="right">Population density</th>
+<th align="right">Diversity Index rank</th>
+<th align="right">Pop. density rank</th>
+<th align="right">Diversity Index percentile</th>
+<th align="right">Pop. density percentile</th>
+<th align="right">pct Asian</th>
+<th align="right">pct Black</th>
+<th align="right">pct White</th>
+<th align="right">pct Other race</th>
+<th align="right">pct Native American</th>
+<th align="right">pct Pacific Islander</th>
+<th align="right">pct Two or more</th>
+<th align="right">pct Hispanic</th>
+<th align="right">pct Non-Hispanic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Audubon borough</td>
+<td align="left">Camden</td>
+<td align="right">8736</td>
+<td align="right">0.1050283</td>
+<td align="right">5894.1254</td>
+<td align="right">274</td>
+<td align="right">70</td>
+<td align="right">0.0353357</td>
+<td align="right">0.7561837</td>
+<td align="right">0.0016026</td>
+<td align="right">0.0386905</td>
+<td align="right">0.9451694</td>
+<td align="right">0.0040064</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+<td align="right">0.0105311</td>
+<td align="right">0.0215201</td>
+<td align="right">0.9784799</td>
+</tr>
+<tr class="even">
+<td align="left">Pequannock township</td>
+<td align="left">Morris</td>
+<td align="right">15499</td>
+<td align="right">0.1029539</td>
+<td align="right">2283.9020</td>
+<td align="right">275</td>
+<td align="right">165</td>
+<td align="right">0.0318021</td>
+<td align="right">0.4204947</td>
+<td align="right">0.0142590</td>
+<td align="right">0.0014840</td>
+<td align="right">0.9467062</td>
+<td align="right">0.0180012</td>
+<td align="right">0.0037422</td>
+<td align="right">0</td>
+<td align="right">0.0158075</td>
+<td align="right">0.0833602</td>
+<td align="right">0.9166398</td>
+</tr>
+<tr class="odd">
+<td align="left">Wall township</td>
+<td align="left">Monmouth</td>
+<td align="right">26020</td>
+<td align="right">0.1017452</td>
+<td align="right">848.7185</td>
+<td align="right">276</td>
+<td align="right">231</td>
+<td align="right">0.0282686</td>
+<td align="right">0.1872792</td>
+<td align="right">0.0099539</td>
+<td align="right">0.0339354</td>
+<td align="right">0.9470792</td>
+<td align="right">0.0030361</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+<td align="right">0.0059954</td>
+<td align="right">0.0321291</td>
+<td align="right">0.9678709</td>
+</tr>
+<tr class="even">
+<td align="left">Beachwood borough</td>
+<td align="left">Ocean</td>
+<td align="right">11193</td>
+<td align="right">0.0988250</td>
+<td align="right">4050.9557</td>
+<td align="right">277</td>
+<td align="right">106</td>
+<td align="right">0.0247350</td>
+<td align="right">0.6289753</td>
+<td align="right">0.0032163</td>
+<td align="right">0.0127758</td>
+<td align="right">0.9488966</td>
+<td align="right">0.0148307</td>
+<td align="right">0.0008934</td>
+<td align="right">0</td>
+<td align="right">0.0193871</td>
+<td align="right">0.0781739</td>
+<td align="right">0.9218261</td>
+</tr>
+<tr class="odd">
+<td align="left">Wantage township</td>
+<td align="left">Sussex</td>
+<td align="right">11062</td>
+<td align="right">0.0987186</td>
+<td align="right">165.7101</td>
+<td align="right">278</td>
+<td align="right">283</td>
+<td align="right">0.0212014</td>
+<td align="right">0.0035336</td>
+<td align="right">0.0117519</td>
+<td align="right">0.0082264</td>
+<td align="right">0.9487434</td>
+<td align="right">0.0002712</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+<td align="right">0.0310071</td>
+<td align="right">0.0549629</td>
+<td align="right">0.9450371</td>
+</tr>
+<tr class="even">
+<td align="left">Berkeley township</td>
+<td align="left">Ocean</td>
+<td align="right">41676</td>
+<td align="right">0.0894888</td>
+<td align="right">975.6271</td>
+<td align="right">279</td>
+<td align="right">224</td>
+<td align="right">0.0176678</td>
+<td align="right">0.2120141</td>
+<td align="right">0.0156445</td>
+<td align="right">0.0149007</td>
+<td align="right">0.9539063</td>
+<td align="right">0.0062386</td>
+<td align="right">0.0011277</td>
+<td align="right">0</td>
+<td align="right">0.0081822</td>
+<td align="right">0.0591228</td>
+<td align="right">0.9408772</td>
+</tr>
+<tr class="odd">
+<td align="left">Lacey township</td>
+<td align="left">Ocean</td>
+<td align="right">28444</td>
+<td align="right">0.0603786</td>
+<td align="right">341.1660</td>
+<td align="right">280</td>
+<td align="right">268</td>
+<td align="right">0.0141343</td>
+<td align="right">0.0565371</td>
+<td align="right">0.0118478</td>
+<td align="right">0.0081915</td>
+<td align="right">0.9692026</td>
+<td align="right">0.0068204</td>
+<td align="right">0.0002461</td>
+<td align="right">0</td>
+<td align="right">0.0036915</td>
+<td align="right">0.0473914</td>
+<td align="right">0.9526086</td>
+</tr>
+<tr class="even">
+<td align="left">Upper township</td>
+<td align="left">Cape May</td>
+<td align="right">11990</td>
+<td align="right">0.0471160</td>
+<td align="right">193.3220</td>
+<td align="right">281</td>
+<td align="right">282</td>
+<td align="right">0.0106007</td>
+<td align="right">0.0070671</td>
+<td align="right">0.0027523</td>
+<td align="right">0.0073394</td>
+<td align="right">0.9760634</td>
+<td align="right">0.0032527</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+<td align="right">0.0105922</td>
+<td align="right">0.0222686</td>
+<td align="right">0.9777314</td>
+</tr>
+<tr class="odd">
+<td align="left">Ocean township</td>
+<td align="left">Ocean</td>
+<td align="right">8838</td>
+<td align="right">0.0465866</td>
+<td align="right">418.8719</td>
+<td align="right">282</td>
+<td align="right">263</td>
+<td align="right">0.0070671</td>
+<td align="right">0.0742049</td>
+<td align="right">0.0045259</td>
+<td align="right">0.0049785</td>
+<td align="right">0.9763521</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0055442</td>
+<td align="right">0</td>
+<td align="right">0.0085992</td>
+<td align="right">0.0243268</td>
+<td align="right">0.9756732</td>
+</tr>
+<tr class="even">
+<td align="left">Point Pleasant borough</td>
+<td align="left">Ocean</td>
+<td align="right">18519</td>
+<td align="right">0.0320661</td>
+<td align="right">5304.7268</td>
+<td align="right">283</td>
+<td align="right">79</td>
+<td align="right">0.0035336</td>
+<td align="right">0.7243816</td>
+<td align="right">0.0016740</td>
+<td align="right">0.0038879</td>
+<td align="right">0.9838004</td>
+<td align="right">0.0043739</td>
+<td align="right">0.0004860</td>
+<td align="right">0</td>
+<td align="right">0.0057778</td>
+<td align="right">0.0461148</td>
+<td align="right">0.9538852</td>
+</tr>
+</tbody>
+</table>
+<p>The 10 densest municipalities:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Municipality</th>
+<th align="left">County</th>
+<th align="right">Population, 2013-17</th>
+<th align="right">Diversity Index</th>
+<th align="right">Population density</th>
+<th align="right">Diversity Index rank</th>
+<th align="right">Pop. density rank</th>
+<th align="right">Diversity Index percentile</th>
+<th align="right">Pop. density percentile</th>
+<th align="right">pct Asian</th>
+<th align="right">pct Black</th>
+<th align="right">pct White</th>
+<th align="right">pct Other race</th>
+<th align="right">pct Native American</th>
+<th align="right">pct Pacific Islander</th>
+<th align="right">pct Two or more</th>
+<th align="right">pct Hispanic</th>
+<th align="right">pct Non-Hispanic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Guttenberg town</td>
+<td align="left">Hudson</td>
+<td align="right">11733</td>
+<td align="right">0.5815861</td>
+<td align="right">60788.43</td>
+<td align="right">39</td>
+<td align="right">1</td>
+<td align="right">0.8657244</td>
+<td align="right">1.0000000</td>
+<td align="right">0.0744055</td>
+<td align="right">0.0334953</td>
+<td align="right">0.5837382</td>
+<td align="right">0.2635302</td>
+<td align="right">0.0057956</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0390352</td>
+<td align="right">0.6584846</td>
+<td align="right">0.3415154</td>
+</tr>
+<tr class="even">
+<td align="left">Union City city</td>
+<td align="left">Hudson</td>
+<td align="right">69815</td>
+<td align="right">0.4514594</td>
+<td align="right">54246.15</td>
+<td align="right">100</td>
+<td align="right">2</td>
+<td align="right">0.6501767</td>
+<td align="right">0.9964664</td>
+<td align="right">0.0409081</td>
+<td align="right">0.0483420</td>
+<td align="right">0.7207477</td>
+<td align="right">0.1554967</td>
+<td align="right">0.0044833</td>
+<td align="right">0.0008164</td>
+<td align="right">0.0292058</td>
+<td align="right">0.7958748</td>
+<td align="right">0.2041252</td>
+</tr>
+<tr class="odd">
+<td align="left">West New York town</td>
+<td align="left">Hudson</td>
+<td align="right">53345</td>
+<td align="right">0.5670316</td>
+<td align="right">53652.70</td>
+<td align="right">48</td>
+<td align="right">3</td>
+<td align="right">0.8339223</td>
+<td align="right">0.9929329</td>
+<td align="right">0.0620489</td>
+<td align="right">0.0338738</td>
+<td align="right">0.5953135</td>
+<td align="right">0.2688537</td>
+<td align="right">0.0021745</td>
+<td align="right">0.0019308</td>
+<td align="right">0.0358047</td>
+<td align="right">0.7694817</td>
+<td align="right">0.2305183</td>
+</tr>
+<tr class="even">
+<td align="left">Hoboken city</td>
+<td align="left">Hudson</td>
+<td align="right">54117</td>
+<td align="right">0.3018175</td>
+<td align="right">43286.62</td>
+<td align="right">174</td>
+<td align="right">4</td>
+<td align="right">0.3886926</td>
+<td align="right">0.9893993</td>
+<td align="right">0.0929283</td>
+<td align="right">0.0271818</td>
+<td align="right">0.8290740</td>
+<td align="right">0.0164089</td>
+<td align="right">0.0001109</td>
+<td align="right">0.0000185</td>
+<td align="right">0.0342776</td>
+<td align="right">0.1621856</td>
+<td align="right">0.8378144</td>
+</tr>
+<tr class="odd">
+<td align="left">Cliffside Park borough</td>
+<td align="left">Bergen</td>
+<td align="right">24861</td>
+<td align="right">0.5122879</td>
+<td align="right">26011.57</td>
+<td align="right">71</td>
+<td align="right">5</td>
+<td align="right">0.7526502</td>
+<td align="right">0.9858657</td>
+<td align="right">0.1673706</td>
+<td align="right">0.0325409</td>
+<td align="right">0.6689594</td>
+<td align="right">0.1016854</td>
+<td align="right">0.0007642</td>
+<td align="right">0.0005229</td>
+<td align="right">0.0281566</td>
+<td align="right">0.3005913</td>
+<td align="right">0.6994087</td>
+</tr>
+<tr class="even">
+<td align="left">Passaic city</td>
+<td align="left">Passaic</td>
+<td align="right">71057</td>
+<td align="right">0.6026179</td>
+<td align="right">22680.72</td>
+<td align="right">31</td>
+<td align="right">6</td>
+<td align="right">0.8939929</td>
+<td align="right">0.9823322</td>
+<td align="right">0.0337616</td>
+<td align="right">0.0990754</td>
+<td align="right">0.5694724</td>
+<td align="right">0.2458027</td>
+<td align="right">0.0113852</td>
+<td align="right">0.0007740</td>
+<td align="right">0.0397287</td>
+<td align="right">0.7319335</td>
+<td align="right">0.2680665</td>
+</tr>
+<tr class="odd">
+<td align="left">Irvington township</td>
+<td align="left">Essex</td>
+<td align="right">54715</td>
+<td align="right">0.2395346</td>
+<td align="right">18775.34</td>
+<td align="right">204</td>
+<td align="right">7</td>
+<td align="right">0.2826855</td>
+<td align="right">0.9787986</td>
+<td align="right">0.0149136</td>
+<td align="right">0.8684821</td>
+<td align="right">0.0641872</td>
+<td align="right">0.0420360</td>
+<td align="right">0.0003655</td>
+<td align="right">0.0002924</td>
+<td align="right">0.0097231</td>
+<td align="right">0.0961893</td>
+<td align="right">0.9038107</td>
+</tr>
+<tr class="even">
+<td align="left">Weehawken township</td>
+<td align="left">Hudson</td>
+<td align="right">14268</td>
+<td align="right">0.4201864</td>
+<td align="right">18282.59</td>
+<td align="right">116</td>
+<td align="right">8</td>
+<td align="right">0.5936396</td>
+<td align="right">0.9752650</td>
+<td align="right">0.0998738</td>
+<td align="right">0.0397393</td>
+<td align="right">0.7501402</td>
+<td align="right">0.0599944</td>
+<td align="right">0.0065882</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0436641</td>
+<td align="right">0.3760163</td>
+<td align="right">0.6239837</td>
+</tr>
+<tr class="odd">
+<td align="left">Jersey City city</td>
+<td align="left">Hudson</td>
+<td align="right">265932</td>
+<td align="right">0.7382005</td>
+<td align="right">17974.86</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">1.0000000</td>
+<td align="right">0.9717314</td>
+<td align="right">0.2539221</td>
+<td align="right">0.2398658</td>
+<td align="right">0.3540717</td>
+<td align="right">0.1156837</td>
+<td align="right">0.0039070</td>
+<td align="right">0.0005753</td>
+<td align="right">0.0319743</td>
+<td align="right">0.2881827</td>
+<td align="right">0.7118173</td>
+</tr>
+<tr class="even">
+<td align="left">Paterson city</td>
+<td align="left">Passaic</td>
+<td align="right">147890</td>
+<td align="right">0.7212596</td>
+<td align="right">17578.40</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">0.9929329</td>
+<td align="right">0.9681979</td>
+<td align="right">0.0392048</td>
+<td align="right">0.2776861</td>
+<td align="right">0.2997160</td>
+<td align="right">0.3275137</td>
+<td align="right">0.0011292</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0547502</td>
+<td align="right">0.6073095</td>
+<td align="right">0.3926905</td>
+</tr>
+</tbody>
+</table>
+<p>The 10 sparsest:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Municipality</th>
+<th align="left">County</th>
+<th align="right">Population, 2013-17</th>
+<th align="right">Diversity Index</th>
+<th align="right">Population density</th>
+<th align="right">Diversity Index rank</th>
+<th align="right">Pop. density rank</th>
+<th align="right">Diversity Index percentile</th>
+<th align="right">Pop. density percentile</th>
+<th align="right">pct Asian</th>
+<th align="right">pct Black</th>
+<th align="right">pct White</th>
+<th align="right">pct Other race</th>
+<th align="right">pct Native American</th>
+<th align="right">pct Pacific Islander</th>
+<th align="right">pct Two or more</th>
+<th align="right">pct Hispanic</th>
+<th align="right">pct Non-Hispanic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Waterford township</td>
+<td align="left">Camden</td>
+<td align="right">10749</td>
+<td align="right">0.2356335</td>
+<td align="right">298.5652</td>
+<td align="right">210</td>
+<td align="right">274</td>
+<td align="right">0.2614841</td>
+<td align="right">0.0353357</td>
+<td align="right">0.0034422</td>
+<td align="right">0.0403758</td>
+<td align="right">0.8712438</td>
+<td align="right">0.0373988</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0475393</td>
+<td align="right">0.0589822</td>
+<td align="right">0.9410178</td>
+</tr>
+<tr class="even">
+<td align="left">Franklin township</td>
+<td align="left">Gloucester</td>
+<td align="right">16579</td>
+<td align="right">0.2892155</td>
+<td align="right">296.9550</td>
+<td align="right">179</td>
+<td align="right">275</td>
+<td align="right">0.3710247</td>
+<td align="right">0.0318021</td>
+<td align="right">0.0245491</td>
+<td align="right">0.0675553</td>
+<td align="right">0.8385307</td>
+<td align="right">0.0409554</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0284094</td>
+<td align="right">0.0687617</td>
+<td align="right">0.9312383</td>
+</tr>
+<tr class="odd">
+<td align="left">Millstone township</td>
+<td align="left">Monmouth</td>
+<td align="right">10522</td>
+<td align="right">0.1956913</td>
+<td align="right">287.5632</td>
+<td align="right">231</td>
+<td align="right">276</td>
+<td align="right">0.1872792</td>
+<td align="right">0.0282686</td>
+<td align="right">0.0381106</td>
+<td align="right">0.0191028</td>
+<td align="right">0.8952671</td>
+<td align="right">0.0186276</td>
+<td align="right">0.0016157</td>
+<td align="right">0.0020909</td>
+<td align="right">0.0251853</td>
+<td align="right">0.0664322</td>
+<td align="right">0.9335678</td>
+</tr>
+<tr class="even">
+<td align="left">Middle township</td>
+<td align="left">Cape May</td>
+<td align="right">18623</td>
+<td align="right">0.2933582</td>
+<td align="right">264.9062</td>
+<td align="right">177</td>
+<td align="right">277</td>
+<td align="right">0.3780919</td>
+<td align="right">0.0247350</td>
+<td align="right">0.0134243</td>
+<td align="right">0.1182946</td>
+<td align="right">0.8317135</td>
+<td align="right">0.0114375</td>
+<td align="right">0.0008592</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0242711</td>
+<td align="right">0.0598722</td>
+<td align="right">0.9401278</td>
+</tr>
+<tr class="odd">
+<td align="left">Hamilton township</td>
+<td align="left">Atlantic</td>
+<td align="right">26663</td>
+<td align="right">0.5576664</td>
+<td align="right">240.3487</td>
+<td align="right">53</td>
+<td align="right">278</td>
+<td align="right">0.8162544</td>
+<td align="right">0.0212014</td>
+<td align="right">0.0680344</td>
+<td align="right">0.1945768</td>
+<td align="right">0.6284364</td>
+<td align="right">0.0548700</td>
+<td align="right">0.0111390</td>
+<td align="right">0.0007876</td>
+<td align="right">0.0421558</td>
+<td align="right">0.1545588</td>
+<td align="right">0.8454412</td>
+</tr>
+<tr class="even">
+<td align="left">Southampton township</td>
+<td align="left">Burlington</td>
+<td align="right">10274</td>
+<td align="right">0.1261181</td>
+<td align="right">234.0944</td>
+<td align="right">263</td>
+<td align="right">279</td>
+<td align="right">0.0742049</td>
+<td align="right">0.0176678</td>
+<td align="right">0.0050613</td>
+<td align="right">0.0268639</td>
+<td align="right">0.9341055</td>
+<td align="right">0.0154760</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0184933</td>
+<td align="right">0.0435079</td>
+<td align="right">0.9564921</td>
+</tr>
+<tr class="odd">
+<td align="left">Plumsted township</td>
+<td align="left">Ocean</td>
+<td align="right">8509</td>
+<td align="right">0.1065713</td>
+<td align="right">217.4172</td>
+<td align="right">273</td>
+<td align="right">280</td>
+<td align="right">0.0388693</td>
+<td align="right">0.0141343</td>
+<td align="right">0.0082266</td>
+<td align="right">0.0373722</td>
+<td align="right">0.9444118</td>
+<td align="right">0.0056411</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0043483</td>
+<td align="right">0.0881420</td>
+<td align="right">0.9118580</td>
+</tr>
+<tr class="even">
+<td align="left">Pittsgrove township</td>
+<td align="left">Salem</td>
+<td align="right">9009</td>
+<td align="right">0.1821425</td>
+<td align="right">200.6520</td>
+<td align="right">235</td>
+<td align="right">281</td>
+<td align="right">0.1731449</td>
+<td align="right">0.0106007</td>
+<td align="right">0.0084360</td>
+<td align="right">0.0599401</td>
+<td align="right">0.9020979</td>
+<td align="right">0.0133200</td>
+<td align="right">0.0008880</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0153180</td>
+<td align="right">0.0428460</td>
+<td align="right">0.9571540</td>
+</tr>
+<tr class="odd">
+<td align="left">Upper township</td>
+<td align="left">Cape May</td>
+<td align="right">11990</td>
+<td align="right">0.0471160</td>
+<td align="right">193.3220</td>
+<td align="right">281</td>
+<td align="right">282</td>
+<td align="right">0.0106007</td>
+<td align="right">0.0070671</td>
+<td align="right">0.0027523</td>
+<td align="right">0.0073394</td>
+<td align="right">0.9760634</td>
+<td align="right">0.0032527</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0105922</td>
+<td align="right">0.0222686</td>
+<td align="right">0.9777314</td>
+</tr>
+<tr class="even">
+<td align="left">Wantage township</td>
+<td align="left">Sussex</td>
+<td align="right">11062</td>
+<td align="right">0.0987186</td>
+<td align="right">165.7101</td>
+<td align="right">278</td>
+<td align="right">283</td>
+<td align="right">0.0212014</td>
+<td align="right">0.0035336</td>
+<td align="right">0.0117519</td>
+<td align="right">0.0082264</td>
+<td align="right">0.9487434</td>
+<td align="right">0.0002712</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0310071</td>
+<td align="right">0.0549629</td>
+<td align="right">0.9450371</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
