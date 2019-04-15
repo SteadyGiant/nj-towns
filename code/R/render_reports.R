@@ -3,6 +3,11 @@ cat('\014')
 
 library(rmarkdown)
 
+rmarkdown::render(input = './README.Rmd',
+                  output_format = 'github_document',
+                  output_file = 'README.md',
+                  output_dir = './')
+
 rmarkdown::render(input = './code/Markdown/Methodology.Rmd',
                   output_format = 'github_document',
                   output_file   = 'Methodology.md',
