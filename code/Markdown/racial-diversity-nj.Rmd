@@ -8,7 +8,7 @@ tags:
 - race
 keywords:
 - tech
-summary: ""
+summary: "Which towns are the most and least racially diverse?"
 thumbnailImage: https://res.cloudinary.com/evcloud/image/upload/v1555372288/race2000.jpg
 thumbnailImagePosition: left
 autoThumbnailImage: yes
@@ -220,6 +220,7 @@ The image appering in the thumbnail for this post on the home page is by
 [Eric Fischer](https://www.flickr.com/photos/walkingsf/5010396867/in/photolist-qzM8zR-mt34zn-8CKAqT-5hJgbT-9tiLT4-5VUVeU-8aiFQ2-bV3kEF-QdchHW-Gm1KvC-utLBHK-rVAz6-imyrbY-ppAPQe-cvQGpf-4Z83nn-oRHth4-ecmQAZ-5ZsqeC-7rYqCC-5amLek-4CiNj-5RTTQj-5ZocyK-5tThZy-egU1y1-dpLNMR-8TcAJs-ymkJBP-ovCXdx-bV3kwH-fgjNcs-bRDZqp-c2zgU5-bV3ktZ-4ZYayq-t2Fq3-4ZTWAD-4ZU7Bi-aeuMoJ-qikdfb-FVCUp9-Ljxjrn-mt4Dqs-jNfsW-oPnxH7-uXTeQL), 
 licensed under 
 [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+
 
 [^1]: That 68% includes people identifying as Hispanic/Latinx in ancestry and
 white in race. 56% of NJ is white and *not* Hispanic/Latinx. Source: 
