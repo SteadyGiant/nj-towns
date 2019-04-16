@@ -1,30 +1,27 @@
 ---
 title: "Racial Diversity in New Jersey"
-slug: "racial-diversity-nj"
-date: 2019-04-15
-categories:
-- New Jersey
-tags:
-- race
-keywords:
-- tech
-summary: "Which towns are the most and least racially diverse?"
+categories: New Jersey
+date: "2019-04-16"
+comments: no
+coverCaption: ''
+coverImage: jc_v_nyc.JPG
+coverMeta: in
+coverSize: full
+clearReading: yes
+keywords: tech
+metaAlignment: left
+showActions: yes
+showDate: yes
+showMeta: yes
+showPagination: yes
+showSocial: yes
+showTags: yes
+slug: racial-diversity-nj
+summary: Which towns are the most and least racially diverse?
+tags: race
 thumbnailImage: https://res.cloudinary.com/evcloud/image/upload/v1555372288/race2000.jpg
 thumbnailImagePosition: left
 autoThumbnailImage: yes
-coverImage: jc_v_nyc.JPG
-coverCaption: ""
-coverMeta: in
-coverSize: full
-clearReading: true
-comments: false
-showTags: true
-showDate: true
-showMeta: true
-metaAlignment: left
-showPagination: true
-showSocial: true
-showActions: true
 ---
 
 ```{r setup, include=FALSE}
