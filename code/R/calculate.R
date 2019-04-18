@@ -68,6 +68,11 @@ race =
          diversity     = 1 - race_homog,
          diversity_2   = 1 - homog)
 
+mhi =
+  read_csv('./data/input/ACS_17_5YR_B19013/ACS_17_5YR_B19013.csv') %>%
+  mutate(GEOID = as.character(GEO.id2)) %>%
+  rename(mhi1317 = HD01_VD01)
+
 
 ############
 ### Join ###
@@ -87,7 +92,9 @@ data_join = cousubs %>%
   ) %>%
   # Compare density to
   # https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34
-  mutate(density = pop1317 / sq_miles)
+  mutate(density = pop1317 / sq_miles) %>%
+  left_join(mhi,
+            by = 'GEOID')
 
 
 ################
@@ -129,6 +136,7 @@ data_out = data_uni %>%
   select(Municipality = NAMELSAD,
          County = county_name,
          `Population, 2013-17` = pop1317,
+         `Med. Household Income, 2013-17` = mhi1317,
          `Diversity Index` = diversity,
          `Population density` = density,
          `Diversity Index rank` = diversity_rank,
@@ -153,7 +161,10 @@ data_out_display = data_out %>%
   mutate_at(.vars = vars(`Diversity Index`, `pct Asian`:`pct Non-Hispanic`),
             .funs = ~ scales::percent(., accuracy = 0.1)) %>%
   mutate_at(.vars = vars(`Population, 2013-17`, `Population density`),
-            .funs = ~ scales::comma(., accuracy = 1))
+            .funs = ~ scales::comma(., accuracy = 1)) %>%
+  mutate(`Med. Household Income, 2013-17` =
+           scales::dollar(`Med. Household Income, 2013-17`,
+                          accuracy = 1))
 
 # This dataset will be joined to the "Best Towns" dataset for further calculations.
 # No formatting.
@@ -186,7 +197,8 @@ data_out_best = data_join %>%
          `pct Pacific Islander` = pacis_pct,
          `pct White` = white_pct,
          `pct Hispanic` = hispan_pct,
-         `pct Non-Hispanic` = nonhispan_pct)
+         `pct Non-Hispanic` = nonhispan_pct,
+         `Med. Household Income, 2013-17` = mhi1317)
 
 write_csv(x = data_out,
           path = paste0(DATA_WRITE_DIR,
