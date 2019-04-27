@@ -19,6 +19,16 @@ library(dplyr)
 library(readr)
 library(rvest)
 
+# ?toupper
+simpleCap =
+  Vectorize({
+    function(x) {
+      s <- strsplit(x, " ")[[1]]
+      paste(toupper(substring(s, 1, 1)), substring(s, 2),
+            sep = "", collapse = " ")
+    }
+  })
+
 
 ##############
 ### Import ###
@@ -34,25 +44,76 @@ best_towns = READ_URL %>%
   slice(-1) %>%
   rename(`Best Towns Rank` = `Town\nRank`) %>%
   mutate(County = gsub(' County', '', County),
-         join_town = gsub(' Borough$| Twp\\.$| Township$| town$', '', Town),
          `Best Towns Rank` = as.numeric(`Best Towns Rank`))
+
+best_towns_dupes = best_towns %>%
+  mutate(join_town_tmp = gsub(' Twp\\.| Borough$| Township$', '', Town)) %>%
+  filter(join_town_tmp %in% join_town_tmp[duplicated(join_town_tmp)]) %>%
+  arrange(join_town_tmp) %>%
+  mutate(
+    join_town = case_when(
+      Town == 'Berlin' & `Total Population` == '5,580' ~ 'Berlin township',
+      Town == 'Chester Twp.' ~ 'Chester township',
+      Town == 'Clinton Twp.' ~ 'Clinton township',
+      Town == 'Egg Harbor' & `Total Population` == '43,296' ~
+        'Egg Harbor township',
+      # There are two Fairfield townships, but in diff counties.
+      Town == 'Fairfield' ~ 'Fairfield township',
+      Town == 'Franklin Twp.' ~ 'Franklin township',
+      Town == 'Hamilton Twp.' ~ 'Hamilton township',
+      Town == 'Hopewell Twp.' ~ 'Hopewell township',
+      Town == 'Lawrence Twp.' ~ 'Lawrence township',
+      Town == 'Lebanon' & `Total Population` == '6,101' ~ 'Lebanon township',
+      Town == 'Monroe Twp.' ~ 'Monroe township',
+      Town == 'Ocean Twp.' ~ 'Ocean township',
+      Town == 'Rockaway' & `Total Population` == '25,494' ~ 'Rockaway township',
+      Town == 'Springfield Twp.' ~ 'Springfield township',
+      Town == 'Washington Twp.' & County == 'Warren' ~ 'Washington township',
+      Town == 'Washington Twp.' & County != 'Warren' ~ 'Washington',
+      Town == 'Chatham Twp.' ~ 'Chatham township',
+      Town == 'Freehold Township' ~ 'Freehold township',
+      Town == 'Mendham Twp.' ~ 'Mendham township',
+      Town == 'Raritan Twp.' ~ 'Raritan township',
+      Town %in% c('Union Twp.', 'Union Township') ~ 'Union township',
+      TRUE ~ join_town_tmp
+    )
+  ) %>%
+  select(-join_town_tmp)
+
+best_townships = best_towns_dupes %>%
+  filter(grepl('township', join_town)) %>%
+  mutate(identifier = paste(join_town, County, sep = ' '))
+
+best_towns_clean = best_towns %>%
+  filter(!Town %in% best_towns_dupes$Town) %>%
+  mutate(join_town = gsub(' town$| Twp\\.$| Borough$', '', Town)) %>%
+  bind_rows(best_towns_dupes)
 
 dive_dens =
   read_csv(paste0(DATA_READ_DIR,
                   'NJ_1000up_diversity_density_unformat.csv')) %>%
-  mutate(join_town = gsub(' borough$| city$| township$| town$| village$| Village township$', '',
-                          Municipality),
-         join_town = gsub('Ventnor City', 'Ventnor', join_town),
-         join_town = gsub('Margate City', 'Margate', join_town),
-         join_town = gsub('Peapack and Gladstone', 'Peapack-Gladstone',
-                          join_town))
+  mutate(
+    join_town = gsub(' city$| town$| village$| Village township$| borough$',
+                     '',
+                     Municipality),
+    twp_identifier = paste(join_town, County, sep = ' ')) %>%
+  mutate(
+    join_town = if_else(!twp_identifier %in% best_townships$identifier,
+                        gsub(' township$', '', join_town,
+                             ignore.case = TRUE),
+                        join_town) %>%
+      gsub('Ventnor City', 'Ventnor', .) %>%
+      gsub('Margate City', 'Margate', .) %>%
+      gsub('Peapack and Gladstone', 'Peapack-Gladstone', .) %>%
+      gsub('Egg Harbor City', 'Egg Harbor', .)
+  )
 
 
 ############
 ### Join ###
 ############
 
-data_join = best_towns %>%
+data_join = best_towns_clean %>%
   left_join(dive_dens,
             by = c('join_town',
                    'County')) %>%
@@ -64,11 +125,11 @@ data_join = best_towns %>%
 ##############
 
 mean(data_join$`Diversity Index`)
-# [1] 0.3118595
-mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` < 20])
-# [1] 0.2522159
-mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` < 10])
-# [1] 0.2855
+# [1] 0.3151452
+mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 20])
+# [1] 0.2721031
+mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 10])
+# [1] 0.3118671
 
 data_join %>%
   pull(`Diversity Index`) %>%
