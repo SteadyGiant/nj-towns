@@ -75,6 +75,9 @@ best_towns_dupes = best_towns %>%
       Town == 'Mendham Twp.' ~ 'Mendham township',
       Town == 'Raritan Twp.' ~ 'Raritan township',
       Town %in% c('Union Twp.', 'Union Township') ~ 'Union township',
+      Town == 'Boonton' & `Total Population` == '4,350' ~ 'Boonton township',
+      Town == 'Bordentown' & `Total Population` == '12,202' ~ 'Bordentown township',
+      Town == 'Burlington' & `Total Population` == '22,824' ~ 'Burlington township',
       TRUE ~ join_town_tmp
     )
   ) %>%
@@ -106,7 +109,10 @@ dive_dens =
       gsub('Margate City', 'Margate', .) %>%
       gsub('Peapack and Gladstone', 'Peapack-Gladstone', .) %>%
       gsub('Egg Harbor City', 'Egg Harbor', .)
-  )
+  ) %>%
+  filter(!(Municipality == 'Shrewsbury township' & `Population, 2013-17` == 1117)
+         & !(Municipality == 'Pemberton borough' & `Population, 2013-17` == 1439)) %>%
+  select(-twp_identifier)
 
 
 ############
@@ -119,13 +125,17 @@ data_join = best_towns_clean %>%
                    'County')) %>%
   select(-c(`Total Population`, Municipality, join_town))
 
+# No dupes from join. That sucked.
+sum(duplicated(data_join$`Best Towns Rank`))
+# [1] 0
+
 
 ##############
 ### Expore ###
 ##############
 
 mean(data_join$`Diversity Index`)
-# [1] 0.3151452
+# [1] 0.3130628
 mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 20])
 # [1] 0.2721031
 mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 10])
