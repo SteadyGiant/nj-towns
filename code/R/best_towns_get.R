@@ -90,7 +90,8 @@ best_townships = best_towns_dupes %>%
 best_towns_clean = best_towns %>%
   filter(!Town %in% best_towns_dupes$Town) %>%
   mutate(join_town = gsub(' town$| Twp\\.$| Borough$', '', Town)) %>%
-  bind_rows(best_towns_dupes)
+  bind_rows(best_towns_dupes) %>%
+  arrange(`Best Towns Rank`)
 
 dive_dens =
   read_csv(paste0(DATA_READ_DIR,
