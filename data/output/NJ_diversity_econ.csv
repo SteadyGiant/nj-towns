@@ -1,0 +1,284 @@
+"","GEOID","municipality","county","econ_diversity","econ_diversity_rank","state_econ_diversity","more_econ_diverse_than_state"
+"1","3402536810","Keyport borough","Monmouth",0.893933,1,0.883128,1
+"2","3401736000","Jersey City city","Hudson",0.89181,2,0.883128,1
+"3","3400313570","Cliffside Park borough","Bergen",0.890191,3,0.883128,1
+"4","3400143890","Margate City city","Atlantic",0.888162,4,0.883128,1
+"5","3404141490","Lopatcong township","Warren",0.887913,5,0.883128,1
+"6","3402501960","Asbury Park city","Monmouth",0.886752,6,0.883128,1
+"7","3401703580","Bayonne city","Hudson",0.886632,7,0.883128,1
+"8","3402541310","Long Branch city","Monmouth",0.886403,8,0.883128,1
+"9","3402519840","Eatontown borough","Monmouth",0.885461,9,0.883128,1
+"10","3401526340","Glassboro borough","Gloucester",0.884569,10,0.883128,1
+"11","3401582120","Woodbury city","Gloucester",0.884447,11,0.883128,1
+"12","3400324420","Fort Lee borough","Bergen",0.884142,12,0.883128,1
+"13","3402562430","Red Bank borough","Monmouth",0.883961,13,0.883128,1
+"14","3403959190","Plainfield city","Union",0.883728,14,0.883128,1
+"15","3400328680","Hackensack city","Bergen",0.883243,15,0.883128,1
+"16","3401779610","West New York town","Hudson",0.882888,16,0.883128,0
+"17","3400341100","Lodi borough","Bergen",0.882341,17,0.883128,0
+"18","3402525200","Freehold borough","Monmouth",0.882077,18,0.883128,0
+"19","3400107810","Brigantine city","Atlantic",0.881567,19,0.883128,0
+"20","3402536480","Keansburg borough","Monmouth",0.88139,20,0.883128,0
+"21","3401176070","Vineland city","Cumberland",0.881364,21,0.883128,0
+"22","3403751930","Newton town","Sussex",0.881176,22,0.883128,0
+"23","3403964620","Roselle borough","Union",0.880975,23,0.883128,0
+"24","3401319390","East Orange city","Essex",0.880873,24,0.883128,0
+"25","3400954360","Ocean City city","Cape May",0.88071,25,0.883128,0
+"26","3401774630","Union City city","Hudson",0.880575,26,0.883128,0
+"27","3400714260","Collingswood borough","Camden",0.880204,27,0.883128,0
+"28","3400325770","Garfield city","Bergen",0.87992,28,0.883128,0
+"29","3401513360","Clayton borough","Gloucester",0.879831,29,0.883128,0
+"30","3400352320","North Arlington borough","Bergen",0.879817,30,0.883128,0
+"31","3400340020","Leonia borough","Bergen",0.87935,31,0.883128,0
+"32","3400362940","Ridgefield Park village","Bergen",0.879319,32,0.883128,0
+"33","3402351210","New Brunswick city","Middlesex",0.878991,33,0.883128,0
+"34","3402347280","Monroe township","Middlesex",0.878926,34,0.883128,0
+"35","3402573020","Tinton Falls borough","Monmouth",0.878868,35,0.883128,0
+"36","3400168430","Somers Point city","Atlantic",0.878864,36,0.883128,0
+"37","3400175620","Ventnor City city","Atlantic",0.87883,37,0.883128,0
+"38","3401752470","North Bergen township","Hudson",0.87883,37,0.883128,0
+"39","3400322560","Fairview borough","Bergen",0.878619,39,0.883128,0
+"40","3403156550","Passaic city","Passaic",0.87824,40,0.883128,0
+"41","3403961530","Rahway city","Union",0.878167,41,0.883128,0
+"42","3402905305","Berkeley township","Ocean",0.878111,42,0.883128,0
+"43","3400542060","Lumberton township","Burlington",0.877547,43,0.883128,0
+"44","3400508920","Burlington city","Burlington",0.877545,44,0.883128,0
+"45","3404128710","Hackettstown town","Warren",0.877471,45,0.883128,0
+"46","3402331470","Highland Park borough","Middlesex",0.87737,46,0.883128,0
+"47","3403157000","Paterson city","Passaic",0.877222,47,0.883128,0
+"48","3403113690","Clifton city","Passaic",0.876999,48,0.883128,0
+"49","3400340680","Little Ferry borough","Bergen",0.876495,49,0.883128,0
+"50","3402554270","Ocean township","Monmouth",0.876247,50,0.883128,0
+"51","3400543740","Maple Shade township","Burlington",0.876228,51,0.883128,0
+"52","3402174000","Trenton city","Mercer",0.876047,52,0.883128,0
+"53","3400129280","Hamilton township","Atlantic",0.875807,53,0.883128,0
+"54","3402358200","Perth Amboy city","Middlesex",0.875802,54,0.883128,0
+"55","3401313045","City of Orange township","Essex",0.875761,55,0.883128,0
+"56","3404158350","Phillipsburg town","Warren",0.87569,56,0.883128,0
+"57","3402943140","Manchester township","Ocean",0.875655,57,0.883128,0
+"58","3402973125","Toms River township","Ocean",0.875632,58,0.883128,0
+"59","3401777930","Weehawken township","Hudson",0.875506,59,0.883128,0
+"60","3401351000","Newark city","Essex",0.875362,60,0.883128,0
+"61","3400342090","Lyndhurst township","Bergen",0.87517,61,0.883128,0
+"62","3401728650","Guttenberg town","Hudson",0.875132,62,0.883128,0
+"63","3403182423","Woodland Park borough","Passaic",0.875093,63,0.883128,0
+"64","3400330420","Hasbrouck Heights borough","Bergen",0.874977,64,0.883128,0
+"65","3402907420","Brick township","Ocean",0.874884,65,0.883128,0
+"66","3402549890","Neptune township","Monmouth",0.874739,66,0.883128,0
+"67","3401379800","West Orange township","Essex",0.874624,67,0.883128,0
+"68","3400568610","Southampton township","Burlington",0.874585,68,0.883128,0
+"69","3402938550","Lakewood township","Ocean",0.874505,69,0.883128,0
+"70","3400319510","East Rutherford borough","Bergen",0.874455,70,0.883128,0
+"71","3402119780","East Windsor township","Mercer",0.874203,71,0.883128,0
+"72","3402758110","Pequannock township","Morris",0.874069,72,0.883128,0
+"73","3403931980","Hillside township","Union",0.873278,73,0.883128,0
+"74","3400321480","Englewood city","Bergen",0.873208,74,0.883128,0
+"75","3403974480","Union township","Union",0.873193,75,0.883128,0
+"76","3402749080","Mount Olive township","Morris",0.872954,76,0.883128,0
+"77","3400776220","Voorhees township","Camden",0.872923,77,0.883128,0
+"78","3402369810","Spotswood borough","Middlesex",0.872723,78,0.883128,0
+"79","3401146680","Millville city","Cumberland",0.872564,79,0.883128,0
+"80","3400781740","Winslow township","Camden",0.87256,80,0.883128,0
+"81","3400506700","Bordentown township","Burlington",0.872535,81,0.883128,0
+"82","3400355770","Palisades Park borough","Bergen",0.872424,82,0.883128,0
+"83","3400362910","Ridgefield borough","Bergen",0.872398,83,0.883128,0
+"84","3401309250","Caldwell borough","Essex",0.872347,84,0.883128,0
+"85","3400344880","Maywood borough","Bergen",0.872234,85,0.883128,0
+"86","3400125560","Galloway township","Atlantic",0.871655,86,0.883128,0
+"87","3401107600","Bridgeton city","Cumberland",0.871284,87,0.883128,0
+"88","3403921000","Elizabeth city","Union",0.871275,88,0.883128,0
+"89","3401353680","Nutley township","Essex",0.871205,89,0.883128,0
+"90","3401730210","Harrison town","Hudson",0.871192,90,0.883128,0
+"91","3400758770","Pine Hill borough","Camden",0.870974,91,0.883128,0
+"92","3402359010","Piscataway township","Middlesex",0.870889,92,0.883128,0
+"93","3402544520","Matawan borough","Monmouth",0.870673,93,0.883128,0
+"94","3402352560","North Brunswick township","Middlesex",0.870083,94,0.883128,0
+"95","3400726820","Gloucester City city","Camden",0.870054,95,0.883128,0
+"96","3401578800","West Deptford township","Gloucester",0.869953,96,0.883128,0
+"97","3403524900","Franklin township","Somerset",0.869927,97,0.883128,0
+"98","3400549020","Mount Laurel township","Burlington",0.869808,98,0.883128,0
+"99","3401334450","Irvington township","Essex",0.869783,99,0.883128,0
+"100","3400120290","Egg Harbor township","Atlantic",0.869669,100,0.883128,0
+"101","3401766570","Secaucus town","Hudson",0.869618,101,0.883128,0
+"102","3400365280","Rutherford borough","Bergen",0.86959,102,0.883128,0
+"103","3400704750","Bellmawr borough","Camden",0.869532,103,0.883128,0
+"104","3402129310","Hamilton township","Mercer",0.869428,104,0.883128,0
+"105","3400129430","Hammonton town","Atlantic",0.869171,105,0.883128,0
+"106","3401306260","Bloomfield township","Essex",0.869113,106,0.883128,0
+"107","3401736510","Kearny town","Hudson",0.868863,107,0.883128,0
+"108","3400712280","Cherry Hill township","Camden",0.868798,108,0.883128,0
+"109","3400508950","Burlington township","Burlington",0.868779,109,0.883128,0
+"110","3400945810","Middle township","Cape May",0.86864,110,0.883128,0
+"111","3402937380","Lacey township","Ocean",0.868565,111,0.883128,0
+"112","3400321300","Elmwood Park borough","Bergen",0.868556,112,0.883128,0
+"113","3400523850","Florence township","Burlington",0.868534,113,0.883128,0
+"114","3403357870","Pennsville township","Salem",0.868508,114,0.883128,0
+"115","3401517710","Deptford township","Gloucester",0.868358,115,0.883128,0
+"116","3400702200","Audubon borough","Camden",0.868116,116,0.883128,0
+"117","3402748300","Morristown town","Morris",0.868089,117,0.883128,0
+"118","3402320230","Edison township","Middlesex",0.868,118,0.883128,0
+"119","3403359130","Pittsgrove township","Salem",0.867954,119,0.883128,0
+"120","3400305170","Bergenfield borough","Bergen",0.867936,120,0.883128,0
+"121","3400757660","Pennsauken township","Camden",0.867863,121,0.883128,0
+"122","3402122185","Ewing township","Mercer",0.867823,122,0.883128,0
+"123","3400726760","Gloucester township","Camden",0.86768,123,0.883128,0
+"124","3401547250","Monroe township","Gloucester",0.867505,124,0.883128,0
+"125","3400548900","Mount Holly township","Burlington",0.867409,125,0.883128,0
+"126","3400102080","Atlantic City city","Atlantic",0.866787,126,0.883128,0
+"127","3402525230","Freehold township","Monmouth",0.866783,127,0.883128,0
+"128","3403940350","Linden city","Union",0.86672,128,0.883128,0
+"129","3402970320","Stafford township","Ocean",0.86657,129,0.883128,0
+"130","3404143320","Mansfield township","Warren",0.866426,130,0.883128,0
+"131","3402368550","South Amboy city","Middlesex",0.866368,131,0.883128,0
+"132","3400351660","New Milford borough","Bergen",0.866293,132,0.883128,0
+"133","3403140620","Little Falls township","Passaic",0.866127,133,0.883128,0
+"134","3402365790","Sayreville borough","Middlesex",0.866031,134,0.883128,0
+"135","3402310750","Carteret borough","Middlesex",0.865865,135,0.883128,0
+"136","3401304695","Belleville township","Essex",0.865679,136,0.883128,0
+"137","3400318400","Dumont borough","Bergen",0.865612,137,0.883128,0
+"138","3400941610","Lower township","Cape May",0.865432,138,0.883128,0
+"139","3402940560","Little Egg Harbor township","Ocean",0.865263,139,0.883128,0
+"140","3400159640","Pleasantville city","Atlantic",0.865002,140,0.883128,0
+"141","3402369420","South River borough","Middlesex",0.864943,141,0.883128,0
+"142","3402382000","Woodbridge township","Middlesex",0.864891,142,0.883128,0
+"143","3402903050","Barnegat township","Ocean",0.864866,143,0.883128,0
+"144","3403568460","Somerville borough","Somerset",0.864722,144,0.883128,0
+"145","3403506790","Bound Brook borough","Somerset",0.864709,145,0.883128,0
+"146","3400380270","Westwood borough","Bergen",0.864705,146,0.883128,0
+"147","3402530690","Hazlet township","Monmouth",0.864699,147,0.883128,0
+"148","3400320020","Edgewater borough","Bergen",0.864671,148,0.883128,0
+"149","3402345900","Middlesex borough","Middlesex",0.864514,149,0.883128,0
+"150","3400974810","Upper township","Cape May",0.864499,150,0.883128,0
+"151","3402706610","Boonton town","Morris",0.864472,151,0.883128,0
+"152","3400376490","Wallington borough","Bergen",0.864451,152,0.883128,0
+"153","3403776790","Wantage township","Sussex",0.864101,153,0.883128,0
+"154","3402718070","Dover town","Morris",0.86364,154,0.883128,0
+"155","3403964650","Roselle Park borough","Union",0.863406,155,0.883128,0
+"156","3403130570","Hawthorne borough","Passaic",0.863324,156,0.883128,0
+"157","3400520050","Edgewater Park township","Burlington",0.863268,157,0.883128,0
+"158","3402319000","East Brunswick township","Middlesex",0.862971,158,0.883128,0
+"159","3401378510","West Caldwell township","Essex",0.862926,159,0.883128,0
+"160","3400543290","Mansfield township","Burlington",0.862735,160,0.883128,0
+"161","3402545990","Middletown township","Monmouth",0.862379,161,0.883128,0
+"162","3400728740","Haddon township","Camden",0.862292,162,0.883128,0
+"163","3400522110","Evesham township","Burlington",0.862201,163,0.883128,0
+"164","3400355950","Paramus borough","Bergen",0.861918,164,0.883128,0
+"165","3403176730","Wanaque borough","Passaic",0.861745,165,0.883128,0
+"166","3402734980","Jefferson township","Morris",0.861425,166,0.883128,0
+"167","3402533300","Howell township","Monmouth",0.861224,167,0.883128,0
+"168","3402756460","Parsippany-Troy Hills township","Morris",0.861002,168,0.883128,0
+"169","3400372360","Teaneck township","Bergen",0.860991,169,0.883128,0
+"170","3400555800","Palmyra borough","Burlington",0.860988,170,0.883128,0
+"171","3402934680","Jackson township","Ocean",0.860708,171,0.883128,0
+"172","3400765160","Runnemede borough","Camden",0.860594,172,0.883128,0
+"173","3403177840","Wayne township","Passaic",0.860488,173,0.883128,0
+"174","3402500070","Aberdeen township","Monmouth",0.860447,174,0.883128,0
+"175","3401577180","Washington township","Gloucester",0.860119,175,0.883128,0
+"176","3400710000","Camden city","Camden",0.860008,176,0.883128,0
+"177","3402354705","Old Bridge township","Middlesex",0.859943,177,0.883128,0
+"178","3400100100","Absecon city","Atlantic",0.859692,178,0.883128,0
+"179","3400512940","Cinnaminson township","Burlington",0.85969,179,0.883128,0
+"180","3402576460","Wall township","Monmouth",0.859672,180,0.883128,0
+"181","3403913150","Clark township","Union",0.859328,181,0.883128,0
+"182","3402959880","Point Pleasant borough","Ocean",0.858755,182,0.883128,0
+"183","3401524840","Franklin township","Gloucester",0.858453,183,0.883128,0
+"184","3403970020","Springfield township","Union",0.858306,184,0.883128,0
+"185","3403543620","Manville borough","Somerset",0.858285,185,0.883128,0
+"186","3400740440","Lindenwold borough","Camden",0.858029,186,0.883128,0
+"187","3403732910","Hopatcong borough","Sussex",0.857765,187,0.883128,0
+"188","3400342750","Mahwah township","Bergen",0.857506,188,0.883128,0
+"189","3400322470","Fair Lawn borough","Bergen",0.857299,189,0.883128,0
+"190","3400356130","Park Ridge borough","Bergen",0.857269,190,0.883128,0
+"191","3401375815","Verona township","Essex",0.856884,191,0.883128,0
+"192","3400557510","Pemberton township","Burlington",0.856725,192,0.883128,0
+"193","3400517440","Delran township","Burlington",0.856631,193,0.883128,0
+"194","3400382570","Wood-Ridge borough","Bergen",0.856512,194,0.883128,0
+"195","3400376400","Waldwick borough","Bergen",0.854904,195,0.883128,0
+"196","3402764080","Rockaway township","Morris",0.854535,196,0.883128,0
+"197","3400365340","Saddle Brook township","Bergen",0.854258,197,0.883128,0
+"198","3401543440","Mantua township","Gloucester",0.854257,198,0.883128,0
+"199","3402369390","South Plainfield borough","Middlesex",0.854231,199,0.883128,0
+"200","3403179460","West Milford township","Passaic",0.853828,200,0.883128,0
+"201","3401311200","Cedar Grove township","Essex",0.853738,201,0.883128,0
+"202","3403553280","North Plainfield borough","Somerset",0.853397,202,0.883128,0
+"203","3402359280","Plainsboro township","Middlesex",0.853376,203,0.883128,0
+"204","3402954300","Ocean township","Ocean",0.853147,204,0.883128,0
+"205","3402717650","Denville township","Morris",0.85302,205,0.883128,0
+"206","3402139510","Lawrence township","Mercer",0.852803,206,0.883128,0
+"207","3403966060","Scotch Plains township","Union",0.85212,207,0.883128,0
+"208","3402542990","Manalapan township","Monmouth",0.851372,208,0.883128,0
+"209","3402719210","East Hanover township","Morris",0.851145,209,0.883128,0
+"210","3402368790","South Brunswick township","Middlesex",0.851022,210,0.883128,0
+"211","3402740290","Lincoln Park borough","Morris",0.850983,211,0.883128,0
+"212","3402764980","Roxbury township","Morris",0.850495,212,0.883128,0
+"213","3402959790","Plumsted township","Ocean",0.850045,213,0.883128,0
+"214","3403160090","Pompton Lakes borough","Passaic",0.849824,214,0.883128,0
+"215","3403775740","Vernon township","Sussex",0.849812,215,0.883128,0
+"216","3402723910","Florham Park borough","Morris",0.849688,216,0.883128,0
+"217","3401961920","Raritan township","Hunterdon",0.849524,217,0.883128,0
+"218","3401559070","Pitman borough","Gloucester",0.849347,218,0.883128,0
+"219","3402729550","Hanover township","Morris",0.849064,219,0.883128,0
+"220","3402904180","Beachwood borough","Ocean",0.848772,220,0.883128,0
+"221","3401347500","Montclair township","Essex",0.848319,221,0.883128,0
+"222","3403504450","Bedminster township","Somerset",0.848267,222,0.883128,0
+"223","3403173140","Totowa borough","Passaic",0.848035,223,0.883128,0
+"224","3403915640","Cranford township","Union",0.847659,224,0.883128,0
+"225","3400331920","Hillsdale borough","Bergen",0.847516,225,0.883128,0
+"226","3401369274","South Orange Village township","Essex",0.847401,226,0.883128,0
+"227","3403153040","North Haledon borough","Passaic",0.845934,227,0.883128,0
+"228","3400363360","River Edge borough","Bergen",0.845738,228,0.883128,0
+"229","3403531890","Hillsborough township","Somerset",0.844357,229,0.883128,0
+"230","3400581440","Willingboro township","Burlington",0.843664,230,0.883128,0
+"231","3400353850","Oakland borough","Bergen",0.842917,231,0.883128,0
+"232","3403163150","Ringwood borough","Passaic",0.841856,232,0.883128,0
+"233","3403507720","Bridgewater township","Somerset",0.841258,233,0.883128,0
+"234","3403729850","Hardyston township","Sussex",0.840741,234,0.883128,0
+"235","3400545120","Medford township","Burlington",0.840215,235,0.883128,0
+"236","3402345690","Metuchen borough","Middlesex",0.838538,236,0.883128,0
+"237","3401519180","East Greenwich township","Gloucester",0.83523,237,0.883128,0
+"238","3400377135","Washington township","Bergen",0.834887,238,0.883128,0
+"239","3403507180","Branchburg township","Somerset",0.834137,239,0.883128,0
+"240","3401343800","Maplewood township","Essex",0.833633,240,0.883128,0
+"241","3400315820","Cresskill borough","Bergen",0.833458,241,0.883128,0
+"242","3401913750","Clinton township","Hunterdon",0.831292,242,0.883128,0
+"243","3400777630","Waterford township","Camden",0.830575,243,0.883128,0
+"244","3401732250","Hoboken city","Hudson",0.83049,244,0.883128,0
+"245","3402742510","Madison borough","Morris",0.829663,245,0.883128,0
+"246","3402163850","Robbinsville township","Mercer",0.829411,246,0.883128,0
+"247","3401962250","Readington township","Hunterdon",0.82903,247,0.883128,0
+"248","3403769690","Sparta township","Sussex",0.82848,248,0.883128,0
+"249","3400578200","Westampton township","Burlington",0.827361,249,0.883128,0
+"250","3402761890","Randolph township","Morris",0.827241,250,0.883128,0
+"251","3401582840","Woolwich township","Gloucester",0.826157,251,0.883128,0
+"252","3402741362","Long Hill township","Morris",0.824068,252,0.883128,0
+"253","3402747670","Montville township","Morris",0.824042,253,0.883128,0
+"254","3402777240","Washington township","Morris",0.823048,254,0.883128,0
+"255","3401530180","Harrison township","Gloucester",0.821894,255,0.883128,0
+"256","3400547880","Moorestown township","Burlington",0.821781,256,0.883128,0
+"257","3403951810","New Providence borough","Union",0.821768,257,0.883128,0
+"258","3400363690","River Vale township","Bergen",0.821421,258,0.883128,0
+"259","3402133180","Hopewell township","Mercer",0.821111,259,0.883128,0
+"260","3400361680","Ramsey borough","Bergen",0.82103,260,0.883128,0
+"261","3402748090","Morris township","Morris",0.817777,261,0.883128,0
+"262","3402160900","Princeton","Mercer",0.817673,262,0.883128,0
+"263","3400728770","Haddonfield borough","Camden",0.813567,263,0.883128,0
+"264","3402544070","Marlboro township","Monmouth",0.809872,264,0.883128,0
+"265","3400383050","Wyckoff township","Bergen",0.80631,265,0.883128,0
+"266","3402532640","Holmdel township","Monmouth",0.805473,266,0.883128,0
+"267","3402737110","Kinnelon borough","Morris",0.805169,267,0.883128,0
+"268","3403505560","Bernards township","Somerset",0.804079,268,0.883128,0
+"269","3403971430","Summit city","Union",0.803869,269,0.883128,0
+"270","3402546560","Millstone township","Monmouth",0.803142,270,0.883128,0
+"271","3400372420","Tenafly borough","Bergen",0.794391,271,0.883128,0
+"272","3403576940","Warren township","Somerset",0.789469,272,0.883128,0
+"273","3401340890","Livingston township","Essex",0.788864,273,0.883128,0
+"274","3403905320","Berkeley Heights township","Union",0.778505,274,0.883128,0
+"275","3403979040","Westfield town","Union",0.774223,275,0.883128,0
+"276","3400324990","Franklin Lakes borough","Bergen",0.773497,276,0.883128,0
+"277","3402514560","Colts Neck township","Monmouth",0.770495,277,0.883128,0
+"278","3400326640","Glen Rock borough","Bergen",0.770441,278,0.883128,0
+"279","3402180240","West Windsor township","Mercer",0.759076,279,0.883128,0
+"280","3400363000","Ridgewood village","Bergen",0.747863,280,0.883128,0
+"281","3403547580","Montgomery township","Somerset",0.744544,281,0.883128,0
+"282","3402712130","Chatham township","Morris",0.741678,282,0.883128,0
+"283","3401346380","Millburn township","Essex",0.707277,283,0.883128,0
