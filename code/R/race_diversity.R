@@ -1,212 +1,155 @@
 #!/usr/bin/env Rscript
-cat('\014')
-
-
-##############
-### Params ###
-##############
-
-DATA_READ_DIR  = './data/input/'
-DATA_WRITE_DIR = './data/output/'
-
-
-#############
-### Setup ###
-#############
 
 library(dplyr)
-library(readr)
-library(readxl)
-library(scales)
-library(sf)
+library(here)
+library(magrittr)
+library(tidycensus)
+library(tidyr)
 
 options(scipen = 999)
 
-
-##############
-### Import ###
-##############
-
-fips_nj_co =
-  read_excel('./data/input/all-geocodes-v2017.xlsx',
-             skip = 4) %>%
-  filter(`State Code (FIPS)` == '34'
-         & `Summary Level` == '050') %>%
-  mutate(`Area Name (including legal/statistical area description)` =
-           gsub(' County', '', `Area Name (including legal/statistical area description)`))
-
-cousubs =
-  sf::st_read(dsn = paste0(DATA_READ_DIR,
-                           'tl_2017_34_cousub/tl_2017_34_cousub.shp')) %>%
-  mutate(GEOID = as.character(GEOID),
-         COUNTYFP = as.character(COUNTYFP),
-         # https://www.metric-conversions.org/area/square-meters-to-square-miles.htm
-         sq_miles = ALAND * 0.00000038610)
-
-race =
-  read_csv('./data/input/ACS_17_5YR_B03002/ACS_17_5YR_B03002.csv') %>%
-  mutate(GEOID         = as.character(GEO.id2),
-         asian_pct     = (HD01_VD06 + HD01_VD16) / HD01_VD01,
-         black_pct     = (HD01_VD04 + HD01_VD14) / HD01_VD01,
-         multi_pct     = (HD01_VD09 + HD01_VD19) / HD01_VD01,
-         natam_pct     = (HD01_VD05 + HD01_VD15) / HD01_VD01,
-         other_pct     = (HD01_VD08 + HD01_VD18) / HD01_VD01,
-         pacis_pct     = (HD01_VD07 + HD01_VD17) / HD01_VD01,
-         white_pct     = (HD01_VD03 + HD01_VD13) / HD01_VD01,
-         asian_pct_2   = (HD01_VD06 + HD01_VD16) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         black_pct_2   = (HD01_VD04 + HD01_VD14) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         multi_pct_2   = (HD01_VD09 + HD01_VD19) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         natam_pct_2   = (HD01_VD05 + HD01_VD15) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         pacis_pct_2   = (HD01_VD07 + HD01_VD17) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         white_pct_2   = (HD01_VD03 + HD01_VD13) / (HD01_VD01 - (HD01_VD08 + HD01_VD18)),
-         hispan_pct    = HD01_VD12 / HD01_VD01,
-         nonhispan_pct = HD01_VD02 / HD01_VD01,
-         race_homog    = asian_pct^2 + black_pct^2 + multi_pct^2 + natam_pct^2 + other_pct^2 + pacis_pct^2 + white_pct^2,
-         race_homog_2  = asian_pct_2^2 + black_pct_2^2 + multi_pct_2^2 + natam_pct_2^2 + pacis_pct_2^2 + white_pct_2^2,
-         ethn_homog    = hispan_pct^2 + nonhispan_pct^2,
-         homog         = race_homog_2 * ethn_homog,
-         diversity     = 1 - race_homog,
-         diversity_2   = 1 - homog)
-
-mhi =
-  read_csv('./data/input/ACS_17_5YR_B19013/ACS_17_5YR_B19013.csv') %>%
-  mutate(GEOID = as.character(GEO.id2)) %>%
-  rename(mhi1317 = HD01_VD01)
+census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 
-############
-### Join ###
-############
+##%######################################################%##
+#                                                          #
+####                      Extract                       ####
+#                                                          #
+##%######################################################%##
 
-data_join = cousubs %>%
-  left_join(
-    select(fips_nj_co,
-           `County Code (FIPS)`,
-           county_name = `Area Name (including legal/statistical area description)`),
-    by = c('COUNTYFP' = 'County Code (FIPS)')) %>%
-  left_join(
-    select(race,
-           GEOID:diversity_2,
-           pop1317 = HD01_VD01),
-    by = 'GEOID'
-  ) %>%
-  # Compare density to
-  # https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34
-  mutate(density = pop1317 / sq_miles) %>%
-  left_join(mhi,
+# get race counts for county subdivisions in NJ
+# https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34.06000
+race_cosub = get_acs(geography = 'county subdivision',
+                     table = 'B02001',
+                     year = 2017,
+                     state = 'NJ',
+                     survey = 'acs5')
+
+# get hispanic origin counts for county subdivisions in NJ
+# https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03003/0400000US34.06000
+hisp_cosub = get_acs(geography = 'county subdivision',
+                     table = 'B03003',
+                     year = 2017,
+                     output = 'wide',
+                     state = 'NJ',
+                     survey = 'acs5')
+
+# get statewide race counts for NJ
+# https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34
+race_state = get_acs(geography = 'state',
+                     table = 'B02001',
+                     year = 2017,
+                     state = 'NJ',
+                     survey = 'acs5')
+
+
+##%######################################################%##
+#                                                          #
+####                      Universe                      ####
+#                                                          #
+##%######################################################%##
+
+race_uni = race_cosub %>%
+  # Keep only population & counts by race. That's rows 1-8.
+  group_by(GEOID) %>%
+  slice(1:8) %>%
+  mutate(population = estimate[variable == 'B02001_001']) %>%
+  ungroup() %>%
+  filter(
+    # only want incorporated towns
+    !grepl('County subdivisions not defined', NAME),
+    # drop pop
+    variable != 'B02001_001'
+  )
+
+# save to display later in a summary
+MED_POP = median(race_uni$population)
+
+race_uni %<>%
+  # keep towns w/ population at or above median
+  filter(population >= MED_POP)
+
+
+##%######################################################%##
+#                                                          #
+####                     Transform                      ####
+#                                                          #
+##%######################################################%##
+
+race_clean = race_uni %>%
+  mutate(NAME = gsub(', New Jersey$', '', NAME)) %>%
+  separate(col = NAME,
+           into = c('municipality', 'county'),
+           sep = ', ') %>%
+  mutate(county = gsub(' County$', '', county)) %>%
+  # this isn't that serious
+  select(-moe)
+
+# calculate statewide racial diversity
+STATE_RACIAL_DIVERSITY = race_state %>%
+  slice(2:8) %>%
+  mutate(estimate = estimate / sum(estimate)) %>%
+  summarize(racial_diversity = 1 - sum(estimate^2)) %>%
+  pull(racial_diversity)
+
+# calculate racial diversity index for each town, & other stuff
+race_agg = race_clean %>%
+  group_by(GEOID, municipality, county, population) %>%
+  mutate(pct = estimate / population) %>%
+  summarize(pct_white = pct[variable == 'B02001_002'],
+            pct_black = pct[variable == 'B02001_003'],
+            pct_natam = pct[variable == 'B02001_004'],
+            pct_asian = pct[variable == 'B02001_005'],
+            pct_pacis = pct[variable == 'B02001_006'],
+            pct_other = pct[variable == 'B02001_007'],
+            pct_multi = pct[variable == 'B02001_008'],
+            racial_diversity = 1 - sum(pct^2)) %>%
+  ungroup() %>%
+  mutate(racial_diversity_rank = min_rank(desc(racial_diversity)),
+         state_racial_diversity = STATE_RACIAL_DIVERSITY,
+         more_racial_diverse_than_state = if_else(
+           racial_diversity > state_racial_diversity, 1, 0
+         )) %>%
+  arrange(racial_diversity_rank)
+
+
+hisp_clean = hisp_cosub %>%
+  mutate(pct_not_hispanic = B03003_002E / B03003_001E,
+         pct_hispanic = B03003_003E / B03003_001E) %>%
+  select(-c(NAME, matches('[0-9]')))
+
+
+data_out = race_agg %>%
+  left_join(hisp_clean,
             by = 'GEOID')
 
 
-################
-### Universe ###
-################
+##%######################################################%##
+#                                                          #
+####                      Validate                      ####
+#                                                          #
+##%######################################################%##
 
-data_uni = data_join %>%
-  filter(NAME != 'County subdivisions not defined')
+# compare resutls to original NJ.com article
+# https://www.nj.com/data/2019/03/how-racially-diverse-is-your-town-look-up-using-our-tool.html
 
-median(data_uni$pop1317)
+MED_POP
 # [1] 8244
-median(data_uni$density)
-# [1] 2163.473
+STATE_RACIAL_DIVERSITY
+# [1] 0.5069469
+median(data_out$racial_diversity)
+# [1] 0.3641735
+sum(data_out$more_racial_diverse_than_state)
+# [1] 74
 
-data_uni = data_uni %>%
-  filter(pop1317 >= median(pop1317))
-
-median(data_uni$pop1317)
-# [1] 18622
-median(data_uni$density)
-# [1] 2957.973
+summary(data_out)
 
 
-##############
-### Export ###
-##############
+##%######################################################%##
+#                                                          #
+####                        Load                        ####
+#                                                          #
+##%######################################################%##
 
-get_diversity_pctile = ecdf(data_uni$diversity)
-get_density_pctile   = ecdf(data_uni$density)
-
-# This dataset will be for blog posts.
-data_out = data_uni %>%
-  as_tibble() %>%
-  mutate(diversity_rank   = min_rank(-diversity),
-         density_rank     = min_rank(-density),
-         diversity_pctile = get_diversity_pctile(diversity),
-         density_pctile   = get_density_pctile(density)) %>%
-  arrange(-diversity) %>%
-  select(Municipality = NAMELSAD,
-         County = county_name,
-         `Population, 2013-17` = pop1317,
-         `Med. Household Income, 2013-17` = mhi1317,
-         `Diversity Index` = diversity,
-         `Population density` = density,
-         `Diversity Index rank` = diversity_rank,
-         `Pop. density rank` = density_rank,
-         `Diversity Index percentile` = diversity_pctile,
-         `Pop. density percentile` = density_pctile,
-         `pct Asian` = asian_pct,
-         `pct Black` = black_pct,
-         `pct White` = white_pct,
-         `pct Other race` = other_pct,
-         `pct Native American` = natam_pct,
-         `pct Pacific Islander` = pacis_pct,
-         `pct Two or more` = multi_pct,
-         `pct Hispanic` = hispan_pct,
-         `pct Non-Hispanic` = nonhispan_pct)
-
-# This dataset will be for public consumption.
-data_out_display = data_out %>%
-  mutate_at(.vars = vars(`Diversity Index percentile`,
-                         `Pop. density percentile`),
-            .funs = ~ scales::percent(., accuracy = 1, suffix = '')) %>%
-  mutate_at(.vars = vars(`Diversity Index`, `pct Asian`:`pct Non-Hispanic`),
-            .funs = ~ scales::percent(., accuracy = 0.1)) %>%
-  mutate_at(.vars = vars(`Population, 2013-17`, `Population density`),
-            .funs = ~ scales::comma(., accuracy = 1)) %>%
-  mutate(`Med. Household Income, 2013-17` =
-           scales::dollar(`Med. Household Income, 2013-17`,
-                          accuracy = 1))
-
-# This dataset will be joined to the "Best Towns" dataset for further calculations.
-# No formatting.
-data_out_best = data_join %>%
-  # Different universe.
-  filter(NAME != 'County subdivisions not defined'
-         & pop1317 >= 1000) %>%
-  as_tibble() %>%
-  # Ranks and percentiles recalculated for different universe.
-  mutate(diversity_rank   = min_rank(-diversity),
-         density_rank     = min_rank(-density),
-         diversity_pctile = get_diversity_pctile(diversity),
-         density_pctile   = get_density_pctile(density),
-         density          = scales::comma(density, accuracy = 1)) %>%
-  select(Municipality = NAMELSAD,
-         County = county_name,
-         `Diversity Index` = diversity,
-         `Population density` = density,
-         `Diversity Index rank` = diversity_rank,
-         `Pop. density rank` = density_rank,
-         `Diversity Index percentile` = diversity_pctile,
-         `Pop. density percentile` = density_pctile,
-         `Population, 2013-17` = pop1317,
-         `Square miles` = sq_miles,
-         `pct Asian` = asian_pct,
-         `pct Black` = black_pct,
-         `pct Two or more` = multi_pct,
-         `pct Native American` = natam_pct,
-         `pct Other race` = other_pct,
-         `pct Pacific Islander` = pacis_pct,
-         `pct White` = white_pct,
-         `pct Hispanic` = hispan_pct,
-         `pct Non-Hispanic` = nonhispan_pct,
-         `Med. Household Income, 2013-17` = mhi1317)
-
-write_csv(x = data_out,
-          path = paste0(DATA_WRITE_DIR,
-                        'NJ_diversity_density_unformat.csv'))
-
-write_csv(x = data_out_display,
-          path = paste0(DATA_WRITE_DIR, 'NJ_diversity_density.csv'))
-
-write_csv(x = data_out_best,
-          path = paste0(DATA_WRITE_DIR,
-                        'NJ_1000up_diversity_density_unformat.csv'))
+write.csv(x = data_out,
+          file = here::here('data/output/NJ_racial_diversity.csv'))
