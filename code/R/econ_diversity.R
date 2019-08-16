@@ -1,27 +1,44 @@
 #!/usr/bin/env Rscript
 
-# https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html
-
 library(dplyr)
+library(here)
 library(magrittr)
 library(tidycensus)
 library(tidyr)
 
+options(scipen = 999)
+
 census_api_key(Sys.getenv('CENSUS_API_KEY'))
+
+
+##%######################################################%##
+#                                                          #
+####                      Extract                       ####
+#                                                          #
+##%######################################################%##
 
 # get % of households in each income bracket, for all county subdivisions in NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34.06000
 cosub_inc_brackets = get_acs(geography = 'county subdivision',
                              table = 'S1901',
+                             year = 2017,
                              state = 'NJ',
-                             geometry = FALSE)
+                             survey = 'acs5')
 
 # get the same for the entire state
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34
 state_inc_brackets = get_acs(geography = 'state',
                              table = 'S1901',
+                             year = 2017,
                              state = 'NJ',
-                             geometry = FALSE)
+                             survey = 'acs5')
+
+
+##%######################################################%##
+#                                                          #
+####                      Universe                      ####
+#                                                          #
+##%######################################################%##
 
 data_uni = cosub_inc_brackets %>%
   # Keep only num HHs & bracket % variables. That's rows 1-11.
@@ -43,6 +60,13 @@ data_uni %<>%
   ungroup() %>%
   # drop num HHs
   filter(variable != 'S1901_C01_001')
+
+
+##%######################################################%##
+#                                                          #
+####                     Transform                      ####
+#                                                          #
+##%######################################################%##
 
 data_clean = data_uni %>%
   mutate(estimate = estimate / 100,
@@ -74,11 +98,29 @@ data_agg = data_clean %>%
          )) %>%
   arrange(econ_diversity_rank)
 
+
+##%######################################################%##
+#                                                          #
+####                      Validate                      ####
+#                                                          #
+##%######################################################%##
+
 MED_ECON_DIVERSITY = median(data_agg$econ_diversity)
 # [1] 0.864891
 
 sum(data_agg$more_econ_diverse_than_state)
 # [1] 15
 
+# compare results to
+# https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html
+
+
+##%######################################################%##
+#                                                          #
+####                        Load                        ####
+#                                                          #
+##%######################################################%##
+
 write.csv(x = data_agg,
-          file = 'data/output/NJ_diversity_econ.csv')
+          file = here::here('data/output/NJ_diversity_econ.csv'),
+          row.names = FALSE)
