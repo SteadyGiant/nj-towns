@@ -152,4 +152,5 @@ summary(data_out)
 ##%######################################################%##
 
 write.csv(x = data_out,
-          file = here::here('data/output/NJ_racial_diversity.csv'))
+          file = here::here('data/output/NJ_racial_diversity.csv'),
+          row.names = FALSE)
