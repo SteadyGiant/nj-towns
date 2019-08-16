@@ -67,7 +67,11 @@ MED_POP = median(race_uni$population)
 
 race_uni %<>%
   # keep towns w/ population at or above median
-  filter(population >= MED_POP)
+  # filter(population >= MED_POP)
+  #
+  # Keep towns w/ population at least 1k. Consistent with "Best Towns" method.
+  # NJ.com included only those w/ 10k+.
+  filter(population >= 1000)
 
 
 ##%######################################################%##
@@ -135,6 +139,7 @@ data_out = race_agg %>%
 
 MED_POP
 # [1] 8244
+
 STATE_RACIAL_DIVERSITY
 # [1] 0.5069469
 median(data_out$racial_diversity)
