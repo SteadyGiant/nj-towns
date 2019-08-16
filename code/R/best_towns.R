@@ -28,7 +28,7 @@ best_towns = READ_URL %>%
   mutate(County = gsub(' County', '', County),
          `Best Towns Rank` = as.numeric(`Best Towns Rank`))
 
-race_diver = read.csv(here::here('data/output/NJ_racial_diversity.csv'))
+race_diver = read.csv(here::here('data/output/NJ_diversity_race.csv'))
 
 
 ##%######################################################%##
@@ -108,13 +108,13 @@ race_diver_clean = race_diver %>%
       gsub('Peapack and Gladstone', 'Peapack-Gladstone', .) %>%
       gsub('Egg Harbor City', 'Egg Harbor', .)
   ) %>%
-  # filter(
-  #   !(municipality == 'Shrewsbury township'
-  #     & `Population, 2013-17` == 1117)
-  #   &
-  #     !(municipality == 'Pemberton borough'
-  #       & `Population, 2013-17` == 1439)
-  # ) %>%
+  filter(
+    !(municipality == 'Shrewsbury township'
+      & population == 1117)
+    &
+      !(municipality == 'Pemberton borough'
+        & population == 1439)
+  ) %>%
   select(-twp_identifier)
 
 rm(best_townships)
@@ -139,13 +139,6 @@ data_join = best_towns_clean %>%
 sum(duplicated(data_join$`Best Towns Rank`))
 # [1] 0
 
-mean(data_join$racial_diversity)
-# [1] 0.3130628
-mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 20])
-# [1] 0.2721031
-mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 10])
-# [1] 0.3118671
-
 
 ##%######################################################%##
 #                                                          #
@@ -154,4 +147,4 @@ mean(data_join$`Diversity Index`[data_join$`Best Towns Rank` <= 10])
 ##%######################################################%##
 
 write_csv(x = data_join,
-          path = here::here('data/output/NJ_best_towns_racial_diversity.csv'))
+          path = here::here('data/output/NJ_best_towns_diversity_race.csv'))
