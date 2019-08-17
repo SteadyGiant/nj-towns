@@ -19,28 +19,33 @@ census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 # get race counts for county subdivisions in NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34.06000
-race_cosub = get_acs(geography = 'county subdivision',
-                     table = 'B02001',
-                     year = 2017,
+race_cosub = get_acs(table = 'B02001',
+                     geography = 'county subdivision',
                      state = 'NJ',
-                     survey = 'acs5')
+                     year = 2017,
+                     survey = 'acs5',
+                     summary_var = 'B02001_001',
+                     cache_table = TRUE)
 
 # get hispanic origin counts for county subdivisions in NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03003/0400000US34.06000
-hisp_cosub = get_acs(geography = 'county subdivision',
-                     table = 'B03003',
-                     year = 2017,
-                     output = 'wide',
+hisp_cosub = get_acs(table = 'B03003',
+                     geography = 'county subdivision',
                      state = 'NJ',
-                     survey = 'acs5')
+                     year = 2017,
+                     survey = 'acs5',
+                     output = 'wide',
+                     cache_table = TRUE)
 
 # get statewide race counts for NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34
-race_state = get_acs(geography = 'state',
-                     table = 'B02001',
-                     year = 2017,
+race_state = get_acs(table = 'B02001',
+                     geography = 'state',
                      state = 'NJ',
-                     survey = 'acs5')
+                     year = 2017,
+                     survey = 'acs5',
+                     summary_var = 'B02001_001',
+                     cache_table = TRUE)
 
 
 ##%######################################################%##
@@ -49,23 +54,23 @@ race_state = get_acs(geography = 'state',
 #                                                          #
 ##%######################################################%##
 
-race_uni = race_cosub %>%
-  # Keep only population & counts by race. That's rows 1-8.
+race_cosub_uni = race_cosub %>%
+  rename(population = summary_est) %>%
+  # Keep only counts by race. That's rows 2-8.
   group_by(GEOID) %>%
-  slice(1:8) %>%
-  mutate(population = estimate[variable == 'B02001_001']) %>%
+  slice(2:8) %>%
   ungroup() %>%
   filter(
-    # only want incorporated towns
+    # only incorporated towns
     !grepl('County subdivisions not defined', NAME),
     # drop pop
     variable != 'B02001_001'
   )
 
 # save to display later in a summary
-MED_POP = median(race_uni$population)
+MED_POP = median(race_cosub_uni$population)
 
-race_uni %<>%
+race_cosub_uni %<>%
   # keep towns w/ population at or above median
   # filter(population >= MED_POP)
   #
@@ -80,24 +85,25 @@ race_uni %<>%
 #                                                          #
 ##%######################################################%##
 
-race_clean = race_uni %>%
+race_cosub_clean = race_cosub_uni %>%
   mutate(NAME = gsub(', New Jersey$', '', NAME)) %>%
   separate(col = NAME,
            into = c('municipality', 'county'),
            sep = ', ') %>%
   mutate(county = gsub(' County$', '', county)) %>%
   # this isn't that serious
-  select(-moe)
+  select(-c(moe, summary_moe))
 
 # calculate statewide racial diversity
 STATE_RACIAL_DIVERSITY = race_state %>%
+  rename(population = summary_est) %>%
   slice(2:8) %>%
-  mutate(estimate = estimate / sum(estimate)) %>%
-  summarize(racial_diversity = 1 - sum(estimate^2)) %>%
+  mutate(pct = estimate / population) %>%
+  summarize(racial_diversity = 1 - sum(pct^2)) %>%
   pull(racial_diversity)
 
 # calculate racial diversity index for each town, & other stuff
-race_agg = race_clean %>%
+race_cosub_agg = race_cosub_clean %>%
   group_by(GEOID, municipality, county, population) %>%
   mutate(pct = estimate / population) %>%
   summarize(pct_white = pct[variable == 'B02001_002'],
@@ -117,14 +123,14 @@ race_agg = race_clean %>%
   arrange(racial_diversity_rank)
 
 
-hisp_clean = hisp_cosub %>%
+hisp_cosub_clean = hisp_cosub %>%
   mutate(pct_not_hispanic = B03003_002E / B03003_001E,
          pct_hispanic = B03003_003E / B03003_001E) %>%
   select(-c(NAME, matches('[0-9]')))
 
 
-data_out = race_agg %>%
-  left_join(hisp_clean,
+data_out = race_cosub_agg %>%
+  left_join(hisp_cosub_clean,
             by = 'GEOID')
 
 
@@ -143,9 +149,9 @@ MED_POP
 STATE_RACIAL_DIVERSITY
 # [1] 0.5069469
 median(data_out$racial_diversity)
-# [1] 0.3641735
+# [1] 0.2758469
 sum(data_out$more_racial_diverse_than_state)
-# [1] 74
+# [1] 99
 
 summary(data_out)
 
