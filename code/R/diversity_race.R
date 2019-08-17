@@ -86,7 +86,8 @@ race_cosub_uni %<>%
 ##%######################################################%##
 
 race_cosub_clean = race_cosub_uni %>%
-  mutate(NAME = gsub(', New Jersey$', '', NAME)) %>%
+  mutate(pct = estimate / population,
+         NAME = gsub(', New Jersey$', '', NAME)) %>%
   separate(col = NAME,
            into = c('municipality', 'county'),
            sep = ', ') %>%
@@ -105,7 +106,6 @@ STATE_RACIAL_DIVERSITY = race_state %>%
 # calculate racial diversity index for each town, & other stuff
 race_cosub_agg = race_cosub_clean %>%
   group_by(GEOID, municipality, county, population) %>%
-  mutate(pct = estimate / population) %>%
   summarize(pct_white = pct[variable == 'B02001_002'],
             pct_black = pct[variable == 'B02001_003'],
             pct_natam = pct[variable == 'B02001_004'],
