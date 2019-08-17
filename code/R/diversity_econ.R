@@ -19,19 +19,23 @@ census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 # get % of households in each income bracket, for all county subdivisions in NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34.06000
-cosub_inc_brackets = get_acs(geography = 'county subdivision',
-                             table = 'S1901',
-                             year = 2017,
-                             state = 'NJ',
-                             survey = 'acs5')
+incdist_cosub = get_acs(table = 'S1901',
+                        geography = 'county subdivision',
+                        state = 'NJ',
+                        year = 2017,
+                        survey = 'acs5',
+                        summary_var = 'S1901_C01_001',
+                        cache_table = TRUE)
 
 # get the same for the entire state
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34
-state_inc_brackets = get_acs(geography = 'state',
-                             table = 'S1901',
-                             year = 2017,
-                             state = 'NJ',
-                             survey = 'acs5')
+incdist_state = get_acs(table = 'S1901',
+                        geography = 'state',
+                        state = 'NJ',
+                        year = 2017,
+                        survey = 'acs5',
+                        summary_var = 'S1901_C01_001',
+                        cache_table = TRUE)
 
 
 ##%######################################################%##
@@ -40,26 +44,26 @@ state_inc_brackets = get_acs(geography = 'state',
 #                                                          #
 ##%######################################################%##
 
-data_uni = cosub_inc_brackets %>%
-  # Keep only num HHs & bracket % variables. That's rows 1-11.
+incdist_cosub_uni = incdist_cosub %>%
+  rename(num_hh = summary_est) %>%
+  # Keep only bracket %s. That's rows 1-11.
   group_by(GEOID) %>%
-  # for each town, rows 1-16 are vars for HHs
-  slice(1:11) %>%
+  # for each town, rows 2-11 are vars for HHs
+  slice(2:11) %>%
   ungroup() %>%
-  # only want incorporated towns
-  filter( !grepl('County subdivisions not defined', NAME) )
+  filter(
+    # only incorporated towns
+    !grepl('County subdivisions not defined', NAME)
+    # drop num HHs
+    & variable != 'S1901_C01_001'
+  )
 
 # calc median num HHs
-MED_POP = median(data_uni$estimate[data_uni$variable == 'S1901_C01_001'])
-# [1] 2979
+MED_HH = median(incdist_cosub_uni$num_hh)
 
-data_uni %<>%
+incdist_cosub_uni %<>%
   # keep towns w/ num HHs at or above median
-  group_by(GEOID) %>%
-  filter(estimate[variable == 'S1901_C01_001'] >= MED_POP) %>%
-  ungroup() %>%
-  # drop num HHs
-  filter(variable != 'S1901_C01_001')
+  filter(num_hh >= MED_HH)
 
 
 ##%######################################################%##
@@ -68,28 +72,27 @@ data_uni %<>%
 #                                                          #
 ##%######################################################%##
 
-data_clean = data_uni %>%
-  mutate(estimate = estimate / 100,
+incdist_cosub_clean = incdist_cosub_uni %>%
+  mutate(pct = estimate / 100,
          NAME = gsub(', New Jersey$', '', NAME)) %>%
   separate(col = NAME,
            into = c('municipality', 'county'),
            sep = ', ') %>%
   mutate(county = gsub(' County$', '', county)) %>%
   # this isn't that serious
-  select(-moe)
+  select(-c(moe, summary_moe))
 
 # calculate statewide econ diversity
-STATE_ECON_DIVERSITY = state_inc_brackets %>%
+STATE_ECON_DIVERSITY = incdist_state %>%
   slice(2:11) %>%
-  mutate(estimate = estimate / 100) %>%
-  summarize(econ_diversity = 1 - sum(estimate^2)) %>%
+  mutate(pct = estimate / 100) %>%
+  summarize(econ_diversity = 1 - sum(pct^2)) %>%
   pull(econ_diversity)
-# [1] 0.883128
 
 # calculate economic diversity index for each town, & other stuff
-data_agg = data_clean %>%
+incdist_cosub_agg = incdist_cosub_clean %>%
   group_by(GEOID, municipality, county) %>%
-  summarize(econ_diversity = 1 - sum(estimate^2)) %>%
+  summarize(econ_diversity = 1 - sum(pct^2)) %>%
   ungroup() %>%
   mutate(econ_diversity_rank = min_rank(desc(econ_diversity)),
          state_econ_diversity = STATE_ECON_DIVERSITY,
@@ -105,14 +108,18 @@ data_agg = data_clean %>%
 #                                                          #
 ##%######################################################%##
 
-MED_ECON_DIVERSITY = median(data_agg$econ_diversity)
-# [1] 0.864891
-
-sum(data_agg$more_econ_diverse_than_state)
-# [1] 15
-
 # compare results to
 # https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html
+
+MED_HH
+# [1] 2979
+
+STATE_ECON_DIVERSITY
+# [1] 0.883128
+MED_ECON_DIVERSITY = median(incdist_cosub_agg$econ_diversity)
+# [1] 0.864891
+sum(incdist_cosub_agg$more_econ_diverse_than_state)
+# [1] 15
 
 
 ##%######################################################%##
@@ -121,6 +128,6 @@ sum(data_agg$more_econ_diverse_than_state)
 #                                                          #
 ##%######################################################%##
 
-write.csv(x = data_agg,
+write.csv(x = incdist_cosub_agg,
           file = here::here('data/output/NJ_diversity_econ.csv'),
           row.names = FALSE)
