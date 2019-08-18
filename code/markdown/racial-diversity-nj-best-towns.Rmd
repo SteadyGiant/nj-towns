@@ -1,0 +1,76 @@
+---
+title: "Density, Diversity, and the Best Towns of New Jersey"
+slug: "racial-diversity-nj-best-towns"
+date: 2019-04-24
+categories:
+- New Jersey
+tags:
+- race
+keywords:
+summary: ""
+thumbnailImage: https://res.cloudinary.com/evcloud/image/upload/v1555372288/race2000.jpg
+thumbnailImagePosition: left
+autoThumbnailImage: yes
+coverImage: jc_v_nyc.JPG
+coverCaption: ""
+coverMeta: in
+coverSize: full
+clearReading: true
+comments: false
+showTags: true
+showDate: true
+showMeta: true
+metaAlignment: left
+showPagination: true
+showSocial: false
+showActions: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_knit$set(root.dir = '../../')
+
+options(scipen = 999)
+
+library(dplyr)
+library(DT)
+# library(ggplot2)
+library(plotly)
+library(readr)
+library(scales)
+# library(tidyr)
+```
+
+```{r import, include=FALSE}
+dive_dens = read_csv('./data/output/NJ_best_towns_diversity_density.csv')
+```
+
+New Jersey Family magazine compiled a list of 
+["New Jersey's Best Towns for Families 2019"](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/).
+Let's see how these top ranked towns stack up in terms of population density
+and racial diversity, features that matter a lot to myself and I'll bet at least
+one other NJ Millennial.
+
+# The Data
+
+
+
+# The Results
+
+`r median(dive_dens$'Population density') %>% comma()`
+
+`r median(dive_dens$'Diversity Index') %>% percent(accuracy = 0.1)`
+
+```{r}
+dive_dens %>%
+  select(-c(`pct Two or more`, `pct Native American`, 
+            `pct Pacific Islander`, `Square miles`)) %>%
+  DT::datatable(rownames = NULL) %>%
+  DT::formatRound(columns = c(5, 10), digits = 0, mark = ',') %>%
+  DT::formatPercentage(columns = c(4, 11:ncol(dive_dens)), digits = 1) %>%
+  DT::formatPercentage(columns = c(8, 9), digits = 0)
+```
+
+
