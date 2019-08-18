@@ -16,5 +16,4 @@ source(here::here('code/population.R'))
 source(here::here('code/best_towns.R'))
 
 # Build reports.
-# source(here::here('code/render_reports.R'))
-
+source(here::here('code/render_reports.R'))

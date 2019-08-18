@@ -7,6 +7,9 @@ This repo contains a bunch of datasets about New Jersey’s towns and the
 code I used to build them. Check [my blog](https://everetr.github.io/)
 for articles and visualizations. Contributions to this repo are welcome.
 
+The datasets are in the `data` folder. Use `code/00_plan.R` to build all
+datasets and render all reports in this repo.
+
 [Data sources.](data/data_sources.md)
 
 [Methodology.](reports/Methodology.md)
