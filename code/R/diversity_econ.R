@@ -42,6 +42,14 @@ race_diver_uni =
            stringsAsFactors = FALSE) %>%
   select(GEOID)
 
+# https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B19013/0400000US34.06000
+mhi_cosub = get_acs(table = 'B19013',
+                    geography = 'county subdivision',
+                    state = 'NJ',
+                    year = 2017,
+                    survey = 'acs5',
+                    cache_table = TRUE)
+
 
 ##%######################################################%##
 #                                                          #
@@ -110,12 +118,22 @@ incdist_cosub_agg = incdist_cosub_clean %>%
          )) %>%
   arrange(econ_diversity_rank)
 
+data_join = incdist_cosub_agg %>%
+  left_join(
+    select(mhi_cosub,
+           GEOID, mhi = estimate),
+    by = 'GEOID'
+  )
+
 
 ##%######################################################%##
 #                                                          #
 ####                      Validate                      ####
 #                                                          #
 ##%######################################################%##
+
+sum(duplicated(data_join$GEOID))
+# [1] 0
 
 # compare results to
 # https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html
@@ -127,8 +145,10 @@ STATE_ECON_DIVERSITY
 # [1] 0.883128
 MED_ECON_DIVERSITY = median(incdist_cosub_agg$econ_diversity)
 # [1] 0.864891
-sum(incdist_cosub_agg$more_econ_diverse_than_state)
-# [1] 15
+sum(data_join$more_econ_diverse_than_state)
+# [1] 20
+
+summary(data_join)
 
 
 ##%######################################################%##
