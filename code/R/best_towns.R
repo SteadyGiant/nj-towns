@@ -30,6 +30,8 @@ best_towns = READ_URL %>%
 
 race_diver = read.csv(here::here('data/output/NJ_diversity_race.csv'))
 
+econ_diver = read.csv(here::here('data/output/NJ_diversity_econ.csv'))
+
 
 ##%######################################################%##
 #                                                          #
@@ -126,7 +128,14 @@ data_join = best_towns_clean %>%
   left_join(race_diver_clean,
             by = c('join_town',
                    'County' = 'county')) %>%
-  select(-c(population, municipality, join_town))
+  left_join(
+    select(econ_diver,
+           GEOID, econ_diversity:more_econ_diverse_than_state),
+    by = 'GEOID'
+  ) %>%
+  select(GEOID, everything()) %>%
+  select(-c(join_town, municipality)) %>%
+  rename(`Population (ACS, 2012-17)` = population)
 
 
 ##%######################################################%##
@@ -147,4 +156,4 @@ sum(duplicated(data_join$`Best Towns Rank`))
 ##%######################################################%##
 
 write_csv(x = data_join,
-          path = here::here('data/output/NJ_best_towns_diversity_race.csv'))
+          path = here::here('data/output/NJ_best_towns.csv'))
