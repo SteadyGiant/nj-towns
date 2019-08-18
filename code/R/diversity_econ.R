@@ -37,6 +37,11 @@ incdist_state = get_acs(table = 'S1901',
                         summary_var = 'S1901_C01_001',
                         cache_table = TRUE)
 
+race_diver_uni =
+  read.csv('data/output/NJ_diversity_race.csv',
+           stringsAsFactors = FALSE) %>%
+  select(GEOID)
+
 
 ##%######################################################%##
 #                                                          #
@@ -62,8 +67,12 @@ incdist_cosub_uni = incdist_cosub %>%
 MED_HH = median(incdist_cosub_uni$num_hh)
 
 incdist_cosub_uni %<>%
-  # keep towns w/ num HHs at or above median
-  filter(num_hh >= MED_HH)
+  # Keep towns w/ pop >= 1k.
+  # Use racial diversity dataset, since it's already filtered.
+  filter(GEOID %in% race_diver_uni$GEOID)
+#
+# keep towns w/ num HHs at or above median
+# filter(num_hh >= MED_HH)
 
 
 ##%######################################################%##
@@ -91,7 +100,7 @@ STATE_ECON_DIVERSITY = incdist_state %>%
 
 # calculate economic diversity index for each town, & other stuff
 incdist_cosub_agg = incdist_cosub_clean %>%
-  group_by(GEOID, municipality, county) %>%
+  group_by(GEOID, municipality, county, num_hh) %>%
   summarize(econ_diversity = 1 - sum(pct^2)) %>%
   ungroup() %>%
   mutate(econ_diversity_rank = min_rank(desc(econ_diversity)),
