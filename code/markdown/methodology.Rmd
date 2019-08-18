@@ -1,0 +1,167 @@
+---
+title: "Methodology"
+author: "Everet Rummel"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '../../')
+
+library(knitr)
+library(dplyr)
+library(readr)
+library(scales)
+```
+
+```{r import, include=FALSE}
+dive_dens = read_csv('./data/output/NJ_diversity_density_unformat.csv')
+```
+
+
+# Background
+
+*New Jersey Family* magazine created a list of ["New Jersey's Best Towns for Families"](https://www.njfamily.com/New-Jerseys-Best-Towns-for-Families/) 
+(full list [here](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/). 
+An [obvious question](https://twitter.com/hobokenurbanist/status/1114592402336100355) 
+arose: How dense and racially diverse are the top towns in this list?
+
+# Objectives
+
+Using most recent, highest quality data available:
+
+* Calculate a measure of racial diversity for all municipalities in New Jersey
+* Calculate population density for all municipalities in New Jersey
+* Calculate diversity/density rank and percentile for all municipalities
+
+# Code
+
+I did everything in 
+[`code/R/calculate.R`](./code/R/calculate.R). 
+See that script for all the details.
+See below for a summary in English.
+
+# Source Data
+
+American Community Survey, 5-year Public Use Micro Sample, 2013-2017. The Census
+Bureau provides estimates for county subdivisions, which basically equal 
+municipalities, so I use those summary tables.
+
+## Variables
+
+### Race, Population
+
+[Table B03002: HISPANIC OR LATINO ORIGIN BY RACE](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002/0400000US34.06000).
+
+### Land area
+
+[American FactFinder](https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/GCTPH1.ST16/0400000US34) 
+only provides *rounded* land area. For more accurate land area data, I 
+downloaded the [2017 TIGER/Line shapefile](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.2017.html) 
+for New Jersey (see: [direct download link](https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/tl_2017_34_cousub.zip)).
+
+# Universe
+
+Each record is a county subdivision, which I'm calling a "municipality" here.
+
+I exclude municipalities with populations lower than the median, 
+`r median(dive_dens$'Diversity Index') %>% percent(accuracy = 0.1)`.
+
+# Calculations
+
+To measure diversity, I calculate the [Gini-Simpson Index](https://en.wikipedia.org/wiki/Diversity_index#Gini%E2%80%93Simpson_index).
+If any economists are reading this, the Gini-Simpson Index is one minus the [Herfindahl–Hirschman Index](https://en.wikipedia.org/wiki/Herfindahl_index).
+Hereafter, I'll refer to it as the "Diversity Index" in title-case.
+
+The value of the Diversity Index for a given municipality can be interpreted as 
+the probability that two randomly selected residents are of a different race.
+For example: Two random residents in Jersey City have a ~75% chance of 
+identifying as different races.
+
+The Diversity Index is calculate as follows:
+
+$D = 1 - \sum_{i = 1}^{N} p_i$
+
+where $p_i$ is the percent of the total municipality population identifying as
+racial group $i$, and $N$ is the total number of racial groups. 
+
+There are 7 racial groups in the ACS: White, Black or African American, American
+Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific Islander, Two
+or more races, and Some other race. Because "Hispanic" is not a racial group
+(according to the Census Bureau's admittedly imperfect definitions),
+**I do not use the Hispanic grouping to calculate the Diversity Index.** In 
+doing so, I'm not leaving out Hispanic people. If you glance at the 
+["HISPANIC OR LATINO ORIGIN BY RACE"](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03002)
+summary table, you'll notice most people identifying as "some other race" are
+Hispanic/Latinx in origin. All other Hispanic/Latinx people identify as White,
+Black, Asian, etc, and so they're included in the count of the race with which
+they identify.[^5]
+
+# Validation
+
+My results can be compared to the Diversity Index calculated for every 
+municipality in New Jersey by NJ.com's [Disha Raychaudhuri](https://twitter.com/Disha_RC) 
+in [this article](https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html). 
+My rankings match theirs almost exactly. My calculations are off by about a
+hundredth of a percentage point for each municipality. They claim to have 
+followed [this methodology](https://www.usatoday.com/story/news/nation/2014/10/21/diversity-index-data-how-we-did-report/17432103/) 
+for calculating the Diversity Index from ACS data, but I matched their results 
+by *not* following that methodology.
+
+Note: While Raychaudhuri excludes municipalities with populations lower than 
+10,000, I exclude those with populations lower than the median.
+
+# My Environment
+
+Here are the R packages directly loaded in this analysis:
+
+```{r, message=FALSE}
+library(dplyr)
+library(readr)
+library(scales)
+library(sf)
+```
+
+Here is my session info:
+
+```{r}
+sessionInfo()
+```
+
+# Results
+
+The full cleaned dataset output by `calculate.R` is in `data/output/NJ_20132017_dive_dens.csv`. The following results come
+from this dataset, unless stated otherwise.
+
+The 10 most diverse municipalities in New Jersey:
+
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
+  head(n = 10) %>%
+  knitr::kable()
+```
+
+The 10 least diverse municipalities in New Jersey:
+
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
+  tail(n = 10) %>%
+  knitr::kable()
+```
+
+The 10 densest municipalities:
+
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
+  arrange(-`Population density`) %>%
+  head(n = 10) %>%
+  knitr::kable()
+```
+
+The 10 sparsest:
+
+```{r, echo=FALSE, message=FALSE}
+dive_dens %>%
+  arrange(-`Population density`) %>%
+  tail(n = 10) %>%
+  knitr::kable()
+```
