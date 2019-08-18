@@ -552,7 +552,7 @@ to the start of each source file to most effectively state the exclusion of warr
 and each file should have at least the “copyright” line and a pointer to
 where the full notice is found.
 
-    nj-towns - Calculating stats for New Jersey towns.
+    nj-towns - Datasets for New Jersey's towns.
     Copyright (C) 2019 Everet Rummel
 
     This program is free software: you can redistribute it and/or modify
