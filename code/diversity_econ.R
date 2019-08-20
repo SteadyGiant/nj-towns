@@ -64,12 +64,8 @@ incdist_cosub_uni = incdist_cosub %>%
   # for each town, rows 2-11 are vars for HHs
   slice(2:11) %>%
   ungroup() %>%
-  filter(
-    # only incorporated towns
-    !grepl('County subdivisions not defined', NAME)
-    # drop num HHs
-    & variable != 'S1901_C01_001'
-  )
+  # only incorporated towns
+  filter(!grepl('County subdivisions not defined', NAME))
 
 # calc median num HHs
 MED_HH = median(incdist_cosub_uni$num_hh)
@@ -78,9 +74,6 @@ incdist_cosub_uni %<>%
   # Keep towns w/ pop >= 1k.
   # Use racial diversity dataset, since it's already filtered.
   filter(GEOID %in% race_diver_uni$GEOID)
-#
-# keep towns w/ num HHs at or above median
-# filter(num_hh >= MED_HH)
 
 
 ##%######################################################%##
@@ -95,9 +88,7 @@ incdist_cosub_clean = incdist_cosub_uni %>%
   separate(col = NAME,
            into = c('municipality', 'county'),
            sep = ', ') %>%
-  mutate(county = gsub(' County$', '', county)) %>%
-  # this isn't that serious
-  select(-c(moe, summary_moe))
+  mutate(county = gsub(' County$', '', county))
 
 # calculate statewide econ diversity
 STATE_ECON_DIVERSITY = incdist_state %>%
