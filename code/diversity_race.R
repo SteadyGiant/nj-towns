@@ -60,22 +60,14 @@ race_cosub_uni = race_cosub %>%
   group_by(GEOID) %>%
   slice(2:8) %>%
   ungroup() %>%
-  filter(
-    # only incorporated towns
-    !grepl('County subdivisions not defined', NAME),
-    # drop pop
-    variable != 'B02001_001'
-  )
+  # only incorporated towns
+  filter(!grepl('County subdivisions not defined', NAME))
 
 # save to display later in a summary
 MED_POP = median(race_cosub_uni$population)
 
 race_cosub_uni %<>%
-  # keep towns w/ population at or above median
-  # filter(population >= MED_POP)
-  #
   # Keep towns w/ population at least 1k. Consistent with "Best Towns" method.
-  # NJ.com included only those w/ 10k+.
   filter(population >= 1000)
 
 
@@ -91,9 +83,7 @@ race_cosub_clean = race_cosub_uni %>%
   separate(col = NAME,
            into = c('municipality', 'county'),
            sep = ', ') %>%
-  mutate(county = gsub(' County$', '', county)) %>%
-  # this isn't that serious
-  select(-c(moe, summary_moe))
+  mutate(county = gsub(' County$', '', county))
 
 # calculate statewide racial diversity
 STATE_RACIAL_DIVERSITY = race_state %>%
