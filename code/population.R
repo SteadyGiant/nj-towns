@@ -27,7 +27,6 @@ pop_cosub = get_acs(table = 'B01003',
                     state = 'NJ',
                     year = 2017,
                     survey = 'acs5',
-                    # summary_var = '',
                     cache_table = TRUE)
 
 # get geography info
@@ -46,7 +45,8 @@ geo_cosub =
 # cited by
 # https://en.wikipedia.org/wiki/East_Newark,_NJ#cite_note-CensusArea-1
 geo_cosub_2010 =
-  read.delim('https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt') %>%
+  read.delim('https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt',
+             stringsAsFactors = FALSE) %>%
   mutate(GEOID = as.character(GEOID))
 
 
@@ -57,19 +57,15 @@ geo_cosub_2010 =
 ##%######################################################%##
 
 pop_cosub_uni = pop_cosub %>%
-  filter(
-    # incorporated towns
-    !grepl('County subdivisions not defined', NAME)
-  )
+  # incorporated towns
+  filter(!grepl('County subdivisions not defined', NAME))
 
 # get median pop for validation later
 MED_POP = median(pop_cosub_uni$estimate)
 
 pop_cosub_uni %<>%
-  filter(
-    # population at least 1k
-    estimate >= 1000
-  )
+  # population at least 1k
+  filter(estimate >= 1000)
 
 
 ##%######################################################%##
@@ -97,6 +93,7 @@ units(geo_cosub_clean$sq_mi) = with(ud_units, 'mi^2')
 geo_cosub_clean$sq_mi = as.numeric(geo_cosub_clean$sq_mi)
 units(geo_cosub_clean$sq_km) = with(ud_units, 'km^2')
 geo_cosub_clean$sq_km = as.numeric(geo_cosub_clean$sq_km)
+
 geo_cosub_clean$sq_m = as.numeric(geo_cosub_clean$sq_m)
 
 geo_cosub_clean_2010 = geo_cosub_2010 %>%
