@@ -78,6 +78,7 @@ pop_cosub_clean = pop_cosub_uni %>%
   separate(col = NAME,
            into = c('municipality', 'county', 'state'),
            sep = ', ') %>%
+  mutate(county = gsub(' County$', '', county)) %>%
   select(GEOID, municipality, county,
          population = estimate)
 
