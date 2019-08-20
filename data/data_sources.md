@@ -2,8 +2,11 @@
 
 ## Geography
 
-County subdivisions
+County subdivisions, 2015
 https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/G001/0400000US34.06000
+
+County subdivisions, 2010
+https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt
 
 ## Hispanic/Latino ethnicity
 
