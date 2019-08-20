@@ -12,7 +12,7 @@ build all datasets and render all reports in this repo.
 
 [Data sources.](data/data_sources.md)
 
-[Methodology.](reports/Methodology.md)
+<!-- [Methodology.](reports/Methodology.md) -->
 
 ## Datasets
 
