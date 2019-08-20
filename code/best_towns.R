@@ -32,6 +32,8 @@ race_diver = read.csv(here::here('data/output/NJ_diversity_race.csv'))
 
 econ_diver = read.csv(here::here('data/output/NJ_diversity_econ.csv'))
 
+dens = read.csv(here::here('data/output/NJ_density.csv'))
+
 
 ##%######################################################%##
 #                                                          #
@@ -131,6 +133,11 @@ data_join = best_towns_clean %>%
   left_join(
     select(econ_diver,
            GEOID, econ_diversity:more_econ_diverse_than_state),
+    by = 'GEOID'
+  ) %>%
+  left_join(
+    select(dens,
+           GEOID, density, density_rank),
     by = 'GEOID'
   ) %>%
   select(GEOID, everything()) %>%
