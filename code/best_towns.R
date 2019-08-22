@@ -4,8 +4,7 @@ library(dplyr)
 library(readr)
 library(rvest)
 
-options(scipen = 999,
-        stringsAsFactors = FALSE)
+options(scipen = 999)
 
 
 ##%######################################################%##
@@ -28,11 +27,11 @@ best_towns = READ_URL %>%
   mutate(County = gsub(' County', '', County),
          `Best Towns Rank` = as.numeric(`Best Towns Rank`))
 
-race_diver = read.csv(here::here('data/output/NJ_diversity_race.csv'))
+race_diver = read_csv(here::here('data/output/NJ_diversity_race.csv'))
 
-econ_diver = read.csv(here::here('data/output/NJ_diversity_econ.csv'))
+econ_diver = read_csv(here::here('data/output/NJ_diversity_econ.csv'))
 
-dens = read.csv(here::here('data/output/NJ_density.csv'))
+dens = read_csv(here::here('data/output/NJ_density.csv'))
 
 
 ##%######################################################%##
@@ -162,5 +161,5 @@ sum(duplicated(data_join$`Best Towns Rank`))
 #                                                          #
 ##%######################################################%##
 
-write_csv(x = data_join,
-          path = here::here('data/output/NJ_best_towns.csv'))
+write_csv(data_join,
+          here::here('data/output/NJ_best_towns.csv'))

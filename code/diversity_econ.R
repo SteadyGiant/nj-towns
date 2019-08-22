@@ -38,8 +38,7 @@ incdist_state = get_acs(table = 'S1901',
                         cache_table = TRUE)
 
 race_diver_uni =
-  read.csv('data/output/NJ_diversity_race.csv',
-           stringsAsFactors = FALSE) %>%
+  read_csv('data/output/NJ_diversity_race.csv') %>%
   select(GEOID)
 
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B19013/0400000US34.06000
@@ -148,6 +147,5 @@ summary(data_join)
 #                                                          #
 ##%######################################################%##
 
-write.csv(x = incdist_cosub_agg,
-          file = here::here('data/output/NJ_diversity_econ.csv'),
-          row.names = FALSE)
+write_csv(incdist_cosub_agg,
+          here::here('data/output/NJ_diversity_econ.csv'))

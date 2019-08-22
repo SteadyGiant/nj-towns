@@ -152,6 +152,5 @@ summary(data_out)
 #                                                          #
 ##%######################################################%##
 
-write.csv(x = data_out,
-          file = here::here('data/output/NJ_diversity_race.csv'),
-          row.names = FALSE)
+write_csv(data_out,
+          here::here('data/output/NJ_diversity_race.csv'))

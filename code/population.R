@@ -45,8 +45,8 @@ geo_cosub =
 # cited by
 # https://en.wikipedia.org/wiki/East_Newark,_NJ#cite_note-CensusArea-1
 geo_cosub_2010 =
-  read.delim('https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt',
-             stringsAsFactors = FALSE) %>%
+  read_delim('https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt',
+             delim = '\t') %>%
   mutate(GEOID = as.character(GEOID))
 
 
@@ -141,6 +141,5 @@ MED_POP
 #                                                          #
 ##%######################################################%##
 
-write.csv(x = data_out,
-          file = here::here('data/output/NJ_density.csv'),
-          row.names = FALSE)
+write_csv(data_out,
+          here::here('data/output/NJ_density.csv'))
