@@ -2,6 +2,9 @@
 
 library(here)
 
+# Load packages.
+source(here::here('code/01_packages.R'))
+
 # Build racial diversity dataset.
 # Establish "universe" for others.
 source(here::here('code/diversity_race.R'))
