@@ -42,13 +42,6 @@ geo_cosub =
                       year = 2015) %>%
   as_tibble()
 
-# cited by
-# https://en.wikipedia.org/wiki/East_Newark,_NJ#cite_note-CensusArea-1
-geo_cosub_2010 =
-  read_delim('https://www2.census.gov/geo/docs/maps-data/data/gazetteer/county_sub_list_34.txt',
-             delim = '\t') %>%
-  mutate(GEOID = as.character(GEOID))
-
 
 ##%######################################################%##
 #                                                          #
@@ -97,11 +90,6 @@ geo_cosub_clean$sq_km = as.numeric(geo_cosub_clean$sq_km)
 
 geo_cosub_clean$sq_m = as.numeric(geo_cosub_clean$sq_m)
 
-geo_cosub_clean_2010 = geo_cosub_2010 %>%
-  select(GEOID,
-         population_2010 = POP10,
-         sq_mi_2010 = ALAND_SQMI)
-
 
 ### Join data
 
@@ -109,10 +97,7 @@ data_join = pop_cosub_clean %>%
   left_join(geo_cosub_clean,
             by = 'GEOID') %>%
   mutate(density = population / sq_mi,
-         density_rank = min_rank(desc(density))) %>%
-  left_join(geo_cosub_clean_2010,
-            by = 'GEOID') %>%
-  mutate(density_2010 = population_2010 / sq_mi_2010)
+         density_rank = min_rank(desc(density)))
 
 data_out = data_join %>%
   arrange(density_rank)
@@ -123,11 +108,6 @@ data_out = data_join %>%
 ####                      Validate                      ####
 #                                                          #
 ##%######################################################%##
-
-# How many cosubs "changed" land area?
-sum(round(data_out$sq_mi, digits = 3) != data_out$sq_mi_2010) /
-  nrow(data_out)
-# [1] 0.4484053
 
 summary(data_out)
 
