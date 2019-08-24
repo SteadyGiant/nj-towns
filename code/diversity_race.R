@@ -3,6 +3,7 @@
 library(dplyr)
 library(here)
 library(magrittr)
+library(readr)
 library(tidycensus)
 library(tidyr)
 
@@ -46,6 +47,10 @@ race_state = get_acs(table = 'B02001',
                      survey = 'acs5',
                      summary_var = 'B02001_001',
                      cache_table = TRUE)
+
+mhi_cosub =
+  read_csv(here::here('data/output/NJ_mhi.csv')) %>%
+  mutate(GEOID = as.character(GEOID))
 
 
 ##%######################################################%##
@@ -121,7 +126,12 @@ hisp_cosub_clean = hisp_cosub %>%
 
 data_out = race_cosub_agg %>%
   left_join(hisp_cosub_clean,
-            by = 'GEOID')
+            by = 'GEOID') %>%
+  left_join(
+    select(mhi_cosub,
+           GEOID, mhi),
+    by = 'GEOID'
+  )
 
 
 ##%######################################################%##

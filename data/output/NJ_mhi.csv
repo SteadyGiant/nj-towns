@@ -1,0 +1,566 @@
+GEOID,municipality,county,mhi
+3400100100,Absecon city,Atlantic,63887
+3400102080,Atlantic City city,Atlantic,26006
+3400107810,Brigantine city,Atlantic,65724
+3400108680,Buena borough,Atlantic,50804
+3400108710,Buena Vista township,Atlantic,58942
+3400115160,Corbin City city,Atlantic,65313
+3400120290,Egg Harbor township,Atlantic,78099
+3400120350,Egg Harbor City city,Atlantic,50720
+3400121870,Estell Manor city,Atlantic,85313
+3400123940,Folsom borough,Atlantic,69712
+3400125560,Galloway township,Atlantic,65000
+3400129280,Hamilton township,Atlantic,65084
+3400129430,Hammonton town,Atlantic,68655
+3400140530,Linwood city,Atlantic,91861
+3400141370,Longport borough,Atlantic,106719
+3400143890,Margate City city,Atlantic,69896
+3400149410,Mullica township,Atlantic,73995
+3400152950,Northfield city,Atlantic,73586
+3400159640,Pleasantville city,Atlantic,39924
+3400160600,Port Republic city,Atlantic,101500
+3400168430,Somers Point city,Atlantic,52397
+3400175620,Ventnor City city,Atlantic,52799
+3400180330,Weymouth township,Atlantic,61111
+3400300700,Allendale borough,Bergen,151875
+3400301090,Alpine borough,Bergen,118977
+3400305170,Bergenfield borough,Bergen,90962
+3400306490,Bogota borough,Bergen,79356
+3400310480,Carlstadt borough,Bergen,89419
+3400313570,Cliffside Park borough,Bergen,67799
+3400313810,Closter borough,Bergen,130670
+3400315820,Cresskill borough,Bergen,136250
+3400317530,Demarest borough,Bergen,149271
+3400318400,Dumont borough,Bergen,94617
+3400319510,East Rutherford borough,Bergen,77400
+3400320020,Edgewater borough,Bergen,103505
+3400321300,Elmwood Park borough,Bergen,76907
+3400321450,Emerson borough,Bergen,111536
+3400321480,Englewood city,Bergen,80670
+3400321510,Englewood Cliffs borough,Bergen,134629
+3400322470,Fair Lawn borough,Bergen,109747
+3400322560,Fairview borough,Bergen,56057
+3400324420,Fort Lee borough,Bergen,76578
+3400324990,Franklin Lakes borough,Bergen,155458
+3400325770,Garfield city,Bergen,54063
+3400326640,Glen Rock borough,Bergen,162443
+3400328680,Hackensack city,Bergen,59277
+3400330150,Harrington Park borough,Bergen,127188
+3400330420,Hasbrouck Heights borough,Bergen,87800
+3400330540,Haworth borough,Bergen,170417
+3400331920,Hillsdale borough,Bergen,124844
+3400332310,Ho-Ho-Kus borough,Bergen,176518
+3400340020,Leonia borough,Bergen,89744
+3400340680,Little Ferry borough,Bergen,61341
+3400341100,Lodi borough,Bergen,57188
+3400342090,Lyndhurst township,Bergen,73218
+3400342750,Mahwah township,Bergen,107215
+3400344880,Maywood borough,Bergen,86100
+3400346110,Midland Park borough,Bergen,105313
+3400347610,Montvale borough,Bergen,120060
+3400347700,Moonachie borough,Bergen,59700
+3400351660,New Milford borough,Bergen,84025
+3400352320,North Arlington borough,Bergen,74481
+3400353430,Northvale borough,Bergen,92650
+3400353610,Norwood borough,Bergen,125417
+3400353850,Oakland borough,Bergen,112944
+3400354870,Old Tappan borough,Bergen,141185
+3400354990,Oradell borough,Bergen,137583
+3400355770,Palisades Park borough,Bergen,64589
+3400355950,Paramus borough,Bergen,105114
+3400356130,Park Ridge borough,Bergen,106875
+3400361680,Ramsey borough,Bergen,137768
+3400362910,Ridgefield borough,Bergen,66690
+3400362940,Ridgefield Park village,Bergen,72191
+3400363000,Ridgewood village,Bergen,162011
+3400363360,River Edge borough,Bergen,123590
+3400363690,River Vale township,Bergen,138914
+3400363990,Rochelle Park township,Bergen,78333
+3400364170,Rockleigh borough,Bergen,158594
+3400365280,Rutherford borough,Bergen,93787
+3400365340,Saddle Brook township,Bergen,94177
+3400365400,Saddle River borough,Bergen,173333
+3400368970,South Hackensack township,Bergen,65156
+3400372360,Teaneck township,Bergen,106411
+3400372420,Tenafly borough,Bergen,153906
+3400372480,Teterboro borough,Bergen,NA
+3400375140,Upper Saddle River borough,Bergen,176674
+3400376400,Waldwick borough,Bergen,115591
+3400376490,Wallington borough,Bergen,62648
+3400377135,Washington township,Bergen,128750
+3400380270,Westwood borough,Bergen,95685
+3400382300,Woodcliff Lake borough,Bergen,161250
+3400382570,Wood-Ridge borough,Bergen,102283
+3400383050,Wyckoff township,Bergen,147463
+3400503370,Bass River township,Burlington,66193
+3400505740,Beverly city,Burlington,48583
+3400506670,Bordentown city,Burlington,76250
+3400506700,Bordentown township,Burlington,85640
+3400508920,Burlington city,Burlington,50709
+3400508950,Burlington township,Burlington,81738
+3400512670,Chesterfield township,Burlington,142424
+3400512940,Cinnaminson township,Burlington,97993
+3400517080,Delanco township,Burlington,79778
+3400517440,Delran township,Burlington,94321
+3400518790,Eastampton township,Burlington,90938
+3400520050,Edgewater Park township,Burlington,65778
+3400522110,Evesham township,Burlington,94395
+3400523250,Fieldsboro borough,Burlington,77969
+3400523850,Florence township,Burlington,81011
+3400529010,Hainesport township,Burlington,97420
+3400542060,Lumberton township,Burlington,84558
+3400543290,Mansfield township,Burlington,87704
+3400543740,Maple Shade township,Burlington,57460
+3400545120,Medford township,Burlington,113469
+3400545210,Medford Lakes borough,Burlington,105598
+3400547880,Moorestown township,Burlington,133902
+3400548900,Mount Holly township,Burlington,60656
+3400549020,Mount Laurel township,Burlington,92826
+3400551510,New Hanover township,Burlington,83646
+3400553070,North Hanover township,Burlington,63417
+3400555800,Palmyra borough,Burlington,68307
+3400557480,Pemberton borough,Burlington,67750
+3400557510,Pemberton township,Burlington,62024
+3400563510,Riverside township,Burlington,60885
+3400563660,Riverton borough,Burlington,95288
+3400566810,Shamong township,Burlington,102316
+3400568610,Southampton township,Burlington,57439
+3400569990,Springfield township,Burlington,108875
+3400572060,Tabernacle township,Burlington,99549
+3400577150,Washington township,Burlington,67143
+3400578200,Westampton township,Burlington,105000
+3400581440,Willingboro township,Burlington,70967
+3400582420,Woodland township,Burlington,95074
+3400582960,Wrightstown borough,Burlington,43125
+3400702200,Audubon borough,Camden,80925
+3400702230,Audubon Park borough,Camden,49250
+3400703250,Barrington borough,Camden,72602
+3400704750,Bellmawr borough,Camden,49713
+3400705440,Berlin borough,Camden,90354
+3400705470,Berlin township,Camden,59122
+3400708170,Brooklawn borough,Camden,62697
+3400710000,Camden city,Camden,26105
+3400712280,Cherry Hill township,Camden,97069
+3400712550,Chesilhurst borough,Camden,52000
+3400713420,Clementon borough,Camden,52634
+3400714260,Collingswood borough,Camden,64885
+3400726070,Gibbsboro borough,Camden,84250
+3400726760,Gloucester township,Camden,73701
+3400726820,Gloucester City city,Camden,51152
+3400728740,Haddon township,Camden,86360
+3400728770,Haddonfield borough,Camden,138920
+3400728800,Haddon Heights borough,Camden,90387
+3400732220,Hi-Nella borough,Camden,45132
+3400739210,Laurel Springs borough,Camden,82250
+3400739420,Lawnside borough,Camden,64103
+3400740440,Lindenwold borough,Camden,41346
+3400742630,Magnolia borough,Camden,53938
+3400745510,Merchantville borough,Camden,70563
+3400748750,Mount Ephraim borough,Camden,67340
+3400753880,Oaklyn borough,Camden,65301
+3400757660,Pennsauken township,Camden,67495
+3400758770,Pine Hill borough,Camden,51286
+3400758920,Pine Valley borough,Camden,NA
+3400765160,Runnemede borough,Camden,61104
+3400768340,Somerdale borough,Camden,61964
+3400771220,Stratford borough,Camden,72955
+3400772240,Tavistock borough,Camden,NA
+3400776220,Voorhees township,Camden,85199
+3400777630,Waterford township,Camden,89898
+3400781740,Winslow township,Camden,76640
+3400782450,Woodlynne borough,Camden,45201
+3400902320,Avalon borough,Cape May,90000
+3400910270,Cape May city,Cape May,58958
+3400910330,Cape May Point borough,Cape May,46964
+3400917560,Dennis township,Cape May,67024
+3400941610,Lower township,Cape May,60234
+3400945810,Middle township,Cape May,62249
+3400953490,North Wildwood city,Cape May,45629
+3400954360,Ocean City city,Cape May,72715
+3400966390,Sea Isle City city,Cape May,72153
+3400971010,Stone Harbor borough,Cape May,101406
+3400974810,Upper township,Cape May,81541
+3400978530,West Cape May borough,Cape May,61250
+3400980210,West Wildwood borough,Cape May,52396
+3400981170,Wildwood city,Cape May,29945
+3400981200,Wildwood Crest borough,Cape May,59436
+3400981890,Woodbine borough,Cape May,41111
+3401107600,Bridgeton city,Cumberland,34135
+3401114710,Commercial township,Cumberland,38750
+3401116900,Deerfield township,Cumberland,65625
+3401118220,Downe township,Cumberland,48011
+3401122350,Fairfield township,Cumberland,52602
+3401128170,Greenwich township,Cumberland,71250
+3401133120,Hopewell township,Cumberland,77625
+3401139450,Lawrence township,Cumberland,73277
+3401144580,Maurice River township,Cumberland,72455
+3401146680,Millville city,Cumberland,49950
+3401167020,Shiloh borough,Cumberland,54375
+3401171160,Stow Creek township,Cumberland,69896
+3401174870,Upper Deerfield township,Cumberland,49724
+3401176070,Vineland city,Cumberland,51113
+3401304695,Belleville township,Essex,67292
+3401306260,Bloomfield township,Essex,74961
+3401309250,Caldwell borough,Essex,85162
+3401311200,Cedar Grove township,Essex,115926
+3401313045,City of Orange township,Essex,38645
+3401319390,East Orange city,Essex,41819
+3401321840,Essex Fells borough,Essex,200875
+3401322385,Fairfield township,Essex,110303
+3401326610,Glen Ridge borough,Essex,196821
+3401334450,Irvington township,Essex,39734
+3401340890,Livingston township,Essex,153381
+3401343800,Maplewood township,Essex,126000
+3401346380,Millburn township,Essex,202862
+3401347500,Montclair township,Essex,113293
+3401351000,Newark city,Essex,34826
+3401352620,North Caldwell borough,Essex,187470
+3401353680,Nutley township,Essex,93691
+3401364590,Roseland borough,Essex,110208
+3401369274,South Orange Village township,Essex,121637
+3401375815,Verona township,Essex,113423
+3401378510,West Caldwell township,Essex,105931
+3401379800,West Orange township,Essex,93954
+3401513360,Clayton borough,Gloucester,65595
+3401517710,Deptford township,Gloucester,67983
+3401519180,East Greenwich township,Gloucester,123118
+3401521060,Elk township,Gloucester,81649
+3401524840,Franklin township,Gloucester,81057
+3401526340,Glassboro borough,Gloucester,69000
+3401528185,Greenwich township,Gloucester,70255
+3401530180,Harrison township,Gloucester,130491
+3401541160,Logan township,Gloucester,105804
+3401543440,Mantua township,Gloucester,93601
+3401547250,Monroe township,Gloucester,74800
+3401549680,National Park borough,Gloucester,61397
+3401551390,Newfield borough,Gloucester,74226
+3401557150,Paulsboro borough,Gloucester,46429
+3401559070,Pitman borough,Gloucester,73538
+3401569030,South Harrison township,Gloucester,121406
+3401571850,Swedesboro borough,Gloucester,78267
+3401577180,Washington township,Gloucester,91149
+3401578110,Wenonah borough,Gloucester,110694
+3401578800,West Deptford township,Gloucester,71705
+3401580120,Westville borough,Gloucester,54375
+3401582120,Woodbury city,Gloucester,53618
+3401582180,Woodbury Heights borough,Gloucester,80444
+3401582840,Woolwich township,Gloucester,123347
+3401703580,Bayonne city,Hudson,56701
+3401719360,East Newark borough,Hudson,59313
+3401728650,Guttenberg town,Hudson,54471
+3401730210,Harrison town,Hudson,61168
+3401732250,Hoboken city,Hudson,127523
+3401736000,Jersey City city,Hudson,62739
+3401736510,Kearny town,Hudson,63271
+3401752470,North Bergen township,Hudson,57269
+3401766570,Secaucus town,Hudson,99883
+3401774630,Union City city,Hudson,43424
+3401777930,Weehawken township,Hudson,84841
+3401779610,West New York town,Hudson,50477
+3401900550,Alexandria township,Hunterdon,138039
+3401905650,Bethlehem township,Hunterdon,127083
+3401906370,Bloomsbury borough,Hunterdon,80536
+3401909280,Califon borough,Hunterdon,94531
+3401913720,Clinton town,Hunterdon,103125
+3401913750,Clinton township,Hunterdon,135326
+3401917170,Delaware township,Hunterdon,124151
+3401918820,East Amwell township,Hunterdon,107356
+3401923700,Flemington borough,Hunterdon,60869
+3401924870,Franklin township,Hunterdon,108309
+3401925350,Frenchtown borough,Hunterdon,73438
+3401926550,Glen Gardner borough,Hunterdon,67625
+3401929460,Hampton borough,Hunterdon,70833
+3401931320,High Bridge borough,Hunterdon,92961
+3401932460,Holland township,Hunterdon,94766
+3401937065,Kingwood township,Hunterdon,112139
+3401938610,Lambertville city,Hunterdon,84231
+3401939630,Lebanon borough,Hunterdon,87837
+3401939660,Lebanon township,Hunterdon,110127
+3401946260,Milford borough,Hunterdon,78047
+3401961920,Raritan township,Hunterdon,120644
+3401962250,Readington township,Hunterdon,133320
+3401970980,Stockton borough,Hunterdon,108309
+3401972510,Tewksbury township,Hunterdon,161477
+3401974420,Union township,Hunterdon,108333
+3401978230,West Amwell township,Hunterdon,110000
+3402119780,East Windsor township,Mercer,85636
+3402122185,Ewing township,Mercer,74534
+3402129310,Hamilton township,Mercer,73415
+3402131620,Hightstown borough,Mercer,72973
+3402133150,Hopewell borough,Mercer,113125
+3402133180,Hopewell township,Mercer,129320
+3402139510,Lawrence township,Mercer,96529
+3402157600,Pennington borough,Mercer,121667
+3402160900,Princeton,Mercer,125506
+3402163850,Robbinsville township,Mercer,137313
+3402174000,Trenton city,Mercer,35524
+3402180240,West Windsor township,Mercer,175684
+3402310750,Carteret borough,Middlesex,73892
+3402315550,Cranbury township,Middlesex,138906
+3402318490,Dunellen borough,Middlesex,78447
+3402319000,East Brunswick township,Middlesex,105959
+3402320230,Edison township,Middlesex,95622
+3402330840,Helmetta borough,Middlesex,79702
+3402331470,Highland Park borough,Middlesex,75913
+3402334890,Jamesburg borough,Middlesex,83095
+3402345690,Metuchen borough,Middlesex,116632
+3402345900,Middlesex borough,Middlesex,73196
+3402346620,Milltown borough,Middlesex,99704
+3402347280,Monroe township,Middlesex,78263
+3402351210,New Brunswick city,Middlesex,38413
+3402352560,North Brunswick township,Middlesex,88723
+3402354705,Old Bridge township,Middlesex,88540
+3402358200,Perth Amboy city,Middlesex,50883
+3402359010,Piscataway township,Middlesex,89617
+3402359280,Plainsboro township,Middlesex,101993
+3402365790,Sayreville borough,Middlesex,79620
+3402368550,South Amboy city,Middlesex,65074
+3402368790,South Brunswick township,Middlesex,113815
+3402369390,South Plainfield borough,Middlesex,91889
+3402369420,South River borough,Middlesex,62332
+3402369810,Spotswood borough,Middlesex,75226
+3402382000,Woodbridge township,Middlesex,83266
+3402500070,Aberdeen township,Monmouth,93016
+3402500730,Allenhurst borough,Monmouth,100781
+3402500760,Allentown borough,Monmouth,96154
+3402501960,Asbury Park city,Monmouth,39324
+3402502110,Atlantic Highlands borough,Monmouth,95284
+3402502440,Avon-by-the-Sea borough,Monmouth,78323
+3402504930,Belmar borough,Monmouth,74942
+3402506970,Bradley Beach borough,Monmouth,61209
+3402507750,Brielle borough,Monmouth,133493
+3402514560,Colts Neck township,Monmouth,167480
+3402516660,Deal borough,Monmouth,78194
+3402519840,Eatontown borough,Monmouth,66470
+3402521570,Englishtown borough,Monmouth,77992
+3402522440,Fair Haven borough,Monmouth,158264
+3402522950,Farmingdale borough,Monmouth,58875
+3402525200,Freehold borough,Monmouth,57717
+3402525230,Freehold township,Monmouth,99827
+3402530690,Hazlet township,Monmouth,94657
+3402531500,Highlands borough,Monmouth,60817
+3402532640,Holmdel township,Monmouth,155842
+3402533300,Howell township,Monmouth,100305
+3402534200,Interlaken borough,Monmouth,145893
+3402536480,Keansburg borough,Monmouth,46250
+3402536810,Keyport borough,Monmouth,56935
+3402537560,Lake Como borough,Monmouth,74861
+3402540770,Little Silver borough,Monmouth,144250
+3402541010,Loch Arbour village,Monmouth,113333
+3402541310,Long Branch city,Monmouth,54398
+3402542990,Manalapan township,Monmouth,109326
+3402543050,Manasquan borough,Monmouth,106298
+3402544070,Marlboro township,Monmouth,143208
+3402544520,Matawan borough,Monmouth,86149
+3402545990,Middletown township,Monmouth,105035
+3402546560,Millstone township,Monmouth,156891
+3402547130,Monmouth Beach borough,Monmouth,107383
+3402549890,Neptune township,Monmouth,67836
+3402549920,Neptune City borough,Monmouth,58936
+3402554270,Ocean township,Monmouth,82941
+3402554570,Oceanport borough,Monmouth,107571
+3402562430,Red Bank borough,Monmouth,75114
+3402564410,Roosevelt borough,Monmouth,100694
+3402565130,Rumson borough,Monmouth,158229
+3402566240,Sea Bright borough,Monmouth,84922
+3402566330,Sea Girt borough,Monmouth,126667
+3402567350,Shrewsbury borough,Monmouth,122321
+3402567365,Shrewsbury township,Monmouth,57697
+3402570110,Spring Lake borough,Monmouth,88679
+3402570140,Spring Lake Heights borough,Monmouth,78829
+3402573020,Tinton Falls borough,Monmouth,79206
+3402574540,Union Beach borough,Monmouth,77324
+3402574900,Upper Freehold township,Monmouth,133920
+3402576460,Wall township,Monmouth,101983
+3402579310,West Long Branch borough,Monmouth,100000
+3402706610,Boonton town,Morris,91055
+3402706640,Boonton township,Morris,136125
+3402709040,Butler borough,Morris,96474
+3402712100,Chatham borough,Morris,163026
+3402712130,Chatham township,Morris,176364
+3402712580,Chester borough,Morris,101375
+3402712610,Chester township,Morris,153056
+3402717650,Denville township,Morris,116078
+3402718070,Dover town,Morris,65538
+3402719210,East Hanover township,Morris,121769
+3402723910,Florham Park borough,Morris,123266
+3402729550,Hanover township,Morris,116020
+3402729700,Harding township,Morris,183587
+3402734980,Jefferson township,Morris,97440
+3402737110,Kinnelon borough,Morris,147267
+3402740290,Lincoln Park borough,Morris,91285
+3402741362,Long Hill township,Morris,133269
+3402742510,Madison borough,Morris,127948
+3402745330,Mendham borough,Morris,145284
+3402745360,Mendham township,Morris,185882
+3402746860,Mine Hill township,Morris,84904
+3402747670,Montville township,Morris,134752
+3402748090,Morris township,Morris,142137
+3402748210,Morris Plains borough,Morris,125229
+3402748300,Morristown town,Morris,92296
+3402748480,Mountain Lakes borough,Morris,175556
+3402748690,Mount Arlington borough,Morris,90625
+3402749080,Mount Olive township,Morris,86773
+3402750130,Netcong borough,Morris,56484
+3402756460,Parsippany-Troy Hills township,Morris,93915
+3402758110,Pequannock township,Morris,94237
+3402761890,Randolph township,Morris,128125
+3402763300,Riverdale borough,Morris,100602
+3402764050,Rockaway borough,Morris,83714
+3402764080,Rockaway township,Morris,106599
+3402764980,Roxbury township,Morris,112625
+3402775890,Victory Gardens borough,Morris,45938
+3402777240,Washington township,Morris,140445
+3402780390,Wharton borough,Morris,68265
+3402903050,Barnegat township,Ocean,69877
+3402903130,Barnegat Light borough,Ocean,75000
+3402903520,Bay Head borough,Ocean,112188
+3402903940,Beach Haven borough,Ocean,86705
+3402904180,Beachwood borough,Ocean,72815
+3402905305,Berkeley township,Ocean,48054
+3402907420,Brick township,Ocean,73051
+3402918670,Eagleswood township,Ocean,77708
+3402930390,Harvey Cedars borough,Ocean,85417
+3402934530,Island Heights borough,Ocean,82174
+3402934680,Jackson township,Ocean,88063
+3402937380,Lacey township,Ocean,78649
+3402937770,Lakehurst borough,Ocean,62262
+3402938550,Lakewood township,Ocean,45321
+3402939390,Lavallette borough,Ocean,68098
+3402940560,Little Egg Harbor township,Ocean,63590
+3402941250,Long Beach township,Ocean,82192
+3402943140,Manchester township,Ocean,41689
+3402943380,Mantoloking borough,Ocean,108125
+3402954300,Ocean township,Ocean,67288
+3402954450,Ocean Gate borough,Ocean,62813
+3402958590,Pine Beach borough,Ocean,95909
+3402959790,Plumsted township,Ocean,91438
+3402959880,Point Pleasant borough,Ocean,93276
+3402959910,Point Pleasant Beach borough,Ocean,92143
+3402966450,Seaside Heights borough,Ocean,38306
+3402966480,Seaside Park borough,Ocean,71641
+3402967110,Ship Bottom borough,Ocean,73125
+3402969510,South Toms River borough,Ocean,62500
+3402970320,Stafford township,Ocean,76527
+3402971640,Surf City borough,Ocean,77885
+3402973125,Toms River township,Ocean,76051
+3402974210,Tuckerton borough,Ocean,57868
+3403106340,Bloomingdale borough,Passaic,80516
+3403113690,Clifton city,Passaic,74963
+3403129070,Haledon borough,Passaic,65033
+3403130570,Hawthorne borough,Passaic,93675
+3403140620,Little Falls township,Passaic,85427
+3403153040,North Haledon borough,Passaic,96851
+3403156550,Passaic city,Passaic,34920
+3403157000,Paterson city,Passaic,36106
+3403160090,Pompton Lakes borough,Passaic,92952
+3403161170,Prospect Park borough,Passaic,50938
+3403163150,Ringwood borough,Passaic,116198
+3403173140,Totowa borough,Passaic,97729
+3403176730,Wanaque borough,Passaic,83010
+3403177840,Wayne township,Passaic,108092
+3403179460,West Milford township,Passaic,98843
+3403182423,Woodland Park borough,Passaic,73870
+3403300880,Alloway township,Salem,71648
+3403310610,Carneys Point township,Salem,53892
+3403321240,Elmer borough,Salem,76458
+3403321330,Elsinboro township,Salem,73523
+3403341640,Lower Alloways Creek township,Salem,84688
+3403343200,Mannington township,Salem,81667
+3403354810,Oldmans township,Salem,78636
+3403357750,Penns Grove borough,Salem,37188
+3403357870,Pennsville township,Salem,62134
+3403358530,Pilesgrove township,Salem,85889
+3403359130,Pittsgrove township,Salem,77537
+3403361470,Quinton township,Salem,65515
+3403365490,Salem city,Salem,25171
+3403375110,Upper Pittsgrove township,Salem,95489
+3403382720,Woodstown borough,Salem,76071
+3403504450,Bedminster township,Somerset,104452
+3403505560,Bernards township,Somerset,137855
+3403505590,Bernardsville borough,Somerset,150635
+3403506790,Bound Brook borough,Somerset,65199
+3403507180,Branchburg township,Somerset,129237
+3403507720,Bridgewater township,Somerset,122684
+3403522890,Far Hills borough,Somerset,112083
+3403524900,Franklin township,Somerset,93264
+3403527510,Green Brook township,Somerset,136094
+3403531890,Hillsborough township,Somerset,119542
+3403543620,Manville borough,Somerset,67080
+3403546590,Millstone borough,Somerset,116500
+3403547580,Montgomery township,Somerset,180660
+3403553280,North Plainfield borough,Somerset,71895
+3403557300,Peapack and Gladstone borough,Somerset,129688
+3403561980,Raritan borough,Somerset,78974
+3403564320,Rocky Hill borough,Somerset,112917
+3403568460,Somerville borough,Somerset,72731
+3403568730,South Bound Brook borough,Somerset,81545
+3403576940,Warren township,Somerset,154647
+3403577600,Watchung borough,Somerset,121678
+3403701330,Andover borough,Sussex,61591
+3403701360,Andover township,Sussex,101250
+3403707300,Branchville borough,Sussex,70625
+3403709160,Byram township,Sussex,104099
+3403724810,Frankford township,Sussex,87500
+3403724930,Franklin borough,Sussex,57232
+3403725140,Fredon township,Sussex,108400
+3403727420,Green township,Sussex,117563
+3403729220,Hamburg borough,Sussex,73735
+3403729490,Hampton township,Sussex,75643
+3403729850,Hardyston township,Sussex,92625
+3403732910,Hopatcong borough,Sussex,79613
+3403737440,Lafayette township,Sussex,96815
+3403747430,Montague township,Sussex,70329
+3403751930,Newton town,Sussex,63661
+3403754660,Ogdensburg borough,Sussex,82500
+3403765700,Sandyston township,Sussex,80190
+3403769690,Sparta township,Sussex,133113
+3403770380,Stanhope borough,Sussex,83813
+3403770890,Stillwater township,Sussex,86806
+3403771670,Sussex borough,Sussex,41667
+3403775740,Vernon township,Sussex,90805
+3403776640,Walpack township,Sussex,NA
+3403776790,Wantage township,Sussex,92788
+3403905320,Berkeley Heights township,Union,147614
+3403913150,Clark township,Union,100192
+3403915640,Cranford township,Union,122848
+3403921000,Elizabeth city,Union,45186
+3403922860,Fanwood borough,Union,132292
+3403925800,Garwood borough,Union,79063
+3403931980,Hillside township,Union,65717
+3403936690,Kenilworth borough,Union,108281
+3403940350,Linden city,Union,66538
+3403948510,Mountainside borough,Union,129405
+3403951810,New Providence borough,Union,129638
+3403959190,Plainfield city,Union,56425
+3403961530,Rahway city,Union,69813
+3403964620,Roselle borough,Union,52480
+3403964650,Roselle Park borough,Union,67300
+3403966060,Scotch Plains township,Union,117765
+3403970020,Springfield township,Union,110547
+3403971430,Summit city,Union,132443
+3403974480,Union township,Union,79324
+3403979040,Westfield town,Union,159923
+3403981650,Winfield township,Union,59153
+3404100670,Allamuchy township,Warren,90924
+3404101030,Alpha borough,Warren,68788
+3404104990,Belvidere town,Warren,51917
+3404106160,Blairstown township,Warren,88594
+3404124960,Franklin township,Warren,90648
+3404125320,Frelinghuysen township,Warren,106875
+3404128260,Greenwich township,Warren,109267
+3404128710,Hackettstown town,Warren,63940
+3404129820,Hardwick township,Warren,105139
+3404130090,Harmony township,Warren,87000
+3404133060,Hope township,Warren,91852
+3404133930,Independence township,Warren,98589
+3404137320,Knowlton township,Warren,85652
+3404140110,Liberty township,Warren,101016
+3404141490,Lopatcong township,Warren,78153
+3404143320,Mansfield township,Warren,67491
+3404155530,Oxford township,Warren,82578
+3404158350,Phillipsburg town,Warren,49274
+3404159820,Pohatcong township,Warren,74888
+3404177270,Washington borough,Warren,64282
+3404177300,Washington township,Warren,105768
+3404180570,White township,Warren,63663
