@@ -5,6 +5,9 @@ library(here)
 # Load packages.
 source(here::here('code/01_packages.R'))
 
+# Get median household income.
+source(here::here('code/income.R'))
+
 # Build racial diversity dataset.
 # Establish "universe" for others.
 source(here::here('code/diversity_race.R'))
