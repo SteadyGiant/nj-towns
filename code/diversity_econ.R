@@ -41,13 +41,9 @@ race_diver_uni =
   read_csv('data/output/NJ_diversity_race.csv') %>%
   select(GEOID)
 
-# https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B19013/0400000US34.06000
-mhi_cosub = get_acs(table = 'B19013',
-                    geography = 'county subdivision',
-                    state = 'NJ',
-                    year = 2017,
-                    survey = 'acs5',
-                    cache_table = TRUE)
+mhi_cosub =
+  read_csv(here::here('data/output/NJ_mhi.csv')) %>%
+  mutate(GEOID = as.character(GEOID))
 
 
 ##%######################################################%##
@@ -111,7 +107,7 @@ incdist_cosub_agg = incdist_cosub_clean %>%
 data_join = incdist_cosub_agg %>%
   left_join(
     select(mhi_cosub,
-           GEOID, mhi = estimate),
+           GEOID, mhi),
     by = 'GEOID'
   )
 
