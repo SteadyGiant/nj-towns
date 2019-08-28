@@ -143,5 +143,5 @@ summary(data_join)
 #                                                          #
 ##%######################################################%##
 
-write_csv(incdist_cosub_agg,
+write_csv(data_join,
           here::here('data/output/NJ_diversity_econ.csv'))
