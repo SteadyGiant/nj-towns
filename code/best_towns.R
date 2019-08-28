@@ -31,6 +31,8 @@ race_diver = read_csv(here::here('data/output/NJ_diversity_race.csv'))
 
 econ_diver = read_csv(here::here('data/output/NJ_diversity_econ.csv'))
 
+mhi = read_csv(here::here('data/output/NJ_mhi.csv'))
+
 dens = read_csv(here::here('data/output/NJ_density.csv'))
 
 
@@ -126,12 +128,20 @@ rm(best_townships)
 ### Join data
 
 data_join = best_towns_clean %>%
-  left_join(race_diver_clean,
-            by = c('join_town',
-                   'County' = 'county')) %>%
+  left_join(
+    select(race_diver_clean,
+           GEOID, join_town, county, population:pct_hispanic),
+    by = c('join_town',
+           'County' = 'county')
+  ) %>%
   left_join(
     select(econ_diver,
            GEOID, econ_diversity:more_econ_diverse_than_state),
+    by = 'GEOID'
+  ) %>%
+  left_join(
+    select(mhi,
+           GEOID, mhi),
     by = 'GEOID'
   ) %>%
   left_join(
@@ -139,8 +149,8 @@ data_join = best_towns_clean %>%
            GEOID, density, density_rank),
     by = 'GEOID'
   ) %>%
+  select(-join_town) %>%
   select(GEOID, everything()) %>%
-  select(-c(join_town, municipality)) %>%
   rename(`Population (ACS, 2012-17)` = population)
 
 
