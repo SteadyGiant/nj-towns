@@ -3,6 +3,7 @@
 library(dplyr)
 library(here)
 library(magrittr)
+library(readr)
 library(tidycensus)
 library(tidyr)
 
@@ -95,7 +96,17 @@ STATE_ECON_DIVERSITY = incdist_state %>%
 # calculate economic diversity index for each town, & other stuff
 incdist_cosub_agg = incdist_cosub_clean %>%
   group_by(GEOID, municipality, county, num_hh) %>%
-  summarize(econ_diversity = 1 - sum(pct^2)) %>%
+  summarize(pct_less10  = pct[variable == 'S1901_C01_002'],
+            pct_10_14   = pct[variable == 'S1901_C01_003'],
+            pct_15_24   = pct[variable == 'S1901_C01_004'],
+            pct_25_34   = pct[variable == 'S1901_C01_005'],
+            pct_35_49   = pct[variable == 'S1901_C01_006'],
+            pct_50_74   = pct[variable == 'S1901_C01_007'],
+            pct_75_99   = pct[variable == 'S1901_C01_008'],
+            pct_100_149 = pct[variable == 'S1901_C01_009'],
+            pct_150_199 = pct[variable == 'S1901_C01_010'],
+            pct_200more = pct[variable == 'S1901_C01_011'],
+            econ_diversity = 1 - sum(pct^2)) %>%
   ungroup() %>%
   mutate(econ_diversity_rank = min_rank(desc(econ_diversity)),
          state_econ_diversity = STATE_ECON_DIVERSITY,
