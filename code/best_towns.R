@@ -13,7 +13,7 @@ options(scipen = 999)
 #                                                          #
 ##%######################################################%##
 
-URL = 'https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/'
+URL = 'https://web.archive.org/web/20191112151901/https%3A%2F%2Fwww.njfamily.com%2Fnew-jerseys-best-towns-for-families-the-list-2019%2F'
 
 data_raw = URL %>%
   read_html() %>%
@@ -168,4 +168,4 @@ sum(duplicated(data_join$`Best Towns Rank`))
 write_csv(data_join, path = './data/output/best_towns.csv')
 
 # save a copy of the raw HTML table
-saveRDS(data_raw, file = './data/archive/njfamily.com_SLASH_new-jerseys-best-towns-for-families-the-list-2019')
+saveRDS(data_raw, file = './data/archive/njfamily.com%2Fnew-jerseys-best-towns-for-families-the-list-2019.rds')
