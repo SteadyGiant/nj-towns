@@ -16,5 +16,8 @@ source('code/density.R')
 # Build "Best Towns" rankings dataset.
 source('code/best_towns.R')
 
+# Compile crime data for several years.
+source('code/crime.R')
+
 # Build reports.
 source('code/render_reports.R')
