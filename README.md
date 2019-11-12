@@ -1,37 +1,36 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # nj-towns
 
-This repo contains a bunch of datasets about New Jersey’s towns and the
-code I used to build them. Check [my blog](https://everetr.github.io/)
-for articles and visualizations. Contributions to this repo are welcome.
+This repo contains a bunch of datasets about New Jersey’s towns and the code I
+used to build them. Check [my blog](https://everetr.github.io/) for summaries
+and graphics.
 
-The datasets are in the `data/output` folder. Use `code/00_plan.R` to
-build all datasets and render all reports in this repo.
+## Contents
 
-[Data sources.](data/data_sources.md)
-
-<!-- [Methodology.](reports/Methodology.md) -->
-
-## Datasets
-
-  - `NJ_best_towns.csv` - *New Jersey Family* magazine ranked the [“Best
-    Towns for
-    Families”](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/)
-    in our state. This dataset includes those rankings, as well as data
-    on racial and economic diversity, median household income, and
-    population density. The add-ons are because I intend to write a blog
-    post with this dataset eventually.
-
-  - `NJ_density.csv` - Population, land area, and population density
-    rankings.
-
-  - `NJ_diversity_econ.csv` - Economic diversity index and rankings, as
-    well as median household income.
-
-  - `NJ_diversity_race.csv` - Racial groups, racial diversity index, and
-    rankings.
+* [`data/output`](./data/output) - All datasets. Here are the important ones:
+    * [`best_towns.csv`](data/output/best_towns.csv) - "Best Towns for Families
+    2019" rankings from 
+    [NJ Families magazine](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/),
+    with income, density, & diversity variables from datasets below added
+    * [`crime.csv`](./data/output/crime.csv) - Crime counts & rates from the
+    [FBI](https://www.fbi.gov/services/cjis/ucr/publications#Crime-in%20the%20U.S.)
+    * [`density.csv`](./data/output/density.csv) - 
+    [Population](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B01003/0400000US34.06000), 
+    [square mileage](https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/G001/0400000US34.06000), 
+    density, & rankings calculated from ACS data
+    * [`diversity_econ.csv`](./data/output/diversity_econ.csv) - Economic 
+    diversity calculated from 
+    [ACS data](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34.06000)
+    * [`diversity_race.csv`](./data/output/diversity_race.csv) - Racial diversity
+    calculated from 
+    [ACS data](https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34.06000)
+* [`code/`](./code/) - Scripts that built the datasets
+    * [`__plan__.R`](code/__plan__.R) - Run all lines of this to build all 
+    datasets
+* [`reports/`](./reports/)
+    * [`data_sources.md`](./reports/data_sources.md) - Details about the sources f
+    or each dataset
+    * [`methodology.md`](./reports/methodology.md) - Details about decisions I 
+    made while building the datasets
 
 ## TODO
 
@@ -40,8 +39,14 @@ build all datasets and render all reports in this repo.
     construction](https://www.census.gov/econ/construction.html)
 3.  School districts datasets?
 
+## License
+
+[GNU GPL 3](LICENSE) for code.
+[CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+for content except code.
+
 ## Code of Conduct
 
-Please note that the ‘nj-towns’ project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Please note that the ‘nj-towns’ project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this 
+project, you agree to abide by its terms.
