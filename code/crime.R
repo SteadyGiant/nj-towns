@@ -38,7 +38,7 @@ ids =
   )
 
 # get UCR/CIUS data
-source('https://gitlab.com/snippets/1911952/raw')
+source('./code/functions/cius.R')
 cius = get_agencies(years = 2006:2018)
 
 data_in = cius %>%
