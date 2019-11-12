@@ -1,8 +1,7 @@
 #!/usr/bin/env Rscript
 
 library(dplyr)
-library(here)
-library(magrittr)
+library(readr)
 library(tidycensus)
 library(tidyr)
 library(tigris)
@@ -10,7 +9,6 @@ library(units)
 
 options(scipen = 999,
         tigris_class = 'sf')
-
 census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 
@@ -26,10 +24,9 @@ pop_cosub = get_acs(table = 'B01003',
                     geography = 'county subdivision',
                     state = 'NJ',
                     year = 2017,
-                    survey = 'acs5',
-                    cache_table = TRUE)
+                    survey = 'acs5')
 
-# get geography info
+# get geographic size
 # https://factfinder.census.gov/bkmk/table/1.0/en/DEC/10_SF1/G001/0400000US34.06000
 #
 # must use tigris instead of tidycensus
@@ -38,8 +35,7 @@ pop_cosub = get_acs(table = 'B01003',
 # 2015 most recent shapefile, according to
 # https://github.com/walkerke/tigris/blob/master/README.md
 geo_cosub =
-  county_subdivisions(state = 'NJ',
-                      year = 2015) %>%
+  county_subdivisions(state = 'NJ', year = 2015) %>%
   as_tibble()
 
 
@@ -50,15 +46,12 @@ geo_cosub =
 ##%######################################################%##
 
 pop_cosub_uni = pop_cosub %>%
-  # incorporated towns
-  filter(!grepl('County subdivisions not defined', NAME))
-
-# get median pop for validation later
-MED_POP = median(pop_cosub_uni$estimate)
-
-pop_cosub_uni %<>%
-  # population at least 1k
-  filter(estimate >= 1000)
+  filter(
+    # incorporated towns
+    !grepl('County subdivisions not defined', NAME)
+    # population at least 1k
+    & estimate >= 1000
+  )
 
 
 ##%######################################################%##
@@ -79,22 +72,11 @@ geo_cosub_clean = geo_cosub %>%
   select(GEOID,
          sq_m = ALAND) %>%
   mutate(sq_m = set_units(sq_m, 'm^2'),
-         sq_mi = sq_m,
-         sq_km = sq_m)
+         sq_mi = set_units(sq_m, 'mi^2') %>% as.numeric()) %>%
+  select(-sq_m)
 
-# convert units
-units(geo_cosub_clean$sq_mi) = with(ud_units, 'mi^2')
-geo_cosub_clean$sq_mi = as.numeric(geo_cosub_clean$sq_mi)
-units(geo_cosub_clean$sq_km) = with(ud_units, 'km^2')
-geo_cosub_clean$sq_km = as.numeric(geo_cosub_clean$sq_km)
-
-geo_cosub_clean$sq_m = as.numeric(geo_cosub_clean$sq_m)
-
-
-### Join data
-
-data_join = pop_cosub_clean %>%
-  left_join(geo_cosub_clean,
+data_join =
+  left_join(pop_cosub_clean, geo_cosub_clean,
             by = 'GEOID') %>%
   mutate(density = population / sq_mi,
          density_rank = min_rank(desc(density)))
@@ -111,9 +93,6 @@ data_out = data_join %>%
 
 summary(data_out)
 
-MED_POP
-# [1] 8244
-
 
 ##%######################################################%##
 #                                                          #
@@ -121,5 +100,4 @@ MED_POP
 #                                                          #
 ##%######################################################%##
 
-write_csv(data_out,
-          here::here('data/output/NJ_density.csv'))
+write_csv(data_out, path = './data/output/density.csv')

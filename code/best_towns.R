@@ -13,27 +13,35 @@ options(scipen = 999)
 #                                                          #
 ##%######################################################%##
 
-READ_URL = 'https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/'
+URL = 'https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/'
 
-best_towns = READ_URL %>%
+data_raw = URL %>%
   read_html() %>%
   html_nodes(css = '#post-27575 > div > div > div.entry-content > table') %>%
   html_table() %>%
-  bind_rows() %>%
+  bind_rows()
+
+best_towns = data_raw %>%
   # first row is actually var names
   `names<-`(slice(., 1)) %>%
   slice(-1) %>%
-  rename(`Best Towns Rank` = `Town\nRank`) %>%
+  rename(`Best Towns Rank` = `Town Rank`) %>%
   mutate(County = gsub(' County', '', County),
          `Best Towns Rank` = as.numeric(`Best Towns Rank`))
 
-race_diver = read_csv(here::here('data/output/NJ_diversity_race.csv'))
+race_diver = read_csv('./data/output/diversity_race.csv')
 
-econ_diver = read_csv(here::here('data/output/NJ_diversity_econ.csv'))
+econ_diver =
+  read_csv('./data/output/diversity_econ.csv') %>%
+  select(GEOID, econ_diversity:more_econ_diverse_than_state)
 
-mhi = read_csv(here::here('data/output/NJ_mhi.csv'))
+mhi =
+  read_csv('./data/output/mhi.csv') %>%
+  select(GEOID, mhi)
 
-dens = read_csv(here::here('data/output/NJ_density.csv'))
+dens =
+  read_csv('./data/output/density.csv') %>%
+  select(GEOID, density, density_rank)
 
 
 ##%######################################################%##
@@ -120,7 +128,8 @@ race_diver_clean = race_diver %>%
       !(municipality == 'Pemberton borough'
         & population == 1439)
   ) %>%
-  select(-twp_identifier)
+  select(-twp_identifier) %>%
+  select(GEOID, join_town, county, population:pct_hispanic)
 
 rm(best_townships)
 
@@ -128,27 +137,12 @@ rm(best_townships)
 ### Join data
 
 data_join = best_towns_clean %>%
-  left_join(
-    select(race_diver_clean,
-           GEOID, join_town, county, population:pct_hispanic),
-    by = c('join_town',
-           'County' = 'county')
-  ) %>%
-  left_join(
-    select(econ_diver,
-           GEOID, econ_diversity:more_econ_diverse_than_state),
-    by = 'GEOID'
-  ) %>%
-  left_join(
-    select(mhi,
-           GEOID, mhi),
-    by = 'GEOID'
-  ) %>%
-  left_join(
-    select(dens,
-           GEOID, density, density_rank),
-    by = 'GEOID'
-  ) %>%
+  left_join(race_diver_clean,
+            by = c('join_town',
+                   'County' = 'county')) %>%
+  left_join(econ_diver, by = 'GEOID') %>%
+  left_join(mhi, by = 'GEOID') %>%
+  left_join(dens, by = 'GEOID') %>%
   select(-join_town) %>%
   select(GEOID, everything()) %>%
   rename(`Population (ACS, 2012-17)` = population)
@@ -171,5 +165,7 @@ sum(duplicated(data_join$`Best Towns Rank`))
 #                                                          #
 ##%######################################################%##
 
-write_csv(data_join,
-          here::here('data/output/NJ_best_towns.csv'))
+write_csv(data_join, path = './data/output/best_towns.csv')
+
+# save a copy of the raw HTML table
+saveRDS(data_raw, file = './data/archive/njfamily.com_SLASH_new-jerseys-best-towns-for-families-the-list-2019')

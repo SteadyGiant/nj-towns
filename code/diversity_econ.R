@@ -1,14 +1,11 @@
 #!/usr/bin/env Rscript
 
 library(dplyr)
-library(here)
-library(magrittr)
 library(readr)
 library(tidycensus)
 library(tidyr)
 
 options(scipen = 999)
-
 census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 
@@ -25,8 +22,7 @@ incdist_cosub = get_acs(table = 'S1901',
                         state = 'NJ',
                         year = 2017,
                         survey = 'acs5',
-                        summary_var = 'S1901_C01_001',
-                        cache_table = TRUE)
+                        summary_var = 'S1901_C01_001')
 
 # get the same for the entire state
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/S1901/0100000US|0400000US34
@@ -35,15 +31,16 @@ incdist_state = get_acs(table = 'S1901',
                         state = 'NJ',
                         year = 2017,
                         survey = 'acs5',
-                        summary_var = 'S1901_C01_001',
-                        cache_table = TRUE)
+                        summary_var = 'S1901_C01_001')
 
+# get racial diversity for county subdivisions
 race_diver_uni =
-  read_csv('data/output/NJ_diversity_race.csv') %>%
+  read_csv('./data/output/diversity_race.csv') %>%
   select(GEOID)
 
+# get median household income for county subdivisions
 mhi_cosub =
-  read_csv(here::here('data/output/NJ_mhi.csv')) %>%
+  read_csv('./data/output/mhi.csv') %>%
   mutate(GEOID = as.character(GEOID))
 
 
@@ -60,16 +57,13 @@ incdist_cosub_uni = incdist_cosub %>%
   # for each town, rows 2-11 are vars for HHs
   slice(2:11) %>%
   ungroup() %>%
-  # only incorporated towns
-  filter(!grepl('County subdivisions not defined', NAME))
-
-# calc median num HHs
-MED_HH = median(incdist_cosub_uni$num_hh)
-
-incdist_cosub_uni %<>%
-  # Keep towns w/ pop >= 1k.
-  # Use racial diversity dataset, since it's already filtered.
-  filter(GEOID %in% race_diver_uni$GEOID)
+  filter(
+    # only incorporated towns
+    !grepl('County subdivisions not defined', NAME)
+    # Keep towns w/ pop >= 1k.
+    # Use racial diversity dataset, since it's already filtered.
+    & GEOID %in% race_diver_uni$GEOID
+  )
 
 
 ##%######################################################%##
@@ -135,13 +129,11 @@ sum(duplicated(data_join$GEOID))
 # compare results to
 # https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html
 
-MED_HH
-# [1] 2979
-
 STATE_ECON_DIVERSITY
 # [1] 0.883128
 MED_ECON_DIVERSITY = median(incdist_cosub_agg$econ_diversity)
 # [1] 0.864891
+# [1] 0.861224
 sum(data_join$more_econ_diverse_than_state)
 # [1] 20
 
@@ -154,5 +146,4 @@ summary(data_join)
 #                                                          #
 ##%######################################################%##
 
-write_csv(data_join,
-          here::here('data/output/NJ_diversity_econ.csv'))
+write_csv(data_join, path = 'data/output/diversity_econ.csv')

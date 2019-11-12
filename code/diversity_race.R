@@ -1,14 +1,11 @@
 #!/usr/bin/env Rscript
 
 library(dplyr)
-library(here)
-library(magrittr)
 library(readr)
 library(tidycensus)
 library(tidyr)
 
 options(scipen = 999)
-
 census_api_key(Sys.getenv('CENSUS_API_KEY'))
 
 
@@ -25,8 +22,7 @@ race_cosub = get_acs(table = 'B02001',
                      state = 'NJ',
                      year = 2017,
                      survey = 'acs5',
-                     summary_var = 'B02001_001',
-                     cache_table = TRUE)
+                     summary_var = 'B02001_001')
 
 # get hispanic origin counts for county subdivisions in NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B03003/0400000US34.06000
@@ -35,8 +31,7 @@ hisp_cosub = get_acs(table = 'B03003',
                      state = 'NJ',
                      year = 2017,
                      survey = 'acs5',
-                     output = 'wide',
-                     cache_table = TRUE)
+                     output = 'wide')
 
 # get statewide race counts for NJ
 # https://factfinder.census.gov/bkmk/table/1.0/en/ACS/17_5YR/B02001/0400000US34
@@ -45,12 +40,13 @@ race_state = get_acs(table = 'B02001',
                      state = 'NJ',
                      year = 2017,
                      survey = 'acs5',
-                     summary_var = 'B02001_001',
-                     cache_table = TRUE)
+                     summary_var = 'B02001_001')
 
+# get median household income for county subdivisions in NJ
 mhi_cosub =
-  read_csv(here::here('data/output/NJ_mhi.csv')) %>%
-  mutate(GEOID = as.character(GEOID))
+  read_csv('./data/output/NJ_mhi.csv') %>%
+  mutate(GEOID = as.character(GEOID)) %>%
+  select(GEOID, mhi)
 
 
 ##%######################################################%##
@@ -66,12 +62,7 @@ race_cosub_uni = race_cosub %>%
   slice(2:8) %>%
   ungroup() %>%
   # only incorporated towns
-  filter(!grepl('County subdivisions not defined', NAME))
-
-# save to display later in a summary
-MED_POP = median(race_cosub_uni$population)
-
-race_cosub_uni %<>%
+  filter(!grepl('County subdivisions not defined', NAME)) %>%
   # Keep towns w/ population at least 1k. Consistent with "Best Towns" method.
   filter(population >= 1000)
 
@@ -96,7 +87,7 @@ STATE_RACIAL_DIVERSITY = race_state %>%
   slice(2:8) %>%
   mutate(pct = estimate / population) %>%
   summarize(racial_diversity = 1 - sum(pct^2)) %>%
-  pull(racial_diversity)
+  pull(racial_diversity) # scalar
 
 # calculate racial diversity index for each town, & other stuff
 race_cosub_agg = race_cosub_clean %>%
@@ -117,21 +108,16 @@ race_cosub_agg = race_cosub_clean %>%
          )) %>%
   arrange(racial_diversity_rank)
 
-
 hisp_cosub_clean = hisp_cosub %>%
   mutate(pct_not_hispanic = B03003_002E / B03003_001E,
          pct_hispanic = B03003_003E / B03003_001E) %>%
   select(-c(NAME, matches('[0-9]')))
 
-
 data_out = race_cosub_agg %>%
   left_join(hisp_cosub_clean,
             by = 'GEOID') %>%
-  left_join(
-    select(mhi_cosub,
-           GEOID, mhi),
-    by = 'GEOID'
-  )
+  left_join(mhi_cosub,
+            by = 'GEOID')
 
 
 ##%######################################################%##
@@ -140,11 +126,8 @@ data_out = race_cosub_agg %>%
 #                                                          #
 ##%######################################################%##
 
-# compare resutls to original NJ.com article
+# compare results to original NJ.com article
 # https://www.nj.com/data/2019/03/how-racially-diverse-is-your-town-look-up-using-our-tool.html
-
-MED_POP
-# [1] 8244
 
 STATE_RACIAL_DIVERSITY
 # [1] 0.5069469
@@ -162,5 +145,4 @@ summary(data_out)
 #                                                          #
 ##%######################################################%##
 
-write_csv(data_out,
-          here::here('data/output/NJ_diversity_race.csv'))
+write_csv(data_out, path = './data/output/diversity_race.csv')

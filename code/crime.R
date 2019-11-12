@@ -7,7 +7,7 @@ library(stringr)
 # CIUS doesn't provide GEOIDs or counties for towns. Will have to import a xwalk
 # & join by town names later.
 ids =
-  read_csv('./data/output/NJ_diversity_econ.csv') %>%
+  read_csv('./data/output/diversity_econ.csv') %>%
   select(GEOID, municipality, county) %>%
   mutate(
     municipality = municipality %>%
@@ -119,4 +119,4 @@ data_out = data_uni %>%
   left_join(ids, by = 'municipality') %>%
   select(GEOID, municipality, county, year, everything())
 
-write_csv(data_out, path = './data/output/NJ_crime.csv')
+write_csv(data_out, path = './data/output/crime.csv')
