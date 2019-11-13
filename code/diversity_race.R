@@ -44,7 +44,7 @@ race_state = get_acs(table = 'B02001',
 
 # get median household income for county subdivisions in NJ
 mhi_cosub =
-  read_csv('./data/output/NJ_mhi.csv') %>%
+  read_csv('./data/output/mhi.csv') %>%
   mutate(GEOID = as.character(GEOID)) %>%
   select(GEOID, mhi)
 

@@ -1,23 +1,23 @@
 #!/usr/bin/env Rscript
 
 # Get median household income.
-source('code/mhi.R')
+source('./code/mhi.R')
 
 # Build racial diversity dataset.
 # Establish "universe" for others.
-source('code/diversity_race.R')
+source('./code/diversity_race.R')
 
 # Build economic diversity dataset.
-source('code/diversity_econ.R')
+source('./code/diversity_econ.R')
 
 # Build population density dataset.
-source('code/density.R')
+source('./code/density.R')
 
 # Build "Best Towns" rankings dataset.
-source('code/best_towns.R')
+source('./code/best_towns.R')
 
 # Compile crime data for several years.
-source('code/crime.R')
+source('./code/crime.R')
 
 # Build reports.
-source('code/render_reports.R')
+source('./code/render_reports.R')
