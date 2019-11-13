@@ -7,7 +7,7 @@ Check [my blog](https://everetr.github.io/) for summaries and graphics.
 
 * [`data/output`](data/output) - All datasets. The important ones:
     * [`best_towns.csv`](data/output/best_towns.csv) - "Best Towns for Families
-    2019" rankings from 
+    2019" rankings from
     [NJ Families magazine](https://www.njfamily.com/new-jerseys-best-towns-for-families-the-list-2019/),
     with income, density, & diversity measures from datasets below added
     * [`crime.csv`](data/output/crime.csv) - Crime counts & rates from the

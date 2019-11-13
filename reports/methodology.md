@@ -1,45 +1,23 @@
 Methodology
 ================
 Everet Rummel
-2019-08-22
+2019-11-12
 
-# Source Data
+## Source data notes
 
-See *[Data Sources](reports/data_sources.md)* for details.
+The ACS 2013-17 sample covers years *2012* to 2017.
 
-Data on race, income, and population comes from the American Community
-Survey (ACS) 5-year Public Use Micro Sample (PUMS), 2013-2017. This data
-source covers years *2012* to 2017. I accessed this data via the Census
-Bureau API via the
-[`tidycensus`](https://github.com/walkerke/tidycensus) R package.
+## Universe
 
-Land area for every town was obtained from
-[TIGER](https://www.census.gov/programs-surveys/geography.html) via the
-[`tigris`](https://github.com/walkerke/tigris) R package. The most
-recent year for the county subdivisions shapefile was 2015 at the time
-of this analysis.
+The ACS has county subdivisions, which I usually call “municipalities”
+here. I exclude “County subdivisions not defined” records.
 
-# Source Code
+In all datasets with rankings, I exclude municipalities with populations
+lower than 1,000. In the past, I used the median town population as the
+cutoff, but that seemed a bit high, and doing so excluded some
+interesting findings from the results.
 
-See the `[code](code)` folder. `[00_plan.R](code/00_plan.R)` runs all
-code, reproduces all results, renders all reports, and details the steps
-of the analysis. Run this file *only* if you want to reproduce what I
-did.
-
-Source code for all reports (`data_sources.md`, `methodology.md`, etc)
-lives in `[code/markdown](code/markdown)`.
-
-# Universe
-
-Each record is a county subdivision, which I’m calling a “municipality”
-here.
-
-In all datasets, I exclude municipalities with populations lower than
-1,000. In the past, I used the median town population as the cutoff, but
-that seemed a bit high, and doing so excluded some interesting findings
-from the results.
-
-# Calculations
+## Calculations
 
 To measure diversity, I calculate the [Gini-Simpson
 Index](https://en.wikipedia.org/wiki/Diversity_index#Gini%E2%80%93Simpson_index).
@@ -53,7 +31,7 @@ interpreted as the probability that two randomly selected residents are
 of a different race. For example: Two random residents in Jersey City
 have a ~75% chance of identifying as different races.
 
-The Diversity Index is calculate as follows:
+The Diversity Index is calculated as follows:
 
 \(D = 1 - \sum_{i = 1}^{N} p_i\)
 
@@ -74,7 +52,7 @@ race” are Hispanic/Latinx in origin. All other Hispanic/Latinx people
 identify as White, Black, Asian, etc, and so they’re included in the
 count of the race with which they identify.
 
-# Validation
+## Validation
 
 My racial diversity results can be compared to those calculated by
 NJ.com’s [Disha Raychaudhuri](https://twitter.com/Disha_RC) in [this
@@ -84,34 +62,20 @@ about a hundredth of a percentage point for each municipality. They
 claim to have followed [this
 methodology](https://www.usatoday.com/story/news/nation/2014/10/21/diversity-index-data-how-we-did-report/17432103/)
 for calculating the Diversity Index from ACS data, but I matched their
-results by *not* following that methodology. See my code for details.
-
-Note: While Raychaudhuri excludes municipalities with populations lower
-than 10,000, I exclude those with populations lower than 1,000.
+results by *not* following that methodology. See [my
+code](code/diversity_race.R) for details.
 
 My economic diversity results can be compared to those calculated by
 NJ.com’s [Disha Raychaudhuri](https://twitter.com/Disha_RC) in [this
 article](https://www.nj.com/data/2019/04/nj-towns-are-increasingly-becoming-rich-or-poor-is-the-middle-class-disappearing.html).
 Once again, I’m able to almost exactly match their results.
 
-# My Environment
+Note: While Raychaudhuri excludes municipalities with populations lower
+than 10,000, I exclude those with populations lower than 1,000.
 
-Below are the R packages directly loaded in this analysis. See
-`code/01_packages.R` for the most up-to-date list, just in case.
+## My environment
 
-``` r
-library(dplyr)
-library(here)
-library(magrittr)
-library(readr)
-library(rvest)
-library(tidycensus)
-library(tidyr)
-library(tigris)
-library(units)
-```
-
-Here is my session info after running all lines of `00_plan.R`:
+Here is my session info after running all lines of `__plan__.R`:
 
 ``` r
 sessionInfo()
@@ -137,24 +101,25 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] units_0.6-4      tigris_0.8.2     tidyr_0.8.3      tidycensus_0.9.2
-    ##  [5] rvest_0.3.4      xml2_1.2.2       rmarkdown_1.15   readr_1.3.1     
-    ##  [9] magrittr_1.5     dplyr_0.8.3      here_0.1        
+    ##  [1] rmarkdown_1.16   here_0.1         tibble_2.1.3     readxl_1.3.1    
+    ##  [5] purrr_0.3.3      httr_1.4.1       stringr_1.4.0    rvest_0.3.5     
+    ##  [9] xml2_1.2.2       units_0.6-5      tigris_0.8.2     tidyr_1.0.0     
+    ## [13] tidycensus_0.9.2 readr_1.3.1      dplyr_0.8.3     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.2         pillar_1.4.2       compiler_3.6.1    
-    ##  [4] class_7.3-15       tools_3.6.1        uuid_0.1-2        
-    ##  [7] zeallot_0.1.0      digest_0.6.20      packrat_0.5.0     
-    ## [10] jsonlite_1.6       lattice_0.20-38    evaluate_0.14     
-    ## [13] tibble_2.1.3       pkgconfig_2.0.2    rlang_0.4.0       
-    ## [16] DBI_1.0.0          rstudioapi_0.10    yaml_2.2.0        
-    ## [19] curl_4.0           rgdal_1.4-4        xfun_0.9          
-    ## [22] e1071_1.7-2        stringr_1.4.0      httr_1.4.1        
-    ## [25] knitr_1.24         vctrs_0.2.0        hms_0.5.0         
-    ## [28] rappdirs_0.3.1     grid_3.6.1         classInt_0.4-1    
-    ## [31] rprojroot_1.3-2    tidyselect_0.2.5   glue_1.3.1        
-    ## [34] sf_0.7-7           R6_2.4.0           foreign_0.8-72    
-    ## [37] sp_1.3-1           selectr_0.4-1      purrr_0.3.2       
-    ## [40] maptools_0.9-5     backports_1.1.4    htmltools_0.3.6   
-    ## [43] assertthat_0.2.1   KernSmooth_2.23-15 stringi_1.4.3     
-    ## [46] crayon_1.3.4
+    ##  [1] Rcpp_1.0.3         cellranger_1.1.0   pillar_1.4.2      
+    ##  [4] compiler_3.6.1     class_7.3-15       tools_3.6.1       
+    ##  [7] digest_0.6.22      uuid_0.1-2         zeallot_0.1.0     
+    ## [10] packrat_0.5.0      evaluate_0.14      jsonlite_1.6      
+    ## [13] lattice_0.20-38    lifecycle_0.1.0    pkgconfig_2.0.3   
+    ## [16] rlang_0.4.1        cli_1.1.0          DBI_1.0.0         
+    ## [19] rstudioapi_0.10    yaml_2.2.0         curl_4.2          
+    ## [22] rgdal_1.4-7        xfun_0.10          e1071_1.7-2       
+    ## [25] knitr_1.25         vctrs_0.2.0        rappdirs_0.3.1    
+    ## [28] hms_0.5.2          rprojroot_1.3-2    classInt_0.4-2    
+    ## [31] grid_3.6.1         tidyselect_0.2.5   glue_1.3.1        
+    ## [34] sf_0.8-0           R6_2.4.0           foreign_0.8-72    
+    ## [37] sp_1.3-2           selectr_0.4-1      magrittr_1.5      
+    ## [40] htmltools_0.4.0    ellipsis_0.3.0     backports_1.1.5   
+    ## [43] maptools_0.9-8     assertthat_0.2.1   KernSmooth_2.23-16
+    ## [46] stringi_1.4.3      crayon_1.3.4
