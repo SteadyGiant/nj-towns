@@ -1,7 +1,7 @@
 # nj-towns
 
 A bunch of datasets about New Jersey’s towns and the code I used to build them.
-Check [my blog](https://everetr.github.io/) for summaries and graphics.
+Check [my blog](https://everetr.gitlab.io/) for summaries and graphics.
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A717YDB)
 
