@@ -90,10 +90,10 @@ median(data_cln$population)
 # [1] 9594.5
 
 # Universe:
-#   - At least 10k residents
+#   - At least 1k residents
 data_uni = data_cln %>%
   group_by(municipality) %>%
-  filter(all(population >= 10000)) %>%
+  filter(all(population >= 1000)) %>%
   ungroup()
 
 # Following Pew:
@@ -112,9 +112,9 @@ data_out = data_uni %>%
   ungroup() %>%
   mutate(
     state_violent_crime_per1k =
-      (sum(violent_crime, na.rm = TRUE) / sum(population, na.rm = TRUE)) * 1000,
+      (sum(violent_crime, na.rm = TRUE) / population) * 1000,
     state_property_crime_per1k =
-      (sum(property_crime, na.rm = TRUE) / sum(population, na.rm = TRUE)) * 1000
+      (sum(property_crime, na.rm = TRUE) / population) * 1000
   ) %>%
   left_join(ids, by = 'municipality') %>%
   select(GEOID, municipality, county, year, everything())
