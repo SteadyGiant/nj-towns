@@ -46,8 +46,8 @@ calc = function(dat, front_cols = NULL) {
       county_fips,
       diversity,
       diversity_rank,
-      dplyr::starts_with("pct_"),
-      dplyr::starts_with("pop_")
+      dplyr::starts_with("pct"),
+      dplyr::starts_with("pop")
     )
 }
 
