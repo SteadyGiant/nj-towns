@@ -27,12 +27,16 @@ nj_cosub = tigris::county_subdivisions("NJ", year = 2020) %>%
 
 
 # Get group proportions, diversity index, rankings, & geography stats.
-calc = function(dat) {
-  dat %>%
+calc = function(dat, id) {
+  dat = dat %>%
     dplyr::mutate(
       dplyr::across(pop_hisp:pop_two, `/`, pop, .names = "pct_{.col}")
     ) %>%
-    dplyr::rename_with(~gsub("_pop", "", .), dplyr::starts_with("pct_pop")) %>%
+    dplyr::rename_with(~gsub("_pop", "", .), dplyr::starts_with("pct_pop"))
+  div = dat %>%
+    # NJAM excluded pop < 10k. I want more than that.
+    # # https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html
+    dplyr::filter(pop > 1000) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
       diversity = 1 - sum(dplyr::c_across(dplyr::starts_with("pct_"))^2)
@@ -42,15 +46,19 @@ calc = function(dat) {
       diversity_rank = dplyr::min_rank(dplyr::desc(diversity)),
       median_diversity = median(diversity)
     ) %>%
+    dplyr::select(
+      dplyr::all_of(id), diversity, diversity_rank, median_diversity
+    )
+  # I want diversity stats for low pop towns to be NA but all else not NA.
+  dat %>%
+    dplyr::left_join(div, by = id) %>%
     dplyr::arrange(diversity_rank)
 }
 
 
 muni = pl %>%
-  # Someone else made this decision for me:
-  # https://www.nj.com/data/2019/02/the-25-most-racially-diverse-towns-in-nj-ranked.html
-  dplyr::filter(pop > 10000) %>%
-  calc() %>%
+  dplyr::filter(pop > 0) %>%
+  calc("GEOID") %>%
   dplyr::rename(FIPS = county) %>%
   # Add municipality names.
   dplyr::left_join(nj_cosub, by = "GEOID") %>%
@@ -62,11 +70,11 @@ counties = muni %>%
   dplyr::group_by(name = county, FIPS) %>%
   dplyr::summarise(dplyr::across(dplyr::starts_with("pop"), sum)) %>%
   dplyr::ungroup() %>%
-  calc() %>%
+  calc("FIPS") %>%
   dplyr::mutate(level = "county")
 state = counties %>%
   dplyr::summarise(dplyr::across(dplyr::starts_with("pop"), sum)) %>%
-  calc() %>%
+  calc("pop") %>%
   dplyr::select(-diversity_rank) %>%
   dplyr::mutate(level = "state", name = "New Jersey")
 data_out = dplyr::bind_rows(muni, counties, state) %>%
