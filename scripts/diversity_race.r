@@ -19,11 +19,11 @@ pl = PL94171::pl_url("NJ", 2020) %>%
 # Get county names.
 nj_co = tigris::counties("NJ", year = 2020) %>%
   sf::st_drop_geometry() %>%
-  dplyr::select(FIPS = COUNTYFP, county = NAME)
+  dplyr::select(FIPS = COUNTYFP, county = NAMELSAD)
 # Get county subdivision (municipality) names.
 nj_cosub = tigris::county_subdivisions("NJ", year = 2020) %>%
   sf::st_drop_geometry() %>%
-  dplyr::select(GEOID, municipality = NAME)
+  dplyr::select(GEOID, municipality = NAMELSAD)
 
 
 # Get group proportions, diversity index, rankings, & geography stats.
